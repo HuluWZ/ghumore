@@ -4,23 +4,25 @@ const { json } = require("body-parser");
 
 require("dotenv").config();
 
+const uploadImages = async (files) => {
+  var imageUrlList = []
+  for (let i = 0; i < files.length; i++){
+       const {url}= await uploadToCloud(files[i].filename);
+       imageUrlList.push(url);
+  }
+  return imageUrlList;
+}
 
-exports.createAccount = async (req, res, next) => {
+exports.createActivity = async (req, res, next) => {
   try {    
     const activityData = req.body
     const optionsFilter = [];
-    var imageURLList = [];
     const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)) )
     activityData.options = optionsFilter
     let newActivity = await Activity.create(activityData);
-
-    for (let i = 0; i < req.files.length; i++){
-       const currentFile = req.files[i].filename
-       const {url}= await uploadToCloud(currentFile);
-       imageURLList.push(url);
-     }
+    var imageURLList = await uploadImages(req.files)
     // save user token
-    // console.log(imageURLList)
+    console.log(imageURLList)
     newActivity.images = imageURLList
     // newActivity.options = optionsFilter
     res
@@ -39,26 +41,23 @@ exports.createAccount = async (req, res, next) => {
 
 exports.updateActivity = async (req, res, next) => {
   try {
-    let newUserInfo = req.body;
-    const userID = req.params.id;
-    const user = await Activity.findById(userID);
+    let activityInfo = req.body;
+    const { id } = req.params;
+    const {files} = req
+  
+    if (files.length > 0) {
+      var imageURLList = await uploadImages(files);
+      activityInfo.images = imageURLList
+    }
 
-    if (!user) {
-      return res.status(404).send({ message: "User not found." });
-    }
-    
-    if (newUserInfo.hasOwnProperty("password")) {
-      const encryptedPassword = await bcrypt.hash(newUserInfo.password, 8);
-      newUserInfo.password = encryptedPassword;
-    }
-    const updatedUser = await Activity.findOneAndUpdate(
-      { _id: userID },
-      newUserInfo,
+    const updatedActivity = await Activity.findOneAndUpdate(
+      { _id: id },
+      activityInfo,
       { new: true }
     );
     return res
       .status(202)
-      .send({ user:updatedUser, message: "User Updated Succesfully !" });
+      .send({ activity:updatedActivity, message: "Activity Updated Succesfully !" });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });
     return res.status(404).send({ message: error });
@@ -71,7 +70,7 @@ exports.deleteActivity = async (req, res) => {
     await Activity.deleteById(id);
     return res
       .status(200)
-      .send({ message: "Your Account has been Deleted Succesfully !" });
+      .send({ message: "Activity has been Deleted Succesfully !" });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });
     return res.status(404).send({ message: error });
@@ -107,19 +106,51 @@ exports.getAllActivity = async (req, res) => {
 
 exports.searchActivity = async (req, res) => {
   try {
-    const { area, name } = req.query;
+    const { location, name } = req.query;
     // await Activity.deleteById(id);
     const searchActivity = await Activity.find({
           "name": name ? new RegExp(name,'i'): { $exists: true },
-          "area": area ? new RegExp(area, 'i') : { $exists: true },
+          "area": location ? new RegExp(location, 'i') : { $exists: true },
         });
       
-    console.log(searchActivity,name,area)
+    console.log(searchActivity,name,location)
     return res
       .status(200)
       .send({
         searchResult: searchActivity.length>0? searchActivity: "Activity Not Found",
         message: "Search result !"
+      });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message });
+    return res.status(404).send({ message: error });
+  }
+};
+
+exports.filterActivity = async (req, res) => {
+  try {
+    const { type, location, minDuration, maxDuration, minPrice, maxPrice } = req.query;
+    console.log(type, location, minDuration, maxDuration,minPrice,maxPrice);
+    const filterActivity = await Activity.find({
+          name: type ? new RegExp(type,'i'): { $exists: true },
+          area: location ? new RegExp(location, 'i') : { $exists: true },
+          price: minPrice && maxPrice ? { $gte: minPrice,$lte:maxPrice }:{$exists:true},
+          duration: minDuration && maxDuration ? {$gte:minDuration,$lte:maxDuration}:{$exists:true}
+        });
+      
+    const query = {
+      minPrice,
+      maxPrice,
+      minDuration,
+      maxDuration,
+      location,
+      type
+    }
+    console.log(filterActivity,query);
+    return res
+      .status(200)
+      .send({
+        filterResult: filterActivity.length>0? filterActivity: "Activity Not Found",
+        message: "filter result !"
       });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });

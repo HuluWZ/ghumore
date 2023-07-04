@@ -1,24 +1,26 @@
 const express = require("express");
 const { validateToken } = require("../middleware/authMiddleWare");
 const {
-  createAccount,
-  updateAccount,
-  deleteAccount,
+  createActivity,
+  updateActivity,
+  deleteActivity,
   getActivity,
   getAllActivity,
-  searchActivity
+  searchActivity,
+  filterActivity
 } = require("../controllers/Activity.Controller");
 
-const { uploadAnyImage,uploadImage,uploadImages } = require("../middleware/fileUploadMiddleware");
+const { uploadAnyImages,uploadImage,uploadImages } = require("../middleware/fileUploadMiddleware");
 
 const router = express.Router();
 
 // Activity Router
-router.post("/create/", uploadImages,createAccount);
-// router.put("/update/:id", validateToken, updateAccount);
+router.post("/create/", uploadImages,createActivity);
+router.put("/update/:id", uploadAnyImages, updateActivity);
 router.get("/get/:id", getActivity);
 router.get("/get/", getAllActivity);
-// router.delete("/delete/:id", validateToken, deleteAccount);
-router.get("/search",searchActivity);
+router.delete("/delete/:id", deleteActivity);
+router.get("/search", searchActivity);
+router.get("/filter",filterActivity)
 
 module.exports = router;

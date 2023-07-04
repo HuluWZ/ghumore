@@ -87,9 +87,9 @@ exports.uploadImage = multer({
   fileFilter: fileFilter
 }).single("image");
 
-exports.uploadAnyImage = multer({
+exports.uploadAnyImages = multer({
   storage: productImageStorage,
-  limits: { fileSize: 1024 * 1024 * 3 },
+  limits: { fileSize: 1024 * 1024 * 5 },
   fileFilter: fileFilter
 }).any();
 
