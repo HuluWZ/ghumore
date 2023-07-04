@@ -9,7 +9,7 @@ const {
   getCurrentUser,
   getAll,
   logOut,
-} = require("../controllers/auth.Controller");
+} = require("../controllers/Auth.Controller");
 
 const router = express.Router();
 
