@@ -43,13 +43,12 @@ exports.updateActivity = async (req, res, next) => {
   try {
     let activityInfo = req.body;
     const { id } = req.params;
-    const {files} = req
-  
-    if (files.length > 0) {
+    const { files } = req
+
+    if (files) {
       var imageURLList = await uploadImages(files);
       activityInfo.images = imageURLList
     }
-
     const updatedActivity = await Activity.findOneAndUpdate(
       { _id: id },
       activityInfo,
@@ -57,7 +56,10 @@ exports.updateActivity = async (req, res, next) => {
     );
     return res
       .status(202)
-      .send({ activity:updatedActivity, message: "Activity Updated Succesfully !" });
+      .send({
+        activity: updatedActivity,
+        message: "Activity Updated Succesfully !"
+      });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });
     return res.status(404).send({ message: error });
@@ -129,7 +131,7 @@ exports.searchActivity = async (req, res) => {
 exports.filterActivity = async (req, res) => {
   try {
     const { type, location, minDuration, maxDuration, minPrice, maxPrice } = req.query;
-    console.log(type, location, minDuration, maxDuration,minPrice,maxPrice);
+    // console.log(type, location, minDuration, maxDuration,minPrice,maxPrice);
     const filterActivity = await Activity.find({
           name: type ? new RegExp(type,'i'): { $exists: true },
           area: location ? new RegExp(location, 'i') : { $exists: true },

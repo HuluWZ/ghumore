@@ -8,6 +8,7 @@ const cors = require("cors");
 // const usersApi = require("./router/User.routes");
 const authApi = require("./routes/auth.routes");
 const activityApi = require("./routes/activity.routes");
+const bookingApi = require("./routes/booking.routes");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/auth/", authApi);
 app.use("/api/activity/", activityApi);
+app.use("/api/booking/", bookingApi);
 
 // app.use("/api/users/", usersApi);
 app.get("/", function (req, res) {
