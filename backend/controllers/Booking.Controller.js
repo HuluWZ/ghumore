@@ -6,7 +6,7 @@ require("dotenv").config();
 exports.createBooking = async (req, res, next) => {
   try {    
     const bookingData = req.body
-    bookingData.totalPrice = bookingData.option.unitPrice * bookingData.quantity;
+    bookingData.totalPrice = (bookingData.option.unitPrice * bookingData.quantity).toFixed(2);
     let newBooking = await Booking.create(bookingData);
     res
       .status(201)
@@ -27,10 +27,6 @@ exports.updateBooking = async (req, res, next) => {
     let bookingInfo = req.body;
     const { id } = req.params;
     // TODO check for options and update total price with quantity
-    if (bookingInfo.hasOwnProperty("option")) {
-       bookingInfo.totalPrice = bookingInfo.option.unitPrice * bookingInfo.quantity;
-    }
-
     const updatedBooking = await Booking.findOneAndUpdate(
       { _id: id },
       bookingInfo,
@@ -61,7 +57,7 @@ exports.deleteBooking = async (req, res) => {
 
 exports.getBooking = async (req, res) => {
   try {
-    const getBooking = await Booking.findById(req.params.id);
+    const getBooking = await Booking.findById(req.params.id).populate("activity");
     return res.status(202).send({
       booking: getBooking? getBooking: "Booking Not Found",
       message: "Success !",
@@ -73,7 +69,7 @@ exports.getBooking = async (req, res) => {
 };
 exports.getAllBooking = async (req, res) => {
   try {
-    const getAll = await Booking.find({});
+    const getAll = await Booking.find({}).populate("activity");
     return res
       .status(202)
       .send({
@@ -86,42 +82,16 @@ exports.getAllBooking = async (req, res) => {
   }
 };
 
-exports.payBooking = async (req, res) => {
-  try {
-    
-    return res
-      .status(200)
-      .send({
-        message: "Search result !"
-      });
-  } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
-  }
-};
-
-exports.checkAvailability = async (id) => {
-  try {
-    
-    
-    return res
-      .status(200)
-      .send({
-        message: "Search result !"
-      });
-  } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
-  }
-};
 
 exports.cancelBooking = async (req, res) => {
   try {
-    
+    const { id } = req.params
+    const cancelBooking = await Booking.findByIdAndUpdate(id, {status:"Cancelled"})
     return res
       .status(200)
       .send({
-        message: "Search result !"
+        booking: cancelBooking,
+        message: "Cancel result !"
       });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });
@@ -131,11 +101,14 @@ exports.cancelBooking = async (req, res) => {
 
 exports.confirmBooking = async (req, res) => {
   try {
+    const { id } = req.params
+    const confirmBooking = await Booking.findByIdAndUpdate(id, { status: "Confirmed" });
     
     return res
       .status(200)
       .send({
-        message: "Search result !"
+        booking:confirmBooking,
+        message: "Confirm result !"
       });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });

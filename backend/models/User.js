@@ -3,15 +3,10 @@ const { USER_TYPES,PAYMENT_METHODS } = require("../config/utils");
 
 const UserSchema = mongoose.Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
       trim: true,
-      required: [true, "First Name is required"],
-    },
-    lastName: {
-      type: String,
-      trim: true,
-      required: [true, "Last Name is required"],
+      required: [true, "Full Name is required"],
     },
     phoneNumber: {
       type: String,

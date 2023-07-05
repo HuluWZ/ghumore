@@ -8,6 +8,8 @@ const optionSchema = mongoose.Schema({
   time: { type: String, required: [true, "Available Time is required"] }
 }, { _id: false });
 
+const travellerDetailsSchema = mongoose.Schema({ firstName: String, lastName: String },{_id: false});
+
 const contactDetailsSchema = mongoose.Schema({
       firstName: { type: String },
       lastName: { type: String},
@@ -15,6 +17,7 @@ const contactDetailsSchema = mongoose.Schema({
       phoneNumber:{type:String}
 },
   { _id: false });
+
 const BookingSchema = mongoose.Schema(
   {
     activity: {
@@ -40,7 +43,7 @@ const BookingSchema = mongoose.Schema(
       type: String,
     },
     contactDetails: contactDetailsSchema ,
-    travellerDetails: [{ firstName: String, lastName: String }],
+    travellerDetails: [travellerDetailsSchema],
     totalPrice:{type:Number,required:[true,"Total Price is required"],default:0},
     status: {
       type: String,

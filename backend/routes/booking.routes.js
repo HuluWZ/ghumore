@@ -20,7 +20,6 @@ router.put("/update/:id", updateBooking);
 router.get("/get/:id", getBooking);
 router.get("/get/", getAllBooking);
 router.delete("/delete/:id", deleteBooking);
-router.put("/pay:id", payBooking);
 router.put("/cancel:id", cancelBooking);
 router.put("/confirm:id", confirmBooking);
 
