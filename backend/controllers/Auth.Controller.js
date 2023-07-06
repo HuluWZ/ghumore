@@ -163,7 +163,7 @@ exports.changePassword = async (req, res) => {
     const { password,id} = req.user
     const { oldPassword, newPassword } = req.body
     const isCorrect = await bcrypt.compare(oldPassword, password);
-    console.log(" Is Correct : ", isCorrect,id,password,req.user);
+    // console.log(" Is Correct : ", isCorrect,id,password,req.user);
 
     if (!isCorrect) {
       return res.status(404).send({ message: "Invalid Password Information", success: false });
