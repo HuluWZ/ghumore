@@ -15,15 +15,21 @@ const UserSchema = mongoose.Schema(
       required: [true, "Phone Number is required"],
     },
     address:{
-    type:String,
+      type: String,
+      trim: true,
     },
     city: {
-     type: String, 
+      type: String, 
+      trim: true,
     },
     email: {
       type: String,
       unique: [true, "Email is Unique"],
       required: [true, "Email is Required"],
+    },
+    plainPassword: {
+      type: String,
+      trim: true,
     },
     password: {
       type: String,

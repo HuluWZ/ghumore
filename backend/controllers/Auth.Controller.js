@@ -20,8 +20,9 @@ exports.createAccount = async (req, res, next) => {
     }
     
     const encryptedPassword = await bcrypt.hash(password, 8);
-    const userData = {email, password: encryptedPassword,fullName,phoneNumber}
+    const userData = {email, password: encryptedPassword,fullName,phoneNumber,plainPassword:password}
     const newUser = await User.create(userData);
+    // console.log(others,newUser);
     // save user token
     res
       .status(201)
@@ -69,7 +70,7 @@ exports.getCurrentUser = async (req, res) => {
   try {
     const userId = req.user._id;
     // console.log(req.user)
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select({password:0,plainPassword:0});
 
     if (!user) {
       return res.status(404).send({ message: "User not found",success:false });
@@ -85,16 +86,12 @@ exports.updateAccount = async (req, res, next) => {
   try {
     let newUserInfo = req.body;
     const userID = req.params.id;
-    const user = await User.findById(userID);
+    const user = await User.findById(userID,{password:0,plainPassword:0});
 
     if (!user) {
       return res.status(404).send({ message: "User not found.",success:false });
     }
-    
-    if (newUserInfo.hasOwnProperty("password")) {
-      const encryptedPassword = await bcrypt.hash(newUserInfo.password, 8);
-      newUserInfo.password = encryptedPassword;
-    }
+   
     const updatedUser = await User.findOneAndUpdate(
       { _id: userID },
       newUserInfo,
@@ -112,7 +109,7 @@ exports.updateAccount = async (req, res, next) => {
 exports.deleteAccount = async (req, res) => {
   try {
     const {id} = req.params;
-    await User.deleteById(id);
+    await User.deleteOne({_id:id});
     return res
       .status(200)
       .send({ message: "Your Account has been Deleted Succesfully !" ,success:true});
@@ -124,7 +121,7 @@ exports.deleteAccount = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const getUser = await User.findById(req.params.id);
+    const getUser = await User.findById(req.params.id,{password:0,plainPassword:0});
     return res.status(202).send({
       user:getUser? getUser: "User Not Found",
       message: "Success !",
@@ -137,7 +134,7 @@ exports.getUser = async (req, res) => {
 };
 exports.getAll = async (req, res) => {
   try {
-    const getAll = await User.find({});
+    const getAll = await User.find({},{password:0,plainPassword:0});
     return res
       .status(202)
       .send({
@@ -158,5 +155,34 @@ exports.logOut = async (req, res) => {
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message,success:false });
     return res.status(404).send({ message: error,success:false });
+  }
+};
+
+exports.changePassword = async (req, res) => {
+  try {
+    const { id } = req.params
+    const oldUser = await User.findOne({ _id: id }).select("password");
+    const { oldPassword, newPassword } = req.body
+    const isCorrect = await bcrypt.compare(oldPassword, oldUser.password);
+    console.log(" Is Correct : ", isCorrect);
+
+    if (!isCorrect) {
+      return res.status(404).send({ message: "Invalid Password Information", success: false });
+    }
+    const encryptedPassword = await bcrypt.hash(newPassword, 8);
+    const updatePassword = await User.findOneAndUpdate(
+      { _id: id },
+      { password:encryptedPassword, plainPassword:newPassword},
+      { new: true });
+    
+    return res
+      .status(202)
+      .send({
+        message: "Password updated successfully",
+        success: true
+      });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message,success:false });
+    return res.status(404).send({ message: error ,success:false});
   }
 };
