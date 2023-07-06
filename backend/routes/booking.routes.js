@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateToken } = require("../middleware/authMiddleWare");
+const { validateToken } = require("../middleware/authMiddleware");
 const {
   createBooking,
   updateBooking,
