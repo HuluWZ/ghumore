@@ -22,17 +22,21 @@ export default function LoginModal() {
       try {
         dispatch(setLoader(true))
         const response = await LoginUser(values)
+
         dispatch(setLoader(false))
+
+        console.log(response, 'response')
         if(response.success){
           message.success(response.message)
-          localStorage.setItem("token", response.data)
+          console.log(response, 'response')
+          localStorage.setItem("token", response.token)
           window.location.href = "/"
         }else{
           throw new Error(response.message)
         }
       } catch (error) {
         message.error(error.message)
-        console.log(error.message,'error')
+        // console.log(error.message,'error')
       }
     };
     useEffect(()=>{

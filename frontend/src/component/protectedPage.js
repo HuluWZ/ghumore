@@ -22,7 +22,6 @@ function ProtectedPage({ children }) {
         dispatch(setUser(response.data));
       } else {
         message.error(response.message);
-        console.log(response.message);
       }
     } catch (error) {
       message.error(error.message);
