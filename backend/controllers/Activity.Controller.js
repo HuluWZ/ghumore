@@ -30,11 +30,12 @@ exports.createActivity = async (req, res, next) => {
       .send({
         activity: newActivity,
         message: "Activity Created Saved Succesfully !",
+        success: true
       });
 
     await newActivity.save();
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message,success: false });
   }
 };
 
@@ -58,11 +59,12 @@ exports.updateActivity = async (req, res, next) => {
       .status(202)
       .send({
         activity: updatedActivity,
-        message: "Activity Updated Succesfully !"
+        message: "Activity Updated Succesfully !",
+        success: true
       });
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error, success: false });
   }
 };
 
@@ -72,10 +74,10 @@ exports.deleteActivity = async (req, res) => {
     await Activity.deleteById(id);
     return res
       .status(200)
-      .send({ message: "Activity has been Deleted Succesfully !" });
+      .send({ message: "Activity has been Deleted Succesfully !",success: true });
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error ,success: false});
   }
 };
 
@@ -85,9 +87,10 @@ exports.getActivity = async (req, res) => {
     return res.status(202).send({
       activity:getActivity? getActivity: "Activity Not Found",
       message: "Success !",
+      success: getActivity?true:false
     });
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
     return res.status(404).send({ message: error });
   }
 };
@@ -99,10 +102,11 @@ exports.getAllActivity = async (req, res) => {
       .send({
         totalActivity: getAll.length,
         activity: getAll,
+        success: getAll ? true:false,
       });
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    if (error.message) return res.status(404).send({ message: error.message ,success: false });
+    return res.status(404).send({ message: error,success: false });
   }
 };
 
@@ -119,12 +123,13 @@ exports.searchActivity = async (req, res) => {
     return res
       .status(200)
       .send({
-        searchResult: searchActivity.length>0? searchActivity: "Activity Not Found",
-        message: "Search result !"
+        searchResult: searchActivity,
+        message: searchActivity.length>0? ` ${searchActivity.length} Result  found`: "No Result Not Found",
+        success: true
       });
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error,success: false });
   }
 };
 
@@ -152,11 +157,12 @@ exports.filterActivity = async (req, res) => {
       .status(200)
       .send({
         filterResult: filterActivity.length>0? filterActivity: "Activity Not Found",
-        message: "filter result !"
+        message: filterActivity.length>0? `${filterActivity.length} Result Found`: "No Activity  Found",
+        success:true
       });
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error,success: false });
   }
 };
 
