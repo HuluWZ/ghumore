@@ -9,13 +9,13 @@ exports.createAccount = async (req, res, next) => {
   try {
     const { email, password,fullName,phoneNumber} = req.body;
     const userInfoExist = await User.findOne({email});
-    console.log(userInfoExist);
-
+    // console.log(userInfoExist);
     if (userInfoExist) {
       return res
         .status(400)
         .send({
           message: "Email already exist!",
+          success: false
         });
     }
     
@@ -28,11 +28,11 @@ exports.createAccount = async (req, res, next) => {
       .send({
         user: newUser,
         message: "Account Created Saved Succesfully !",
+        success: true
       });
-
     await newUser.save();
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message ,success:false});
   }
 };
 
@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email });
     // console.log(user,email,phoneNumber);
     if (!user) {
-      res.status(404).json({ message: "User Doestn't Exist. Try Sign Up!" });
+      res.status(404).json({ message: "User Doestn't Exist. Try Sign Up!",success:false });
       return;
     }
 
@@ -56,11 +56,11 @@ exports.login = async (req, res) => {
         }
       );
      
-      return res.status(200).send({ message: "User Loged in", token });
+      return res.status(200).send({ message: "User Loged in", token,success:true });
     }
-    res.status(400).send({ message: "Invalid Credentials" });
+    res.status(400).send({ message: "Invalid Credentials" ,success:false});
   } catch (error) {
-    return res.status(500).send({ message: error });
+    return res.status(500).send({ message: error.message,success:false });
   }
 };
 
@@ -72,10 +72,10 @@ exports.getCurrentUser = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).send({ message: "User not found" });
+      return res.status(404).send({ message: "User not found",success:false });
     }
 
-    return res.status(200).send({ user });
+    return res.status(200).send({ user,message: "User created",success:true});
   } catch (error) {
     return res.status(404).send({ message: error.message });
   }
@@ -88,7 +88,7 @@ exports.updateAccount = async (req, res, next) => {
     const user = await User.findById(userID);
 
     if (!user) {
-      return res.status(404).send({ message: "User not found." });
+      return res.status(404).send({ message: "User not found.",success:false });
     }
     
     if (newUserInfo.hasOwnProperty("password")) {
@@ -102,10 +102,10 @@ exports.updateAccount = async (req, res, next) => {
     );
     return res
       .status(202)
-      .send({ user:updatedUser, message: "User Updated Succesfully !" });
+      .send({ user:updatedUser, message: "User Updated Succesfully !" ,success:true});
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    return res.status(404).send({ message: error ,success:false});
   }
 };
 
@@ -115,7 +115,7 @@ exports.deleteAccount = async (req, res) => {
     await User.deleteById(id);
     return res
       .status(200)
-      .send({ message: "Your Account has been Deleted Succesfully !" });
+      .send({ message: "Your Account has been Deleted Succesfully !" ,success:true});
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });
     return res.status(404).send({ message: error });
@@ -128,6 +128,7 @@ exports.getUser = async (req, res) => {
     return res.status(202).send({
       user:getUser? getUser: "User Not Found",
       message: "Success !",
+      success: getUser? true:false
     });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message });
@@ -142,19 +143,20 @@ exports.getAll = async (req, res) => {
       .send({
         totalUsers: getAll.length,
         users: getAll,
+        success: getAll?true:false
       });
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    if (error.message) return res.status(404).send({ message: error.message,success:false });
+    return res.status(404).send({ message: error ,success:false});
   }
 };
 
 exports.logOut = async (req, res) => {
   try {
     req.user = null;
-    return res.status(202).send({ message: "Logged Out Successfully." });
+    return res.status(202).send({ message: "Logged Out Successfully." ,success:true});
   } catch (error) {
-    if (error.message) return res.status(404).send({ message: error.message });
-    return res.status(404).send({ message: error });
+    if (error.message) return res.status(404).send({ message: error.message,success:false });
+    return res.status(404).send({ message: error,success:false });
   }
 };
