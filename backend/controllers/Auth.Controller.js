@@ -160,17 +160,16 @@ exports.logOut = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
   try {
-    const { id } = req.params
-    const oldUser = await User.findOne({ _id: id }).select("password");
+    const { password,id} = req.user
     const { oldPassword, newPassword } = req.body
-    const isCorrect = await bcrypt.compare(oldPassword, oldUser.password);
-    console.log(" Is Correct : ", isCorrect);
+    const isCorrect = await bcrypt.compare(oldPassword, password);
+    console.log(" Is Correct : ", isCorrect,id,password,req.user);
 
     if (!isCorrect) {
       return res.status(404).send({ message: "Invalid Password Information", success: false });
     }
     const encryptedPassword = await bcrypt.hash(newPassword, 8);
-    const updatePassword = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { _id: id },
       { password:encryptedPassword, plainPassword:newPassword},
       { new: true });

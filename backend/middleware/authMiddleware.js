@@ -16,7 +16,7 @@ const validateToken = async(req, res, next) => {
       const validToken = verify(accessToken, process.env.JWT_TOKEN_SECRET_KEY);
       const userInfo = await User.findById(validToken.user_id);
       req.user = userInfo;
-      console.log("User ",req.user);      
+      // console.log("User ",req.user);      
       if (validToken) {
         return next();
       }

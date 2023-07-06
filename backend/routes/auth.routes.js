@@ -22,7 +22,7 @@ router.get("/currentuser/",validateToken,getCurrentUser);
 router.get("/get/:id", getUser);
 router.get("/get/", getAll);
 router.delete("/delete/:id", deleteAccount);
-router.get("/logout", logOut);
-router.put("/change/password/:id", changePassword);
+router.get("/logout", validateToken,logOut);
+router.put("/change/password/",validateToken,changePassword);
 
 module.exports = router;
