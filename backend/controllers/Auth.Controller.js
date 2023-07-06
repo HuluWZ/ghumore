@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    // console.log(user,email,phoneNumber);
+    // console.log(user);
     if (!user) {
       res.status(404).json({ message: "User Doestn't Exist. Try Sign Up!",success:false });
       return;
