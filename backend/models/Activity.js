@@ -8,8 +8,6 @@ const optionsSchema = mongoose.Schema({
   time: [{ type: String ,required:[true,"Option Available Time is required"]}]
 },{ _id: false })
 
-
-// const optionsItem = mongoose.model("optionsItem", optionsSchema, "optionsItem");
 const ActivitySchema = mongoose.Schema(
   {
     name: {
