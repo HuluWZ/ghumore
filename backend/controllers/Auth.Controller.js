@@ -7,7 +7,7 @@ require("dotenv").config();
 
 exports.createAccount = async (req, res, next) => {
   try {
-    const { email, password,firstName, lastName,phoneNumber} = req.body;
+    const { email, password,fullName,phoneNumber} = req.body;
     const userInfoExist = await User.findOne({email});
     console.log(userInfoExist);
 
@@ -20,7 +20,7 @@ exports.createAccount = async (req, res, next) => {
     }
     
     const encryptedPassword = await bcrypt.hash(password, 8);
-    const userData = {email, password: encryptedPassword,firstName, lastName,phoneNumber}
+    const userData = {email, password: encryptedPassword,fullName,phoneNumber}
     const newUser = await User.create(userData);
     // save user token
     res
