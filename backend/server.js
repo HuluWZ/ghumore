@@ -7,16 +7,29 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+
 const authApi = require("./routes/auth.routes");
 const activityApi = require("./routes/activity.routes");
 const bookingApi = require("./routes/booking.routes");
 
+const session = require('express-session');
 const app = express();
 
 app.use(cors());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 app.use(bodyParser.json());
-app.use("/", express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api/auth/", authApi);
 app.use("/api/activity/", activityApi);
