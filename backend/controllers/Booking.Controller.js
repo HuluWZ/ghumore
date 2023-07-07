@@ -2,6 +2,7 @@ const { Booking } = require("../models/Booking");
 
 require("dotenv").config();
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); 
 
 exports.createBooking = async (req, res, next) => {
   try {    
@@ -58,7 +59,8 @@ exports.deleteBooking = async (req, res) => {
 
 exports.getBooking = async (req, res) => {
   try {
-    const getBooking = await Booking.findById(req.params.id).populate("activity");
+    const getBooking = await Booking.findById(req.params.id);
+    // console.log(getBooking);
     return res.status(202).send({
       booking: getBooking,
       message: "Success !",
@@ -71,7 +73,7 @@ exports.getBooking = async (req, res) => {
 };
 exports.getAllBooking = async (req, res) => {
   try {
-    const getAll = await Booking.find({}).populate("activity");
+    const getAll = await Booking.find({});
     return res
       .status(202)
       .send({
@@ -82,6 +84,42 @@ exports.getAllBooking = async (req, res) => {
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message ,success: false});
     return res.status(404).send({ message: error,success: false });
+  }
+};
+
+exports.payWithStripeBooking = async (req, res) => {
+  try {
+    console.log(" a ")
+    const { id } = req.params
+    const booking = await Booking.findById(id);
+    console.log(" Booking : ", booking);
+
+    const session = await stripe.checkout.sessions.create({ 
+    payment_method_types: ["card"], 
+    line_items: [ 
+      { 
+        price:booking.activity,
+        quantity: booking.quantity,
+        currency: "inr",
+      } 
+    ], 
+    mode: "payment", 
+    success_url: "http://localhost:4000/success", 
+    cancel_url: "http://localhost:4000/cancel", 
+    }); 
+    
+    console.log(" Session ID : ", session);
+    // const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Paid" });
+    return res
+      .status(200)
+      .send({
+        bookingRef: session?session.id:null,
+        message: " Payment Stripe !",
+        success: true
+      });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error ,success: false});
   }
 };
 

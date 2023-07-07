@@ -6,9 +6,9 @@ const {
   deleteBooking,
   getBooking,
   getAllBooking,
-  payBooking,
   cancelBooking,
-  confirmBooking
+  confirmBooking,
+  payWithStripeBooking
 } = require("../controllers/Booking.Controller");
 
 
@@ -22,5 +22,6 @@ router.get("/get/", getAllBooking);
 router.delete("/delete/:id", deleteBooking);
 router.put("/cancel:id", cancelBooking);
 router.put("/confirm:id", confirmBooking);
+router.put("/pay/:id", payWithStripeBooking);
 
 module.exports = router;
