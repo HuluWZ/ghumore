@@ -19,7 +19,7 @@ function ProtectedPage({ children }) {
       const response = await GetCurrentUser();
       dispatch(setLoader(false));
       if (response.success) {
-        dispatch(setUser(response.data));
+        dispatch(setUser(response.user));
       } else {
         message.error(response.message);
       }

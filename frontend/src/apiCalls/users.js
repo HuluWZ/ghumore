@@ -1,12 +1,7 @@
 import { message } from "antd";
-import axios from "axios";
+import axiosInstance from "./axiosinstance";
 
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:4000/",
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-});
+
 
 // register user
 export const RegisterUser = async (payload) => {
@@ -34,6 +29,19 @@ export const LoginUser = async (payload) => {
 export const GetCurrentUser = async () => {
   try {
     const response = await axiosInstance.get("/api/auth/currentuser/");
+    return response.data;
+  } catch (error) {
+    console.log(error.message, 'failed')
+    return error.message;
+  }
+};
+
+
+
+// update user profile
+export const UpdateUserProfile = async (userId, payload) => {
+  try {
+    const response = await axiosInstance.put(`/api/auth/update/${userId}`, payload);
     return response.data;
   } catch (error) {
     return error.message;

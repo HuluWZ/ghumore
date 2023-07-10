@@ -120,6 +120,7 @@ exports.searchActivity = async (req, res) => {
         });
       
     console.log(searchActivity,name,location)
+    console.log(searchActivity.length, name, location)
     return res
       .status(200)
       .send({

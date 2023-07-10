@@ -28,7 +28,7 @@ export default function LoginModal() {
         console.log(response, 'response')
         if(response.success){
           message.success(response.message)
-          console.log(response, 'response')
+          console.log(response.token, 'response token')
           localStorage.setItem("token", response.token)
           window.location.href = "/"
         }else{

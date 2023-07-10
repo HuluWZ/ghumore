@@ -85,17 +85,39 @@ const Navbar = () => {
           <div className="text-center">Contact us</div>
         </div>
         <div className="flex items-center justify-center gap-2 mt-2 sm:mt-0">
-          {user && user.name ? (
-            <button className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+          {user && user.fullName ? (
+            <>
+            <button 
+            onClick={()=>{
+              localStorage.removeItem("token");
+              navigate("/login")
+          }}
+            className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
             <img
               className="w-5 h-5 overflow-hidden"
               alt=""
               src="/sign-in1.svg"
             />
             <div className="text-base font-semibold font-lato text-white">
-              LoOut
+              Log Out
             </div>
           </button>
+          <button 
+            onClick={()=>{
+              navigate("/profile")
+          }}
+            className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+            <img
+              className="w-5 h-5 overflow-hidden"
+              alt=""
+              src="/sign-in1.svg"
+            />
+            <div className="text-base font-semibold font-lato text-white">
+              Profile
+            </div>
+          </button>
+            </>
+          
           ) : (
             <>
               <button 

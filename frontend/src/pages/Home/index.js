@@ -1,10 +1,12 @@
 import React from 'react'
+import LandingPage from '../../component/LandingPage'
 
 export default function Home() {
   return (
     <div>
-        <h1>Home</h1>
-        
+      <div className='h-[810vh]'>
+      <LandingPage/>
+      </div>
     </div>
   )
 }

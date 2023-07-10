@@ -21,7 +21,6 @@ export default function SignUpModal() {
   const [phone, setPhone] = useState("");
   const onFinish = async (values) => {
     values.phoneNumber = phone;
-    values.lastName = "Kaleb"
     console.log(values, 'finish')
     try {
       dispatch(setLoader(true));
@@ -43,11 +42,11 @@ export default function SignUpModal() {
   const handlePhoneChange = (value) => {
     setPhone(value);
   };
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/");
+  //   }
+  // }, [navigate]);
 
   const onFrameContainer5Click = useCallback(() => {
     navigate("/ghumore-account-login-2-jun");
@@ -108,7 +107,7 @@ export default function SignUpModal() {
         <div className="rounded-lg bg-white box-border w-[510px] flex flex-row py-3 px-4 items-center justify-start text-xl text-black-200 border-[1px] border-solid border-grey-grey-200">
           <div className="relative leading-[150%] font-medium inline-block w-72 shrink-0">
             <Form.Item 
-            name="firstName"
+            name="fullName"
             rules={rules}>
               <input
                 className="relative text-xl leading-[24px] rounded-lg border-gray-300 focus:outline-none"
@@ -127,7 +126,7 @@ export default function SignUpModal() {
       <Form.Item
         className="absolute top-[425.5px] left-[803.97px] rounded-lg bg-white box-border w-[273px] flex flex-row py-3 px-4 items-center justify-start text-xl text-black-200 border-[1px] border-solid border-grey-grey-200"
         rules={rules}>
-        <PhoneInput country={"us"} value={phone} onChange={handlePhoneChange} />
+        <PhoneInput country={"in"} value={phone} onChange={handlePhoneChange} />
       </Form.Item>
       <div className="absolute top-[506.5px] left-[714px] flex flex-col items-start justify-start gap-[6px]">
         <div className="relative leading-[150%] font-medium">Email</div>
