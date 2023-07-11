@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
         }
       );
      
-      return res.status(200).send({ message: "User Loged in", token,success:true });
+      return res.status(200).send({ message: "User Loged in", token,user,success:true });
     }
     res.status(400).send({ message: "Invalid Credentials" ,success:false});
   } catch (error) {
