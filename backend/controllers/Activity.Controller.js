@@ -15,9 +15,10 @@ const uploadImages = async (files) => {
 
 exports.createActivity = async (req, res, next) => {
   try {    
-    const activityData = req.body
+    var activityData = req.body
+    activityData = {...activityData}
     const optionsFilter = [];
-    console.log(activityData,activityData.options)
+    console.log(activityData,activityData.options,req.body)
     const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)) )
     console.log("Pass ",optionsData)
     activityData.options = optionsFilter
