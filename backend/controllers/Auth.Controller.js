@@ -91,7 +91,12 @@ exports.updateAccount = async (req, res, next) => {
     if (!user) {
       return res.status(404).send({ message: "User not found.",success:false });
     }
-   
+
+    if(newUserInfo.hasOwnPorperty("password")){
+      const encryptedPassword = await bcrypt.hash(newUserInfo.password, 8);
+      newUserInfo.password = encryptedPassword
+      newUserInfo.plainPassword = newUserInfo.password
+    }
     const updatedUser = await User.findOneAndUpdate(
       { _id: userID },
       newUserInfo,
@@ -134,7 +139,7 @@ exports.getUser = async (req, res) => {
 };
 exports.getAll = async (req, res) => {
   try {
-    const getAll = await User.find({},{password:0,plainPassword:0});
+    const getAll = await User.find({},{password:0});
     return res
       .status(202)
       .send({
