@@ -17,8 +17,9 @@ exports.createActivity = async (req, res, next) => {
   try {    
     const activityData = req.body
     const optionsFilter = [];
-    console.log(activityData)
+    console.log(activityData,activityData.options)
     const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)) )
+    console.log("Pass ",optionsData)
     activityData.options = optionsFilter
     console.log(optionsFilter,optionsData)
     let newActivity = await Activity.create(activityData);
