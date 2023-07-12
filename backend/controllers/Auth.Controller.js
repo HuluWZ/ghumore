@@ -93,9 +93,10 @@ exports.updateAccount = async (req, res, next) => {
     }
 
     if(newUserInfo.hasOwnProperty("password")){
-      const encryptedPassword = await bcrypt.hash(newUserInfo.password, 8);
+      const { password } = newUserInfo
+      const encryptedPassword = await bcrypt.hash(password, 8);
       newUserInfo.password = encryptedPassword
-      newUserInfo.plainPassword = newUserInfo.password
+      newUserInfo.plainPassword = password
     }
     const updatedUser = await User.findOneAndUpdate(
       { _id: userID },
