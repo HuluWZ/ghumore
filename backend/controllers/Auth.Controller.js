@@ -92,7 +92,7 @@ exports.updateAccount = async (req, res, next) => {
       return res.status(404).send({ message: "User not found.",success:false });
     }
 
-    if(newUserInfo.hasOwnPorperty("password")){
+    if(newUserInfo.hasOwnProperty("password")){
       const encryptedPassword = await bcrypt.hash(newUserInfo.password, 8);
       newUserInfo.password = encryptedPassword
       newUserInfo.plainPassword = newUserInfo.password
