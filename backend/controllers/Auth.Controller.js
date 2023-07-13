@@ -39,9 +39,10 @@ exports.createAccount = async (req, res, next) => {
 
 exports.login = async (req, res) => {
   try {
+    console.log(" User LOGIN "+req.body);
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    // console.log(user);
+    console.log(user);
     if (!user) {
       res.status(404).json({ message: "User Doestn't Exist. Try Sign Up!",success:false });
       return;
@@ -127,7 +128,8 @@ exports.deleteAccount = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const getUser = await User.findById(req.params.id,{password:0,plainPassword:0});
+    const getUser = await User.findById(req.params.id, { password: 0, plainPassword: 0 });
+    
     return res.status(202).send({
       user:getUser? getUser: "User Not Found",
       message: "Success !",
@@ -140,7 +142,9 @@ exports.getUser = async (req, res) => {
 };
 exports.getAll = async (req, res) => {
   try {
-    const getAll = await User.find({},{password:0});
+    console.log(" Welcome to get all users  ")
+    const getAll = await User.find({}, { password: 0 });
+    // console.log(getAll)
     return res
       .status(202)
       .send({
@@ -156,6 +160,7 @@ exports.getAll = async (req, res) => {
 
 exports.logOut = async (req, res) => {
   try {
+    console.log(" Welcome to Logout  ")
     req.user = null;
     return res.status(202).send({ message: "Logged Out Successfully." ,success:true});
   } catch (error) {
