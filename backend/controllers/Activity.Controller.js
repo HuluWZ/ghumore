@@ -17,11 +17,15 @@ exports.createActivity = async (req, res, next) => {
   try {    
     var activityData = req.body
     activityData = {...activityData}
-    const optionsFilter = [];
-    console.log(activityData,activityData.options,req.body)
-    const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)) )
-    console.log("Pass ",optionsData)
+    var optionsFilter = [];
+    var imagesFilter = []
+    console.log(activityData,activityData.options,activityData.images)
+    const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)))
+    const imagesDate = activityData.images.map((image) => imagesFilter.push(JSON.parse(image)))
+    
+    console.log(" Option  Filter - ",optionsData,optionsFilter," Image Filter - ",imagesDate,optionsFilter)
     activityData.options = optionsFilter
+    activityData.images = imagesFilter
     console.log(optionsFilter,optionsData)
     let newActivity = await Activity.create(activityData);
     var imageURLList = await uploadImages(req.files)
