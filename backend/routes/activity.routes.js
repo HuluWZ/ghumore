@@ -7,7 +7,8 @@ const {
   getActivity,
   getAllActivity,
   searchActivity,
-  filterActivity
+  filterActivity,
+  uploadMultipleImages
 } = require("../controllers/Activity.Controller");
 
 const { uploadAnyImages,uploadImage,uploadImages } = require("../middleware/fileUploadMiddleware");
@@ -15,7 +16,8 @@ const { uploadAnyImages,uploadImage,uploadImages } = require("../middleware/file
 const router = express.Router();
 
 // Activity Router
-router.post("/create/", uploadImages,createActivity);
+router.post("/upload", uploadImages,uploadMultipleImages);
+router.post("/create",uploadImages,createActivity);
 router.put("/update/:id", uploadAnyImages, updateActivity);
 router.get("/get/:id", getActivity);
 router.get("/get/", getAllActivity);

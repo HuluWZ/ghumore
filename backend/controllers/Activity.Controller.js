@@ -13,10 +13,22 @@ const uploadImages = async (files) => {
   return imageUrlList;
 }
 
+exports.uploadMultipleImages = async (req, res, next) => {
+  console.log(" Image upload ")
+  const { files } = req;
+  var imageUrlList = []
+  for (let i = 0; i < files.length; i++){
+       const {url}= await uploadToCloud(files[i].filename);
+       imageUrlList.push(url);
+  }
+  return imageUrlList;
+}
+
 exports.createActivity = async (req, res, next) => {
   try {    
+    console.log(" Creating activity ")
     var activityData = req.body
-    activityData = {...activityData}
+    // activityData = {...activityData}
     var optionsFilter = [];
     var imagesFilter = []
     console.log(activityData,activityData.options,activityData.images)
@@ -79,7 +91,7 @@ exports.updateActivity = async (req, res, next) => {
 exports.deleteActivity = async (req, res) => {
   try {
     const {id} = req.params;
-    await Activity.deleteById(id);
+    await Activity.deleteOne({_id: id });
     return res
       .status(200)
       .send({ message: "Activity has been Deleted Succesfully !",success: true });
@@ -104,7 +116,8 @@ exports.getActivity = async (req, res) => {
 };
 exports.getAllActivity = async (req, res) => {
   try {
-    const getAll = await Activity.find({});
+    const getAll = await Activity.find({}).sort("-createdAt");;
+    console.log(" Get All Activity ");
     return res
       .status(202)
       .send({

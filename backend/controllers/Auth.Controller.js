@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
     }
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      // Create token
+      // Create token   
       const token = jwt.sign(
         { user_id: user._id, email },
         process.env.JWT_TOKEN_SECRET_KEY,
@@ -143,7 +143,7 @@ exports.getUser = async (req, res) => {
 exports.getAll = async (req, res) => {
   try {
     console.log(" Welcome to get all users  ")
-    const getAll = await User.find({}, { password: 0 });
+    const getAll = await User.find({}, { password: 0 }).sort("-createdAt");
     // console.log(getAll)
     return res
       .status(202)

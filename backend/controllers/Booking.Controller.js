@@ -26,6 +26,7 @@ exports.createBooking = async (req, res, next) => {
 
 exports.updateBooking = async (req, res, next) => {
   try {
+    console.log(" Update Booking ", req.params.id)
     let bookingInfo = req.body;
     const { id } = req.params;
     // TODO check for options and update total price with quantity
@@ -46,8 +47,9 @@ exports.updateBooking = async (req, res, next) => {
 
 exports.deleteBooking = async (req, res) => {
   try {
+    console.log(" Delete Booking ", req.params.id)
     const {id} = req.params;
-    await Booking.deleteById(id);
+    await Booking.deleteOne({_id:id});
     return res
       .status(200)
       .send({ message: "Booking has been Deleted Succesfully !" ,success: true});
@@ -59,6 +61,8 @@ exports.deleteBooking = async (req, res) => {
 
 exports.getBooking = async (req, res) => {
   try {
+    console.log(" Get Booking ", req.params.id)
+    // console.log(" b ", req.params)
     const getBooking = await Booking.findById(req.params.id);
     // console.log(getBooking);
     return res.status(202).send({
@@ -73,7 +77,7 @@ exports.getBooking = async (req, res) => {
 };
 exports.getAllBooking = async (req, res) => {
   try {
-    const getAll = await Booking.find({});
+    const getAll = await Booking.find({}).sort("-createdAt");
     return res
       .status(202)
       .send({
