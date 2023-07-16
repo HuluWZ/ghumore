@@ -14,14 +14,26 @@ const uploadImages = async (files) => {
 }
 
 exports.uploadMultipleImages = async (req, res, next) => {
-  console.log(" Image upload ")
-  const { files } = req;
-  var imageUrlList = []
-  for (let i = 0; i < files.length; i++){
-       const {url}= await uploadToCloud(files[i].filename);
-       imageUrlList.push(url);
+  try {
+    const { files } = req;
+    console.log(" Method Image upload  Start ",files)
+    var imageUrlList = []
+    for (let i = 0; i < files.length; i++){
+         const {url}= await uploadToCloud(files[i].filename);
+         imageUrlList.push(url);
+    }
+    // return imageUrlList;
+    console.log(" Uploaded Images - ",imageUrlList)
+    res
+      .status(201)
+      .send({
+        images: imageUrlList,
+        message: "Image uploaded Succesfully !",
+        success: true
+      });
+  }catch(error){
+    return res.status(400).json({ message: error.message,success: false });
   }
-  return imageUrlList;
 }
 
 exports.createActivity = async (req, res, next) => {
@@ -116,7 +128,7 @@ exports.getActivity = async (req, res) => {
 };
 exports.getAllActivity = async (req, res) => {
   try {
-    const getAll = await Activity.find({}).sort("-createdAt");;
+    const getAll = await Activity.find({}).sort("-updatedAt");;
     console.log(" Get All Activity ");
     return res
       .status(202)

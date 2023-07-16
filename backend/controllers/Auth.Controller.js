@@ -143,7 +143,7 @@ exports.getUser = async (req, res) => {
 exports.getAll = async (req, res) => {
   try {
     console.log(" Welcome to get all users  ")
-    const getAll = await User.find({}, { password: 0 }).sort("-createdAt");
+    const getAll = await User.find({}, { password: 0 }).sort("-updatedAt");
     // console.log(getAll)
     return res
       .status(202)

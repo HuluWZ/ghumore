@@ -26,7 +26,7 @@ exports.createBooking = async (req, res, next) => {
 
 exports.updateBooking = async (req, res, next) => {
   try {
-    console.log(" Update Booking ", req.params.id)
+    console.log(" Update Booking API ", req.params.id, req.body)
     let bookingInfo = req.body;
     const { id } = req.params;
     // TODO check for options and update total price with quantity
@@ -77,7 +77,7 @@ exports.getBooking = async (req, res) => {
 };
 exports.getAllBooking = async (req, res) => {
   try {
-    const getAll = await Booking.find({}).sort("-createdAt");
+    const getAll = await Booking.find({}).sort("-updatedAt");
     return res
       .status(202)
       .send({
