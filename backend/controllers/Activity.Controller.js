@@ -13,6 +13,27 @@ const uploadImages = async (files) => {
   return imageUrlList;
 }
 
+exports.uploadOneImage = async (req, res, next) => {
+  try {
+    const { files } = req;
+    console.log(" Method Image upload  Start ",files,req.file)
+    var imageUrlList = []
+    
+    const {url}= await uploadToCloud(files[i].filename);
+    
+    console.log(" Uploaded Image URL  - ",url)
+    res
+      .status(201)
+      .send({
+        images: url?url:"No File Uploaded",
+        message: "Image uploaded Succesfully !",
+        success: true
+      });
+  }catch(error){
+    return res.status(400).json({ message: error.message,success: false });
+  }
+}
+
 exports.uploadMultipleImages = async (req, res, next) => {
   try {
     const { files } = req;
