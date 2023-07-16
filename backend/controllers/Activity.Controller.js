@@ -16,7 +16,7 @@ const uploadImages = async (files) => {
 exports.uploadMultipleImages = async (req, res, next) => {
   try {
     const { files } = req;
-    console.log(" Method Image upload  Start ",files)
+    console.log(" Method Image upload  Start ",files," Req ",req)
     var imageUrlList = []
     for (let i = 0; i < files.length; i++){
          const {url}= await uploadToCloud(files[i].filename);
