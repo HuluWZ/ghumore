@@ -14,6 +14,8 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const authApi = require("./routes/auth.routes");
 const activityApi = require("./routes/activity.routes");
 const bookingApi = require("./routes/booking.routes");
+const locationApi = require('./routes/location.routes');
+const categoryApi = require('./routes/category.routes');
 
 const session = require('express-session');
 const app = express();
@@ -34,6 +36,8 @@ app.use(passport.session());
 app.use("/api/auth/", authApi);
 app.use("/api/activity/", activityApi);
 app.use("/api/booking/", bookingApi);
+app.use("/api/location/", locationApi);
+app.use("/api/category/", categoryApi);
 
 app.get("/", function (req, res) {
   res.send("Ghumore India App API Gateway.");
