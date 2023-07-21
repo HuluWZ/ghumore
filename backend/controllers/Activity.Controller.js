@@ -64,15 +64,16 @@ exports.createActivity = async (req, res, next) => {
     // activityData = {...activityData}
     var optionsFilter = [];
     var imagesFilter = []
-    console.log(activityData,activityData.options,activityData.images)
-    const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)))
-    const imagesDate = activityData.images.map((image) => imagesFilter.push(JSON.parse(image)))
+    console.log(activityData,req.file,req.files)
+    // const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)))
+    // const imagesDate = activityData.images.map((image) => imagesFilter.push(JSON.parse(image)))
     
-    console.log(" Option  Filter - ",optionsData,optionsFilter," Image Filter - ",imagesDate,optionsFilter)
-    activityData.options = optionsFilter
-    activityData.images = imagesFilter
-    console.log(optionsFilter,optionsData)
+    // console.log(" Option  Filter - ",optionsData,optionsFilter," Image Filter - ",imagesDate,optionsFilter)
+    // activityData.options = optionsFilter
+    // activityData.images = imagesFilter
+    // console.log(optionsFilter,optionsData)
     let newActivity = await Activity.create(activityData);
+    console.log(newActivity)
     var imageURLList = await uploadImages(req.files)
     // save user token
     console.log(imageURLList)
