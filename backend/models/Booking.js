@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
+const User = require("./User");
 
 const optionSchema = mongoose.Schema({
   name: { type: String, required: [true, "Name is required"] },
@@ -25,6 +26,11 @@ const BookingSchema = mongoose.Schema(
       ref: "Activity",
       required: [true, "Activity is required"],
     },
+    user: {
+      type: ObjectId,
+      ref: "User",
+      required: [true, "User is required"],
+    },
     option: {
       type: optionSchema,
       required: [true, "Duration is required"]
@@ -47,7 +53,7 @@ const BookingSchema = mongoose.Schema(
     totalPrice:{type:Number,required:[true,"Total Price is required"],default:0},
     status: {
       type: String,
-      enum: ["Pending", "Confirmed", "Cancelled","Paid","Waiting"],
+      enum: ["Pending", "Confirmed", "Cancelled","Paid","Waiting","Completed","Refunded"],
       default: "Pending",
       required: [true, "Status is required"],
     }

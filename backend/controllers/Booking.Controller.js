@@ -8,6 +8,7 @@ exports.createBooking = async (req, res, next) => {
   try {    
     const bookingData = req.body
     bookingData.totalPrice = (bookingData.option.unitPrice * bookingData.quantity).toFixed(2);
+    bookingData.user=req.user.id
     let newBooking = await Booking.create(bookingData);
     res
       .status(201)
@@ -160,5 +161,29 @@ exports.confirmBooking = async (req, res) => {
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message,success: false });
     return res.status(404).send({ message: error ,success: false});
+  }
+};
+
+exports.getMyBooking =async (req, res) => {
+  try {
+    const {id} = req.user
+    const getMyHistory = await Booking.find({
+      user: id,
+      status: { $in: ['Completed', 'Refunded'] }
+    }).sort("-updatedAt");
+    const getMyUpcoming = await Booking.find({
+      user: id,
+      status: { $in: ["Pending", "Confirmed", "Cancelled", "Paid", "Waiting"] }
+    }).sort("-updatedAt");
+    return res
+      .status(202)
+      .send({
+        history: getMyHistory,
+        upcoming: getMyUpcoming,
+        success: true,
+      });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message ,success: false});
+    return res.status(404).send({ message: error,success: false });
   }
 };

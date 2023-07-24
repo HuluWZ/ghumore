@@ -137,7 +137,7 @@ exports.deleteActivity = async (req, res) => {
 
 exports.getActivity = async (req, res) => {
   try {
-    const getActivity = await Activity.findById(req.params.id);
+    const getActivity = await Activity.findById(req.params.id).populate("location").populate("category");
     return res.status(202).send({
       activity:getActivity? getActivity: "Activity Not Found",
       message: "Success !",
@@ -150,7 +150,9 @@ exports.getActivity = async (req, res) => {
 };
 exports.getAllActivity = async (req, res) => {
   try {
-    const getAll = await Activity.find({}).sort("-updatedAt");;
+    const getAll = await Activity.find({}).populate('location')
+      .populate('category')
+      .sort("-updatedAt");;
     console.log(" Get All Activity ");
     return res
       .status(202)

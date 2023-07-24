@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
+const Location = require("./Location")
+const Category = require("./Category")
 
 const optionsSchema = mongoose.Schema({
   name: { type:String,required:[true,"Option Name is required"] },
@@ -20,11 +22,6 @@ const ActivitySchema = mongoose.Schema(
       trim: true,
       required: [true, "Description is required"],
     },
-    area: {
-      type: String,
-      trim: true,
-      required: [true, "Area is required"],
-    },
     price: {
       type: Number,
       trim: true,
@@ -42,11 +39,25 @@ const ActivitySchema = mongoose.Schema(
       default: "days",
     },
     location: {
-      type: String,
+      type: ObjectId,
+      ref:"Location",
+      required: [true, "Location is required"],
+    },
+    category: {
+      type: ObjectId,
+      ref:"Category",
       required: [true, "Location is required"],
     },
     availablity: {
       type: Date,
+    },
+    startDate: {
+      type: Date,
+      required: [true, "Start Date is required"]
+    },
+    endDate: {
+       type: Date,
+       required:[true,"End Date is required"]
     },
     options: [{ type: optionsSchema,required:[true,"Options is required"] }],
     totalCapacity: {
