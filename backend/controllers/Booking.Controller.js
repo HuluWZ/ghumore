@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 const { Booking } = require("../models/Booking");
 
 require("dotenv").config();
@@ -64,7 +66,8 @@ exports.getBooking = async (req, res) => {
   try {
     console.log(" Get Booking ", req.params.id)
     // console.log(" b ", req.params)
-    const getBooking = await Booking.findById(req.params.id);
+    const getBooking = await Booking.findById(req.params.id).
+    populate("user",{password:0,plainPassword:0,createdAt:0,updatedAt:0}).sort("-updatedAt");
     // console.log(getBooking);
     return res.status(202).send({
       booking: getBooking,
@@ -78,7 +81,8 @@ exports.getBooking = async (req, res) => {
 };
 exports.getAllBooking = async (req, res) => {
   try {
-    const getAll = await Booking.find({}).sort("-updatedAt");
+    const getAll = await Booking.find({}).
+    populate("user",{password:0,plainPassword:0,createdAt:0,updatedAt:0}).sort("-updatedAt");
     return res
       .status(202)
       .send({
@@ -166,13 +170,13 @@ exports.confirmBooking = async (req, res) => {
 
 exports.getMyBooking =async (req, res) => {
   try {
-    const {id} = req.user
+    const { _id } = req.user
     const getMyHistory = await Booking.find({
-      user: id,
+      user: _id,
       status: { $in: ['Completed', 'Refunded'] }
     }).sort("-updatedAt");
     const getMyUpcoming = await Booking.find({
-      user: id,
+      user: _id,
       status: { $in: ["Pending", "Confirmed", "Cancelled", "Paid", "Waiting"] }
     }).sort("-updatedAt");
     return res
@@ -183,6 +187,7 @@ exports.getMyBooking =async (req, res) => {
         success: true,
       });
   } catch (error) {
+    console.log(error);
     if (error.message) return res.status(404).send({ message: error.message ,success: false});
     return res.status(404).send({ message: error,success: false });
   }
