@@ -70,8 +70,9 @@ exports.createActivity = async (req, res, next) => {
     
     // console.log(" Option  Filter - ",optionsData,optionsFilter," Image Filter - ",imagesDate,optionsFilter)
     activityData.options = optionsFilter
+    activityData.availableSpot = activityData.totalCapacity
     // activityData.images = imagesFilter
-    console.log()
+    // console.log()
     let newActivity = await Activity.create(activityData);
     console.log(newActivity)
     var imageURLList = await uploadImages(req.files)
@@ -169,15 +170,16 @@ exports.getAllActivity = async (req, res) => {
 
 exports.searchActivity = async (req, res) => {
   try {
-    const { location, name } = req.query;
+    const { category,location, name } = req.query;
     // await Activity.deleteById(id);
     const searchActivity = await Activity.find({
           "name": name ? new RegExp(name,'i'): { $exists: true },
-          "area": location ? new RegExp(location, 'i') : { $exists: true },
+          "location": location ? location : { $exists: true },
+          "category":category ? category :{$exists:true}
         });
       
     console.log(searchActivity,name,location)
-    console.log(searchActivity.length, name, location)
+    // console.log(searchActivity.length, name, location)
     return res
       .status(200)
       .send({
@@ -193,24 +195,16 @@ exports.searchActivity = async (req, res) => {
 
 exports.filterActivity = async (req, res) => {
   try {
-    const { type, location, minDuration, maxDuration, minPrice, maxPrice } = req.query;
+    const { category, location, minDuration, maxDuration, minPrice, maxPrice } = req.query;
     // console.log(type, location, minDuration, maxDuration,minPrice,maxPrice);
     const filterActivity = await Activity.find({
-          name: type ? new RegExp(type,'i'): { $exists: true },
-          area: location ? new RegExp(location, 'i') : { $exists: true },
+          category: category ? category: { $exists: true },
+          location: location ? location: { $exists: true },
           price: minPrice && maxPrice ? { $gte: minPrice,$lte:maxPrice }:{$exists:true},
           duration: minDuration && maxDuration ? {$gte:minDuration,$lte:maxDuration}:{$exists:true}
         });
-      
-    const query = {
-      minPrice,
-      maxPrice,
-      minDuration,
-      maxDuration,
-      location,
-      type
-    }
-    console.log(filterActivity,query);
+ 
+    console.log(filterActivity);
     return res
       .status(200)
       .send({
@@ -224,3 +218,27 @@ exports.filterActivity = async (req, res) => {
   }
 };
 
+
+exports.checkAvailablity = async (req, res) => {
+  try {
+    const { activity, quantity, date } = req.query;
+    console.log(" Check Available : ",activity,quantity,date);
+    const isAvailable = await Activity.find({
+            "_id": activity ? activity : { $exists: true },
+            "availableSpot": quantity ? { $gte: quantity } : { $exists: true },
+            "lastBookingDate": date ? { $gte: new Date(date) } : {$exists:true}
+    });
+      
+    console.log(" Check Availablity : ",isAvailable.length)
+    return res
+      .status(200)
+      .send({
+        isAvailable: isAvailable.length >0?true:false,
+        message: isAvailable.length > 0 ? `Available` : "No Available",
+        success: true
+      });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error,success: false });
+  }
+};

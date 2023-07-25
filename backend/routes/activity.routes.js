@@ -9,7 +9,8 @@ const {
   searchActivity,
   filterActivity,
   uploadMultipleImages,
-  uploadOneImage
+  uploadOneImage,
+  checkAvailablity
 } = require("../controllers/Activity.Controller");
 
 const { uploadAnyImages,uploadImage,uploadImages } = require("../middleware/fileUploadMiddleware");
@@ -26,5 +27,6 @@ router.get("/get/", getAllActivity);
 router.delete("/delete/:id", deleteActivity);
 router.get("/search", searchActivity);
 router.get("/filter",filterActivity)
+router.get("/check", checkAvailablity);
 
 module.exports = router;

@@ -48,21 +48,31 @@ const ActivitySchema = mongoose.Schema(
       ref:"Category",
       required: [true, "Location is required"],
     },
-    availablity: {
+    lastBookingDate: {
       type: Date,
+      required: [true, "Last Booking Date is required"]
     },
     startDate: {
       type: Date,
       required: [true, "Start Date is required"]
-    },
+    }, 
     endDate: {
        type: Date,
        required:[true,"End Date is required"]
+    },
+    include: {
+      type: String,
+    },
+    exclude: {
+      type: String,
     },
     options: [{ type: optionsSchema,required:[true,"Options is required"] }],
     totalCapacity: {
       type: Number,
       required:[true,"Total Spaces is required"]
+    },
+    availableSpot: {
+      type: Number
     },
     organizer: {
       type: String,

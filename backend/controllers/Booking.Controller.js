@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 const { Booking } = require("../models/Booking");
+const { Activity} = require("../models/Activity");
 
 require("dotenv").config();
 
@@ -10,8 +11,15 @@ exports.createBooking = async (req, res, next) => {
   try {    
     const bookingData = req.body
     bookingData.totalPrice = (bookingData.option.unitPrice * bookingData.quantity).toFixed(2);
-    bookingData.user=req.user.id
+    bookingData.user = req.user.id
+    //TODO Update availableSpot for activity by incrementing from quantity
     let newBooking = await Booking.create(bookingData);
+    const amount = parseInt(bookingData.quantity)
+    await Activity.
+      findByIdAndUpdate(bookingData.activity , {
+          $inc: { availableSpot: -amount }
+        }
+      );
     res
       .status(201)
       .send({
@@ -19,8 +27,7 @@ exports.createBooking = async (req, res, next) => {
         message: "Activity Booked Succesfully !",
         success: true
       });
-
-    await newBooking.save();
+      await newBooking.save();
   } catch (error) {
     return res.status(400).json({ message: error.message ,success: false });
   }
