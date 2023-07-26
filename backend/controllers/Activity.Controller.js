@@ -170,21 +170,65 @@ exports.getAllActivity = async (req, res) => {
 
 exports.searchActivity = async (req, res) => {
   try {
+    // console.log(" Welcome")
     const { category,location, name } = req.query;
-    // await Activity.deleteById(id);
-    const searchActivity = await Activity.find({
-          "name": name ? new RegExp(name,'i'): { $exists: true },
-          "location": location ? location : { $exists: true },
-          "category":category ? category :{$exists:true}
-        });
       
-    console.log(searchActivity,name,location)
+    // search by category and location name from Activity
+    // console.log(" Welcome ",req.query);
+   const place = await Activity.aggregate([
+      {
+        $lookup: {
+          from: "Location",
+          localField: "location",
+          foreignField: "_id",
+          as: "Location"
+        }
+      },
+      { $unwind: "$Location" },
+      { $unwind:"$Location._id"},
+      {
+        $lookup: {
+          from: "Category",
+          localField: "category",
+          foreignField: "_id",
+          as: "Category"
+        }
+      },
+      { $unwind: "$Category" },
+      {
+        $match: {
+          "name": name ? new RegExp(name, 'i') : { $exists: true },
+          "Location.name": location ? new RegExp(location, 'i') : { $exists: true },
+          "Category.name": category ? new RegExp(category, 'i') : { $exists: true },
+        }
+      },
+      {
+        $project: {
+          name: 1,
+          description: 1,
+          category: "$Category",
+          location: "$Location",
+          price: 1,
+          images: 1,
+          options: 1,
+          duration: 1,
+          totalCapacity: 1,
+          organizer: 1,
+          rating: 1,
+          endDate:1,
+          startDate:1,
+          availableSpot:1,
+          lastBookingDate:1
+        }
+      }
+   ])
+    // console.log(searchActivity, name, location)
     // console.log(searchActivity.length, name, location)
     return res
       .status(200)
       .send({
-        searchResult: searchActivity,
-        message: searchActivity.length>0? ` ${searchActivity.length} Result  found`: "No Result Not Found",
+        searchResult: place,
+        message: place.length>0? ` ${place.length} Result  found`: "No Result Not Found",
         success: true
       });
   } catch (error) {
