@@ -1,0 +1,13 @@
+.Poster{
+    background-color: blueviolet;
+    min-height: 40vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.poster-header{
+    font-size: 3rem;
+}

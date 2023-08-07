@@ -1,0 +1,23 @@
+.BaliExperience{
+    width: 96vw;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 100px auto;
+    border-radius: 1rem;
+    color: white;
+}
+.BaliExperience > * {
+    margin: 1rem;
+}
+.experience-buttons{
+    display: flex;
+}
+.experience-buttons>*{
+    margin: 50px;
+    /* background-color: yellow; */
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+}

@@ -1,8 +1,9 @@
 {
-  "name": "frontend",
+  "name": "figma-trial",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-google-maps/api": "^2.18.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -11,15 +12,17 @@
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
-    "postcss": "^8.4.24",
-    "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.3.0",
+    "jwt-decode": "^3.1.2",
+    "rc-slider": "^10.2.1",
     "react": "^18.2.0",
+    "react-datepicker": "^4.15.0",
     "react-dom": "^18.2.0",
+    "react-facebook-login": "^4.1.1",
+    "react-modal": "^3.16.1",
     "react-phone-input-2": "^2.15.1",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

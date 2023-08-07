@@ -1,0 +1,22 @@
+.SearchHeader{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100vw;
+    margin-left: 5%;
+    margin-top: 5%;
+    /* flex-wrap: wrap; */
+}
+.text-header{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.SearchHeader .tags {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+.SearchHeader .tags span{
+    margin: 20px;
+}

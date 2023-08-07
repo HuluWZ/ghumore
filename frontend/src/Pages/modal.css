@@ -1,0 +1,112 @@
+.ModalSign {
+  position: fixed;
+  top: calc(5vh + 1px);
+  /* max-width: 80%; */
+  /* left: 50%; */
+  background-color: #fff;
+  /* padding: 50px; */
+  z-index: 900;
+  right: 20%;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
+}
+.Modal {
+  position: fixed;
+  top: calc(10vh + 1px);
+  max-width: 80%;
+  /* left: 50%; */
+  background-color: #fff;
+  padding: 50px;
+  z-index: 900;
+  left: 10%;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
+}
+.Backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+}
+
+.modal-display {
+  text-align: start;
+}
+.modal-display-header {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.modal-display-header::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ed5826; /* Replace "your-color" with the desired color */
+}
+.modal-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.modal-list > * {
+  padding: 20px;
+}
+.close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: large;
+  padding: 1rem;
+  z-index: 10000;
+}
+.shadow {
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #2a2d32;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); 
+  z-index: 2;
+}
+
+.modal-list-section {
+  display: flex;
+  flex-direction: row;
+}
+.modal-list-section ul li {
+  padding: 10px 30px;
+  color: #2a2d32;
+}
+@media only screen and (max-width: 900px) {
+  /*Tablets [601px -> 1200px]*/
+  .Modal {
+    position: fixed;
+    top: calc(40vh + 1px);
+    max-width: 80%;
+    /* left: 50%; */
+    background-color: #fff;
+    padding: 50px;
+    z-index: 900;
+    left: 10%;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
+  }
+  .ModalSign {
+    position: fixed;
+    top: calc(5vh + 1px);
+    /* max-width: 80%; */
+    /* left: 50%; */
+    background-color: #fff;
+    /* padding: 50px; */
+    z-index: 900;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
+  }
+}

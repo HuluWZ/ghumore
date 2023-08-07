@@ -1,0 +1,260 @@
+.SecureCheckoutPage {
+  margin-top: 150px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.secure-checkout-form{
+  position: relative;
+  border-radius: 19px;
+  background-color: #fff;
+  box-shadow: 0px 24px 80px rgba(17, 17, 26, 0.1);
+  border: 1px solid #2152b1;
+  box-sizing: border-box;
+  width: 50vw;
+  min-height: 50vh;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.review-order-detail {
+  max-width: 30%;
+  height: fit-content;
+  box-shadow: 0px 10px 25px -3px rgba(0, 0, 0, 0.5);
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 1rem;
+}
+.review-order-card {
+  display: flex;
+  flex-direction: row;
+}
+.review-order-description {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+.review-order-img {
+  width: 150px;
+  height: 100px;
+  border-radius: 1rem;
+}
+.review-order-img img{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.contact-detail-form {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  width: 100%;
+}
+.contact-detail-form > * {
+  margin: 20px;
+}
+.contact-detail-form > div {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 10px;
+  align-items: start;
+}
+.contact-detail-form > input {
+  /* width: 50%; */
+}
+.contact-detail-form > label {
+  /* margin: 20px; */
+  
+}
+.book-now-input {
+  position: absolute;
+  left: 50%;
+  margin: 0 auto;
+}
+.pay-option {
+  margin: 20px;
+  height: 3rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  padding: 30px;
+}
+.pay-form {
+  position: relative;
+}
+.pay-option > * {
+  margin-right: 40px;
+}
+.input-form {
+  background: #ffffff;
+  width: 40vh;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #afb3bd;
+  border-width: 1.5px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.pickup-input-form {
+  background: #ffffff;
+  max-width: 80vh;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #afb3bd;
+  border-width: 1.5px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.traveler-detail-form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.traveler-detail-form  > input {
+  width: 40%;
+}
+.traveler-field{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 10px;
+  align-items: flex-start;
+}
+h2 {
+  font-weight: bold;
+}
+.last-detail-form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 90%;
+}
+.last-detail-form>*{
+  margin: 10px;
+}
+.next-btn{
+  margin: 40px auto;
+  width: 50%;
+}
+.review-order-cost {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.line-break {
+  margin: 40px 0;
+}
+.star{
+  display: flex;
+  flex-direction: row;
+}
+
+.review-order-cost::after {
+  content: "";
+  position: relative;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid black; /* Adjust the line color and style as desired */
+}
+.review-order-cost-number{
+  display: flex;
+  flex-direction: column;
+}
+.review-order-description-detail {
+  max-width: 30vw;
+}
+.footer-copyright {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-color: #dfe0e2;
+  max-height: 5vh;
+  width: 100vw;
+}
+.SecureCheckoutConfirm {
+  padding: 30px;
+}
+.booked-data {
+  display: flex;
+  justify-content: space-between;
+}
+.booked-data-info {
+  display: flex;
+  justify-content: center;
+}
+.booked-data-cancel-info {
+  display: flex;
+  justify-content: flex-start;
+}
+.booked-data-info-body {
+  margin-left: 70px;
+}
+.booked-data-card {
+  width: 200px;
+  height: 160px;
+  background-color: red;
+  border-radius: 1rem;
+}
+.cancel-booking {
+  margin: 50px 20px;
+  padding: 5px 20px;
+  background-color: red;
+  width: 25rem;
+  color: white;
+  border-radius: 0.4rem;
+}
+
+@media only screen and (max-width: 900px) {
+  /*Tablets [601px -> 1200px]*/
+  .secure-checkout-form {
+    width: 90vw;
+    /* margin: 1rem; */
+    /* padding: 1rem; */
+  }
+  .contact-detail-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  .contact-detail-form > div {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 10px;
+    align-items: start;
+  }
+  .traveler-detail-form {
+    flex-direction: column;
+    width: 100%;
+  }
+  .traveler-detail-form  > input {
+    width: 80%;
+  }
+  .traveler-field{
+    flex-direction: column;
+    width: 90%;
+  }
+  .review-order-detail{
+    max-width: 90%;
+  }
+  .pickup-input-form {
+  }
+}
