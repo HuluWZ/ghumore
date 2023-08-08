@@ -1,9 +1,12 @@
-import axiosInstance, { AxiosInstance } from "./axiosinstance";
+import axiosInstance from "./axiosinstance";
 
 // Create Booking
 export const createBooking = async (bookingData) => {
   try {
-    const response = await axiosInstance.post(`/api/booking/create`, bookingData);
+    const response = await axiosInstance.post(
+      `/api/booking/create`,
+      bookingData
+    );
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -13,7 +16,10 @@ export const createBooking = async (bookingData) => {
 // Update Booking
 export const updateBooking = async (id, bookingData) => {
   try {
-    const response = await axiosInstance.put(`/api/booking/update/${id}`, bookingData);
+    const response = await axiosInstance.put(
+      `/api/booking/update/${id}`,
+      bookingData
+    );
     return response.data;
   } catch (error) {
     return error.message;
@@ -51,9 +57,13 @@ export const deleteBooking = async (id) => {
 };
 
 // Cancel Booking
-export const cancelBooking = async (id) => {
+export const cancelBooking = async (id, token) => {
   try {
-    const response = await axiosInstance.put(`/api/booking/cancel/${id}`);
+    const response = await axiosInstance.put(`/api/booking/cancel/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     return error.message;
@@ -80,7 +90,6 @@ export const payWithStripeBooking = async (id) => {
   }
 };
 
-
 // const authenticateWithGoogle = async () => {
 //   try {
 //     const response = await axiosInstance.get('/api/auth/google');
@@ -90,14 +99,25 @@ export const payWithStripeBooking = async (id) => {
 //   }
 // };
 
-
-
 // Function to authenticate with Facebook
 const authenticateWithFacebook = async () => {
   try {
-    const response = await axiosInstance.get('/api/auth/facebook');
+    const response = await axiosInstance.get("/api/auth/facebook");
     // No specific response handling
   } catch (error) {
     // Handle error if needed
+  }
+};
+
+export const getMyBookings = async (token) => {
+  try {
+    const response = await axiosInstance.get(`/api/booking/get/my/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
   }
 };

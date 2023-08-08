@@ -16,6 +16,7 @@ import {
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { logout } from "../redux/userSlice";
+import { cancelBooking, getMyBookings } from "../apiCalls/booking";
 
 const rules = [{}];
 
@@ -109,6 +110,43 @@ export default function Profile() {
   const handlePhoneChange = (value) => {
     setPhone(value);
   };
+  const [upcomingBooking, setUpcomingBooking] = useState([]);
+  const [historyBooking, setHistoryBooking] = useState([]);
+
+  const getMyBooking = async () => {
+    const token = localStorage.getItem("token"); // Replace with how you store the authentication token
+
+    try {
+      const response = await getMyBookings(token);
+      if (response.success) {
+        setHistoryBooking(response["history"]);
+        setUpcomingBooking(response["upcoming"]);
+        // console.log("my booking history", historyBooking);
+        // console.log("my booking upcoming", upcomingBooking);
+      } else {
+        throw new Error(response.error);
+      }
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
+  const cancelBookings = async (id,)=>{
+    const token = localStorage.getItem("token")
+    try {
+      dispatch(setLoader(true))
+      const response = await cancelBooking(id);
+      console.log("response",response.message)
+      dispatch(setLoader(false))
+      if (response.success){
+        message.success(response.message)
+      }
+      else{
+        throw new Error(response.error)
+      }
+    } catch (error) {
+      message.error(error.message)
+    }
+  }
 
   useEffect(() => {
     if (user) {
@@ -121,7 +159,8 @@ export default function Profile() {
       });
       setPhone(user.phoneNumber || "");
     }
-  }, [user]);
+  }, [user, upcomingBooking]);
+  getMyBooking();
 
   if (!user) {
     return null; // or display a loading state
@@ -269,55 +308,162 @@ export default function Profile() {
           <div className="bookings">
             {/* Add your code for the My Booking view form here (cloned from the profile detail form) */}
             <h3>Upcoming Booking</h3>
-            <div className="upcoming-booking">
-              <table>
-                <tr>
-                  <th>Product</th>
-                  <th>Date</th>
-                  <th>Location</th>
-                  <th>Booking Status</th>
-                  <th> </th>
-                </tr>
-                <tr>
-                  <td>Alfreds Futterkiste</td>
-                  <td>Maria Anders</td>
-                  <td>Germany</td>
-                  <td>Germany</td>
-                  <td>Germany</td>
-                </tr>
-                <tr>
-                  <td>Centro comercial Moctezuma</td>
-                  <td>Francisco Chang</td>
-                  <td>Mexico</td>
-                  <td>Mexico</td>
-                  <td>Mexico</td>
-                </tr>
-              </table>
-            </div>
+            {/* <div className="upcoming-booking">
+              <div className="single-book">
+                <div className="single-book-col">
+                  <span className="font-semibold flex">
+                    <img
+                      className="relative w-5 h-5 overflow-hidden shrink-0"
+                      alt=""
+                      src="/passport.svg"
+                    />
+                    Product
+                  </span>
+                  <span className="font-semibold inline-block font-medium text-orange-800">
+                    Four-Day Private Luxury Golden Triangle Tour to Agra and
+                    Jaipur...
+                  </span>
+                </div>
+                <div className="single-book-col">
+                  <span className="font-semibold text-sm flex">
+                    <img
+                      className="relative w-5 h-5 overflow-hidden shrink-0"
+                      alt=""
+                      src="/date4.svg"
+                    />
+                    Date
+                  </span>
+                  <span>05 Jun 2023</span>
+                </div>
+                <div className="single-book-col">
+                  <span className="font-semibold flex">
+                    <img
+                      className="relative w-5 h-5 overflow-hidden shrink-0"
+                      alt=""
+                      src="/location7.svg"
+                    />
+                    Location
+                  </span>
+                  <span>Delhi, India</span>
+                </div>
+                <div className="single-book-col">
+                  <span className="font-semibold flex">
+                    <img
+                      className="relative w-5 h-5 overflow-hidden shrink-0"
+                      alt=""
+                      src="/table.svg"
+                    />
+                    Booking Status
+                  </span>
+                  <span>Confirmed</span>
+                </div>
+                <div className="single-book-col">
+                  <div className="rounded-md bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                    <div className="font-semibold">Cancel Booking</div>
+                  </div>
+                  <div className="rounded-md bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                    <div className="">{`View & Manage`}</div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+            {upcomingBooking.map((u) => {
+              return (
+                <div className="upcoming-booking">
+                  <div className="single-book">
+                    <div className="single-book-col">
+                      <span className="font-semibold flex">
+                        <img
+                          className="relative w-5 h-5 overflow-hidden shrink-0"
+                          alt=""
+                          src="/passport.svg"
+                        />
+                        Product
+                      </span>
+                      <span className="font-semibold inline-block font-medium text-orange-800">
+                        {u.option.name}
+                      </span>
+                    </div>
+                    <div className="single-book-col">
+                      <span className="font-semibold text-sm flex">
+                        <img
+                          className="relative w-5 h-5 overflow-hidden shrink-0"
+                          alt=""
+                          src="/date4.svg"
+                        />
+                        Date
+                      </span>
+                      <span>{u.date}</span>
+                    </div>
+                    <div className="single-book-col">
+                      <span className="font-semibold flex">
+                        <img
+                          className="relative w-5 h-5 overflow-hidden shrink-0"
+                          alt=""
+                          src="/location7.svg"
+                        />
+                        Location
+                      </span>
+                      <span>Delhi, India</span>
+                    </div>
+                    <div className="single-book-col">
+                      <span className="font-semibold flex">
+                        <img
+                          className="relative w-5 h-5 overflow-hidden shrink-0"
+                          alt=""
+                          src="/table.svg"
+                        />
+                        Booking Status
+                      </span>
+                      <span>{u.status}</span>
+                    </div>
+                    <div className="single-book-col">
+                      
+                      <div className="rounded-md bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                        <div className="">{`View & Manage`}</div>
+                      </div>
+                      <div 
+                      onClick={
+                      ()=>{
+                        cancelBookings(u.activity)
+                      }
+                      }
+                      className="rounded-md bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                        <div className="font-semibold">Cancel Booking</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
             <div className="completed-booking">
-            <table>
-                <tr>
-                  <th>Booking Ref Number</th>
-                  <th>Trip Details</th>
-                  <th>Journey Date</th>
-                  <th>Booking Date</th>
-                  <th>Booking Status</th>
-                  <th>View and Manage</th>
+              <table>
+                <tr className="tr">
+                  <th className="text-sm font-medium">Booking Ref Number</th>
+                  <th className="text-sm font-medium">Trip Details</th>
+                  <th className="text-sm font-medium">Journey Date</th>
+                  <th className="text-sm font-medium">Booking Date</th>
+                  <th className="text-sm font-medium">Booking Status</th>
+                  <div className="text-sm font-medium">View and Manage</div>
                 </tr>
-                <tr>
-                  <td>Alfreds Futterkiste</td>
-                  <td>Maria Anders</td>
-                  <td>Germany</td>
-                  <td>confirmed</td>
-                  <td>Germany</td>
-                </tr>
-                <tr>
-                  <td>Centro comercial Moctezuma</td>
-                  <td>Francisco Chang</td>
-                  <td>Mexico</td>
-                  <td>confirmed</td>
-                  <td>Mexico</td>
-                </tr>
+
+                {historyBooking.map((h) => {
+                  return (
+                    <tr className="tr">
+                      <td className="font-medium text-orange-800">
+                        {h.option.name}
+                      </td>
+                      <td className="font-medium">{h.option.description}</td>
+                      <td className="font-medium">{h.date}</td>
+                      <td className="font-medium">{h.createdAt}</td>
+                      <td className="font-medium">{h.status}</td>
+                      <div className=" rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                        View and Manage
+                      </div>
+                    </tr>
+                  );
+                })}
               </table>
             </div>
           </div>
