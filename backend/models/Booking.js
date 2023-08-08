@@ -53,7 +53,7 @@ const BookingSchema = mongoose.Schema(
     totalPrice:{type:Number,required:[true,"Total Price is required"],default:0},
     status: {
       type: String,
-      enum: ["Pending", "Confirmed", "Cancelled","Paid","Waiting","Completed","Refunded"],
+      enum: ["Pending", "Confirmed", "Approved","Cancelled","Paid","Waiting","Completed","Refunded"],
       default: "Pending",
       required: [true, "Status is required"],
     }
