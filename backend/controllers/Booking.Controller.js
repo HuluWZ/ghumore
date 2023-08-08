@@ -174,7 +174,10 @@ exports.payWithStripeBooking = async (req, res) => {
 exports.cancelBooking = async (req, res) => {
   try {
     const { id } = req.params
-    const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Cancelled" });
+    const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Cancelled" },{
+      new: true,
+    });
+    console.log(" Cancel Booking ",id,cancelBooking)
     return res
       .status(200)
       .send({
@@ -191,7 +194,9 @@ exports.cancelBooking = async (req, res) => {
 exports.confirmBooking = async (req, res) => {
   try {
     const { id } = req.params
-    const confirmBooking = await Booking.findByIdAndUpdate(id, { status: "Confirmed" });
+    const confirmBooking = await Booking.findByIdAndUpdate(id, { status: "Confirmed" },{
+      new: true,
+    });
     
     return res
       .status(200)
