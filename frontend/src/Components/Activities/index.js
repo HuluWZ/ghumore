@@ -41,7 +41,7 @@ export default function Activity() {
                 {/* <LazyLoadImage src={ i.images[0] || "/image4@2x.png" } lazy="lazy" /> */}
                 <BlurImageLoader 
                  src={ i.images[0]}                         
-                //  preview={ i.images[0]  }                     
+                               
                   fullCover={true}                         
                   maxBlurLevel={0}                       
                     transitionTime={0}/>
