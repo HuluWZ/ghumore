@@ -3,6 +3,9 @@ import "./activity.css";
 import { getAllActivity } from "../../apiCalls/activities";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
+
 
 export default function Activity() {
   const [result, setResult] = useState([]);
@@ -34,7 +37,8 @@ export default function Activity() {
           return (
             <div className="activity-card">
               <div className="activity-image">
-                <img src={ i.images[0] || "/image4@2x.png" }  />
+                
+                <LazyLoadImage src={ i.images[0] || "/image4@2x.png" } lazy="lazy" />
               </div>
               <h2 className="activity-title">{i.name}</h2>
               <span className="font-bold text-4xl">{i.area}</span>

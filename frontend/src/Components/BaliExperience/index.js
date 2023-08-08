@@ -1,9 +1,19 @@
 import React from "react";
 import './baliexperience.css'
+import { useProgressiveImage } from "../../customHooks/ProgressiveImages";
 export default function BaliExperience() {
-  return (
-    <div className="BaliExperience rounded-[20px] w-[1863px] h-[848px] bg-[url(/public/one-of-top-banner@3x.png)] bg-cover bg-no-repeat bg-[top] text-center text-xl font-lato">
-      <h1>Bali Experience</h1>
+
+
+  const Component = (props) => {
+    const loaded = useProgressiveImage(props.url)
+    
+    return (
+      <div 
+      style={{ backgroundImage: `url(${loaded || props.placeholder})` }} 
+       className={`BaliExperience rounded-[20px] w-[1863px] h-[848px] bg-cover bg-no-repeat bg-[top] text-center text-xl font-lato`}
+
+       >
+        <h1>Bali Experience</h1>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore
         expedita magnam modi autem perspiciatis dolores voluptas rerum quam
@@ -21,6 +31,15 @@ export default function BaliExperience() {
           </div>
         </div>
       </div>
-    </div>
+       </div>
+    )
+  }
+
+
+  return (
+    <Component url="one-of-top-banner@3x.png" placeholder="bali experience">
+      
+      </Component>
+  
   );
 }
