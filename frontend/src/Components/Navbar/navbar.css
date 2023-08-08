@@ -13,7 +13,7 @@
     position: fixed;
     top: 0px;
     @media only screen and (max-width: 600px){
-        display: none;
+        font-size: 8px;
     }
 }
 .main-navbar{
@@ -117,3 +117,7 @@
 @media only screen and (max-width: 425px){
 	/*Small smartphones [325px -> 425px]*/
 }
+.drawerAlignment {
+                align-items: center !important;
+                justify-content: center !important;
+    }

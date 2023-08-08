@@ -19,6 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -32,7 +33,6 @@ function DrawerAppBar(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [modalOpen, setModalOpen] = useState(false);
-
     const handleLinkClick = async (link) => {
         setActiveLink(link);
         if (link === "Testimonials") {
@@ -62,11 +62,18 @@ function DrawerAppBar(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-       
+    <div style={{display: 'flex'}} className='drawerAlignment' >
+    <Box onClick={handleDrawerToggle}>
       <Divider />
       <List>
+        <Link to='/'>  <img
+            className="overflow-hidden cursor-pointer"
+            alt=""
+            src="/gumo-re-indiafinal-11.svg"
+            onClick={() => navigate("/")}
+          /></Link>
        <ListItem disablePadding>
+            
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Home" ? "active" : ""}
               style={{color: 'black'}}
@@ -76,7 +83,7 @@ function DrawerAppBar(props) {
               }}>
               Home
             </ListItemButton>
-            </ListItem>
+        </ListItem>
         <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Experience" ? "active" : ""}
@@ -88,7 +95,7 @@ function DrawerAppBar(props) {
               }}>
               Experience
             </ListItemButton>
-            </ListItem>
+    </ListItem>
      <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Destination" ? "active" : ""}
@@ -137,6 +144,7 @@ function DrawerAppBar(props) {
             
       </List>
     </Box>
+    </div>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
@@ -148,7 +156,7 @@ function DrawerAppBar(props) {
    
       <CssBaseline />
       
-      <AppBar className='Navbar main-navbar' style={{background: '#f8f9fa', position: 'fixed', }} component="nav">
+      <AppBar className='Navbar main-navbar' style={{background: '#f8f9fa', position: 'fixed', top: '20px'}} component="nav">
         <Toolbar>
           <IconButton
             color="black"
@@ -184,11 +192,8 @@ function DrawerAppBar(props) {
               style={{color: 'black'}}
               onClick={() => {
                 handleLinkClick("Experience");
-                
                 setModalType("experience");
-               
                 setIsModalOpen(true);
-               
               }}>
               Experience
             </li>
@@ -310,17 +315,19 @@ function DrawerAppBar(props) {
         </div>
         </Toolbar>
       </AppBar>
-      <Box component="nav">
+      <Box component="nav" style={{alignItems: 'left'}}>
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
+          
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
-          }}
+          }} 
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'inline-block', sm: 'none' },
+            alignItems: 'start', justifyContent: 'flex-start',
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
