@@ -175,6 +175,7 @@ exports.cancelBooking = async (req, res) => {
   try {
     const { id } = req.params
     const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Cancelled" });
+    console.log(" Cancel Booking ",id,cancelBooking)
     return res
       .status(200)
       .send({

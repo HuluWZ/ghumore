@@ -22,8 +22,8 @@ router.get("/get/my/",validateToken,getMyBooking);
 router.get("/get/:id", getBooking);
 router.get("/get/", getAllBooking);
 router.delete("/delete/:id", deleteBooking);
-router.put("/cancel:id", cancelBooking);
-router.put("/confirm:id", confirmBooking);
+router.put("/cancel/:id", cancelBooking);
+router.put("/confirm/:id", confirmBooking);
 router.put("/pay/:id", payWithStripeBooking);
 
 module.exports = router;
