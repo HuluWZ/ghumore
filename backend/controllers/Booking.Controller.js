@@ -73,8 +73,22 @@ exports.getBooking = async (req, res) => {
   try {
     console.log(" Get Booking ", req.params.id)
     // console.log(" b ", req.params)
-    const getBooking = await Booking.findById(req.params.id).
-    populate("user",{password:0,plainPassword:0,createdAt:0,updatedAt:0}).sort("-updatedAt");
+    const getBooking = await Booking.findById(req.params.id)
+      .populate({
+        path: 'activity',
+        populate: [
+        {
+          path: 'location',
+          model: 'Location',
+        },
+        {
+          path: 'category',
+          model: 'Category',
+        }
+        ] ,
+      })
+      .populate("user", { password: 0, plainPassword: 0, createdAt: 0, updatedAt: 0 })
+      .sort("-updatedAt");
     // console.log(getBooking);
     return res.status(202).send({
       booking: getBooking,
@@ -88,8 +102,25 @@ exports.getBooking = async (req, res) => {
 };
 exports.getAllBooking = async (req, res) => {
   try {
-    const getAll = await Booking.find({}).
-    populate("user",{password:0,plainPassword:0,createdAt:0,updatedAt:0}).sort("-updatedAt");
+    const getAll = await Booking.find({})
+       .populate({
+         path: 'activity',
+         populate: [
+         {
+           path: 'location',
+           model: 'Location',
+           select: 'name image url', // Specify multiple fields you want from Location
+
+         },
+         {
+           path: 'category',
+           model: 'Category',
+           select: 'name image', // Specify multiple fields you want from Location
+         }
+         ] ,
+       })
+      .populate("user", { password: 0, plainPassword: 0, createdAt: 0, updatedAt: 0 })
+      .sort("-updatedAt");
     return res
       .status(202)
       .send({
@@ -143,7 +174,15 @@ exports.payWithStripeBooking = async (req, res) => {
 exports.cancelBooking = async (req, res) => {
   try {
     const { id } = req.params
-    const cancelBooking = await Booking.findByIdAndUpdate(id, {status:"Cancelled"})
+    const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Cancelled" })
+      .populate({
+        path: 'activity',
+        populate: {
+          path: 'location',
+          model: 'Location',
+        },
+      })
+;
     return res
       .status(200)
       .send({
@@ -181,11 +220,40 @@ exports.getMyBooking =async (req, res) => {
     const getMyHistory = await Booking.find({
       user: _id,
       status: { $in: ['Completed', 'Refunded'] }
-    }).sort("-updatedAt");
+    }).populate({
+        path: 'activity',
+        populate: [
+        {
+          path: 'location',
+          model: 'Location',
+          select: 'name image url', 
+        },
+        {
+          path: 'category',
+          model: 'Category',
+          select: 'name image', 
+        }
+        ] ,
+      }).sort("-updatedAt");
     const getMyUpcoming = await Booking.find({
       user: _id,
       status: { $in: ["Pending", "Confirmed", "Cancelled", "Paid", "Waiting"] }
-    }).sort("-updatedAt");
+    }).populate({
+        path: 'activity',
+        populate: [
+        {
+          path: 'location',
+          model: 'Location',
+          select: 'name image url', 
+        },
+        {
+          path: 'category',
+          model: 'Category',
+          select: 'name image',
+
+        }
+        ] 
+      }).sort("-updatedAt");
     return res
       .status(202)
       .send({
