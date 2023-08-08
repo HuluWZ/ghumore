@@ -1,15 +1,12 @@
 import React from "react";
 import "./company.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Company() {
   return (
     <div className="Company">
       <div className="company-image">
-        <img
-          className=" rounded w-[725px] h-[477px] object-cover"
-          alt=""
-          src="/image8@2x.png"
-        />
+         <LazyLoadImage className=" rounded w-[725px] h-[477px] object-cover" src="/image8@2x.png" lazy="lazy" />
       </div>
       <div className="company-card flex flex-col items-start justify-start gap-[34px]">
         <h1>Our Company</h1>

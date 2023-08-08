@@ -2,8 +2,25 @@ import React, { useEffect, useState } from "react";
 import "./destination.css";
 import { fetchAllLocations } from "../../apiCalls/location";
 import { useNavigate } from "react-router-dom";
+import { useProgressiveImage } from "../../customHooks/ProgressiveImages";
 
 export default function Destination() {
+
+
+
+
+  const Component = (props) => {
+    const loaded = useProgressiveImage(props.source)
+    
+    return (
+      <div 
+       onClick={()=>navigate(`/search?category=&location=${props.name}&activity=`)}
+       style={{ backgroundImage: `url(${loaded || props.placeholder})` }} 
+       className={`destination-card bg-cover bg-no-repeat bg-[top] rounded-2xl w-[330px] h-[224.03px]`}
+       />
+    )
+  }
+
     const navigate = useNavigate()
   const [locationList, setLocationList] = useState([]);
   const addLocationToDestinationList = async () => {
@@ -47,12 +64,13 @@ export default function Destination() {
       <div className="destination-cards">
         {locationList.map((destination) => {
             console.log(locationList, "list");
-            return (<div 
-                onClick={()=>navigate(`/search?category=&location=${destination.name}&activity=`)}
-            style={{backgroundImage: `url(${destination.image})`}} 
-            className={`destination-card bg-cover bg-no-repeat bg-[top] rounded-2xl w-[330px] h-[224.03px]`}>
+            return (<Component   
+            name= {destination.name}
+            source={destination.image}
+            placeholder="new image"
+            >
             <h1>{destination.name}</h1>
-          </div>)
+          </Component>)
         })}
       </div>
     </div>
