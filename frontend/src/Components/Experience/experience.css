@@ -1,0 +1,30 @@
+.Experience{
+    width: 70vw;
+    min-height: 50vh;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    /* background-color: yellow; */
+    margin: 100px auto;
+}
+.experience-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.experience-card{
+    position: relative;
+    margin: 20px 20px;
+    width: 300px;
+    height: 30vh;
+    background-color: wheat;
+    color: white;
+}
+.experience-card span{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}

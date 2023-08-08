@@ -1,0 +1,150 @@
+.option-image {
+  width: 10vh;
+  height: 10vh;
+}
+.big-image {
+  width: 50vw;
+  height: 50vh;
+}
+.SelectedItemBody {
+  text-align: left;
+}
+.booking-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.item-image-list {
+  display: flex;
+  flex-direction: column;
+}
+.item-selection {
+  width: 8vw;
+  height: 13vh;
+  background-color: blueviolet;
+  margin: 1vh;
+  border-radius: 1rem;
+}
+.item-image-main {
+  width: 50vw;
+  height: 60vh;
+  background-color: black;
+  border-radius: 1rem;
+}
+
+.item-image-book {
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  max-width: 600px;
+  min-width: 400px;
+  /* background-color: blue; */
+  border-radius: 1rem;
+  margin: 10px;
+  padding: 10px;
+}
+.option-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px black solid;
+  border-radius: 1rem;
+  margin: 10px;
+}
+.image-cover {
+  margin: 2rem 4rem;
+  width: 90%;
+  height: auto;
+  object-fit: cover;
+}
+.time-option {
+  padding: 0.5rem;
+  margin: 5px;
+  border-radius: 1rem;
+}
+.time-option.selected {
+  background-color: orange;
+}
+.time-option:hover {
+  border: 1px solid black;
+}
+.item-image-book .status {
+  display: flex;
+  justify-content: space-between;
+}
+/* .item-description {
+  width: 500px;
+}
+.item-description > * {
+  margin: 20px;
+} */
+.img-choice{
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+.img-main{
+  width: 800px;
+  height: 700px;
+}
+.map {
+  width: 50vw;
+  height: 70vh;
+}
+.map-container {
+  width: 50vw;
+  height: 70vh;
+}
+h1 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+.form-header{
+  position: relative;
+}
+.select-checkbox{
+  position: absolute;
+  width: 7rem;
+  top: 5px;
+  right: 5px;
+}
+.recomendation-cards {
+  width: 90vw;
+  min-height: 30vh;
+  display: flex;
+  justify-content: space-between;
+  margin: 50px;
+}
+.date-top{
+  position: relative;
+}
+.recomendation-card {
+  text-align: left;
+  width: 300px;
+}
+.recomendation-card-image {
+  width: 300px;
+  height: 200px;
+}
+@media only screen and (max-width: 900px) {
+  /*Tablets [601px -> 1200px]*/
+  .recomendation-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .SelectedItemBody {
+    text-align: center;
+  }
+  .booking-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .item-image-list {
+    flex-direction: row;
+  }
+}

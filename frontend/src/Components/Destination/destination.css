@@ -1,0 +1,33 @@
+.Destinaiton{
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+}
+.destination-cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.destination-card{
+    width: 300px;
+    height: 200px;
+    /* background-color: blue; */
+    margin: 30px;
+    border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+.destn-btn{
+    position: absolute;
+    right: 5rem;
+}
+@media only screen and (max-width: 900px) {
+    .destn-btn{
+        position:relative;
+    }
+}

@@ -1,0 +1,40 @@
+.Company{
+    min-height: 50vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.company-image{
+    width: 30vw;
+    height: 30vw;
+    /* background-color: yellow; */
+}
+.company-card{
+    padding-left: 2rem;
+    width: 40vw;
+    height: 35vw;
+    color: white;
+    background-color: #100534;
+    /* background-color: blue; */
+    display: flex;
+    align-items: start;
+    text-align: start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 900px){
+    /*Tablets [601px -> 1200px]*/
+    .promotion-cards{
+        flex-direction: column;
+    }
+    .company-image{
+        display: none;
+    }
+    .company-card{
+        width: 90vw;
+        height: 100%;
+    }
+    
+}

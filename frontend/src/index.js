@@ -1,16 +1,24 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import App from './App';
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from './redux/store';
+import SecurePayConfirm from './Pages/SecurePayConfirm';
+import SecurePay from './Pages/SecurePay';
+import SecureCheckout from './Pages/SecureCheckout';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+<Provider store={store}>
       <App />
+      {/* <SecurePayConfirm/> */}
+      {/* <SecurePay/> */}
+      {/* <SecureCheckout /> */}
     </Provider>
   </React.StrictMode>
 );
