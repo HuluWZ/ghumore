@@ -5,7 +5,7 @@ export default function Testimonial() {
   return (
     <div className="Testimonial" id="testimonial">
       <div
-        className="flex flex-col items-center justify-start gap-[12px]"
+        className="flex flex-col items-center sm-6 justify-start gap-[12px]"
         data-scroll-to="titleContainer">
         <b className="relative tracking-[0.2em] uppercase">Testimonial</b>
         <b className="relative text-[48px] inline-block font-outfit text-center w-[591px] text-black-100">

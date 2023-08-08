@@ -17,6 +17,7 @@ import AboutUs from "./Pages/AboutUs";
 import ContactUs from "./Pages/ContactUs";
 import Destination from "./Components/Destination";
 import AllDestination from "./Pages/AllDestination";
+import DrawerAppBar from "./Components/Navbar/DrawerAppBar";
 
 function App() {
   const { loading }  = useSelector(state => state.loaders)
@@ -38,6 +39,9 @@ function App() {
         <Route path="/securecheckout" element={<SecureCheckout /> } />
         <Route path="/securepay" element={<ProtectedPage><SecurePay /></ProtectedPage> } />
         <Route path="/securepayconfirm" element={<SecurePayConfirm /> } />
+        <Route path="/nav" element={<DrawerAppBar /> } />
+        
+
         <Route path="*" element={<ProtectedPage><NotFound /></ProtectedPage> } />
         
       </Routes>
