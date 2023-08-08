@@ -174,15 +174,7 @@ exports.payWithStripeBooking = async (req, res) => {
 exports.cancelBooking = async (req, res) => {
   try {
     const { id } = req.params
-    const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Cancelled" })
-      .populate({
-        path: 'activity',
-        populate: {
-          path: 'location',
-          model: 'Location',
-        },
-      })
-;
+    const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Cancelled" });
     return res
       .status(200)
       .send({
