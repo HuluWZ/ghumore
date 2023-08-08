@@ -20,7 +20,7 @@ exports.createAccount = async (req, res, next) => {
     }
     
     const encryptedPassword = await bcrypt.hash(password, 8);
-    const userData = {email, password: encryptedPassword,fullName,phoneNumber,plainPassword:password}
+    const userData = {email, password: encryptedPassword,fullName,phoneNumber,plainPassword:password,city:req.body?.city ,address:req.body?.address,role:req.body?.role}
     const newUser = await User.create(userData);
     // console.log(others,newUser);
     // save user token
