@@ -63,18 +63,78 @@ function DrawerAppBar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }} style={{color: 'black'}}>
-        MUI
-      </Typography>
+       
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText style={{color: 'black'}} primary={item} />
+       <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "Home" ? "active" : ""}
+              style={{color: 'black'}}
+              onClick={() => {
+                handleLinkClick("Home");
+                navigate("/");
+              }}>
+              Home
             </ListItemButton>
-          </ListItem>
-        ))}
+            </ListItem>
+        <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "Experience" ? "active" : ""}
+              style={{color: 'black'}}
+              onClick={() => {
+                handleLinkClick("Experience");
+                setModalType("experience");
+                setIsModalOpen(true);
+              }}>
+              Experience
+            </ListItemButton>
+            </ListItem>
+     <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "Destination" ? "active" : ""}
+              style={{color: 'black'}}
+              onClick={() => {
+                setModalType("destination");
+                handleLinkClick("Destination");
+                setIsModalOpen(true);
+              }}>
+              Destination
+              </ListItemButton>
+              </ListItem>
+    <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "Testimonials" ? "active" : ""}
+              style={{color: 'black'}}
+              onClick={() => {
+                setModalType("testimonial");
+                handleLinkClick("Testimonials");
+              }}>
+              Testimonials
+            </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "About" ? "active" : ""}
+              style={{color: 'black'}}
+              onClick={() => {
+                handleLinkClick("About");
+                navigate("/aboutus");
+              }}>
+              About Us
+            </ListItemButton>
+            </ListItem>
+        <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "Contact" ? "active" : ""}
+              style={{color: 'black'}}
+              onClick={() => {
+                handleLinkClick("Contact");
+                navigate("/contactus");
+              }}>
+              Contact Us
+            </ListItemButton>
+            </ListItem>
+            
       </List>
     </Box>
   );
@@ -175,7 +235,7 @@ function DrawerAppBar(props) {
             
           
           </Box>
-          <div sx={{ display: { xs: 'none', sm: 'block' } }} className="flex gap-2 p-10 mt-2   sm:mt-0">
+          <div sx={{ display: { xs: 'none', sm: 'block' } }} className="flex xs-none gap-2 p-10 mt-2 navbuttons   sm:mt-0">
           {user && user.fullName ? (
             <>
               <button
