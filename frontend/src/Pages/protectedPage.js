@@ -7,6 +7,8 @@ import { setLoader } from "../redux/loaderSlice";
 import { setUser } from "../redux/userSlice";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import DrawerAppBar from "../Components/Navbar/DrawerAppBar";
+import "../Components/Navbar/navbar.css";
 
 function ProtectedPage({ children }) {
   const { user } = useSelector((state) => state.users);
@@ -70,8 +72,11 @@ function ProtectedPage({ children }) {
           )}
         </div>
       </div> */}
-      <Navbar/>
-      
+      {/* <Navbar/> */}
+      <div  className="yellow-bar">
+        Book tours, attractions & things to do with GHUMORE
+      </div>
+      <DrawerAppBar/>
       {/*body*/}
       <div>
         <div> {children} </div>

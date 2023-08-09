@@ -1,11 +1,20 @@
 .Navbar{
     position:fixed;
+    top: 100px;
     z-index: 1000;
     border-bottom: black 1px solid;
+    @media only screen and (max-width: 600px){
+        top: 0px;
+    }
 }
 .yellow-bar{
     background-color: #fda71a;
     width: 100vw;
+    position: fixed;
+    top: 0px;
+    @media only screen and (max-width: 600px){
+        font-size: 8px;
+    }
 }
 .main-navbar{
     background-color: #f8f9fa;
@@ -16,6 +25,11 @@
     align-items: center;
     font-size: 1rem;
 
+}
+.navbuttons{
+    @media only screen and (max-width: 600px){
+        display: none;
+    }
 }
 .auth-items-navbar{
     font-family: Poppins;
@@ -103,3 +117,7 @@
 @media only screen and (max-width: 425px){
 	/*Small smartphones [325px -> 425px]*/
 }
+.drawerAlignment {
+                align-items: center !important;
+                justify-content: center !important;
+    }
