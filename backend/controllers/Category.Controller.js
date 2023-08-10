@@ -7,12 +7,9 @@ exports.createCategory = async (req, res, next) => {
   try {    
     const CategoryData = req.body
      if (req.file) {
-      console.log(" File ",req.file,req.files)
       const { url } = await uploadToCloud(req.file.filename);
       CategoryData.image = url;
-      console.log(" URL ", url);
     }
-    console.log(" Welcome ", CategoryData);
     let newCategory = await Category.create(CategoryData);
     
     res
@@ -32,7 +29,6 @@ exports.createCategory = async (req, res, next) => {
 
 exports.updateCategory = async (req, res, next) => {
   try {
-    console.log(" Update Category API ", req.params.id, req.body)
     let CategoryInfo = req.body;
     const { id } = req.params;
     const updatedCategory = await Category.findOneAndUpdate(
@@ -52,7 +48,6 @@ exports.updateCategory = async (req, res, next) => {
 
 exports.deleteCategory = async (req, res) => {
   try {
-    console.log(" Delete Category ", req.params.id)
     const {id} = req.params;
     await Category.deleteOne({_id:id});
     return res
@@ -66,9 +61,7 @@ exports.deleteCategory = async (req, res) => {
 
 exports.getCategory = async (req, res) => {
   try {
-    console.log(" Get Category ", req.params.id)
     const getCategory = await Category.findById(req.params.id);
-    console.log(getCategory);
     return res.status(202).send({
       category: getCategory,
       message: "Success !",

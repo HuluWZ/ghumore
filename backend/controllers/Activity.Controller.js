@@ -16,12 +16,10 @@ const uploadImages = async (files) => {
 exports.uploadOneImage = async (req, res, next) => {
   try {
     const { files } = req;
-    console.log(" Method Image upload  Start ",files,req.file)
     var imageUrlList = []
     
     const {url}= await uploadToCloud(files[i].filename);
     
-    console.log(" Uploaded Image URL  - ",url)
     res
       .status(201)
       .send({
@@ -37,14 +35,11 @@ exports.uploadOneImage = async (req, res, next) => {
 exports.uploadMultipleImages = async (req, res, next) => {
   try {
     const { files } = req;
-    console.log(" Method Image upload  Start ",files," Req ",req.body,req.file,req.files)
     var imageUrlList = []
     for (let i = 0; i < files.length; i++){
          const {url}= await uploadToCloud(files[i].filename);
          imageUrlList.push(url);
     }
-    // return imageUrlList;
-    console.log(" Uploaded Images - ",imageUrlList)
     res
       .status(201)
       .send({
@@ -59,15 +54,10 @@ exports.uploadMultipleImages = async (req, res, next) => {
 
 exports.createActivity = async (req, res, next) => {
   try {    
-    console.log(" Creating activity ")
     var activityData = req.body
-    console.log(req.files,activityData.options)
     activityData.availableSpot = activityData.totalCapacity
     let newActivity = await Activity.create(activityData);
-    console.log(newActivity)
     var imageURLList = await uploadImages(req.files)
-    // save user token
-    console.log(" URL - ",imageURLList)
     newActivity.images = imageURLList
     res
       .status(201)
@@ -90,7 +80,6 @@ exports.updateActivity = async (req, res, next) => {
     const { id } = req.params;
     const { files } = req
     if (files.length > 0) {
-      // console.log(files,req.file,req.files)
       var imageURLList = await uploadImages(files);
       activityInfo.images = imageURLList
     }
@@ -143,7 +132,6 @@ exports.getAllActivity = async (req, res) => {
     const getAll = await Activity.find({}).populate('location')
       .populate('category')
       .sort("-updatedAt");
-    console.log(" Get All Activity ");
     return res
       .status(202)
       .send({
@@ -159,11 +147,8 @@ exports.getAllActivity = async (req, res) => {
 
 exports.searchActivity = async (req, res) => {
   try {
-    // console.log(" Welcome")
     const { category,location, name } = req.query;
       
-    // search by category and location name from Activity
-    // console.log(" Welcome ",req.query);
    const place = await Activity.aggregate([
       {
         $lookup: {
@@ -211,8 +196,6 @@ exports.searchActivity = async (req, res) => {
         }
       }
    ])
-    // console.log(searchActivity, name, location)
-    // console.log(searchActivity.length, name, location)
     return res
       .status(200)
       .send({
@@ -229,7 +212,6 @@ exports.searchActivity = async (req, res) => {
 exports.filterActivity = async (req, res) => {
   try {
     const { category, location, minDuration, maxDuration, minPrice, maxPrice } = req.query;
-    // console.log(type, location, minDuration, maxDuration,minPrice,maxPrice);
     const filterActivity = await Activity.find({
           category: category ? category: { $exists: true },
           location: location ? location: { $exists: true },
@@ -237,7 +219,6 @@ exports.filterActivity = async (req, res) => {
           duration: minDuration && maxDuration ? {$gte:minDuration,$lte:maxDuration}:{$exists:true}
         });
  
-    console.log(filterActivity);
     return res
       .status(200)
       .send({
@@ -255,14 +236,12 @@ exports.filterActivity = async (req, res) => {
 exports.checkAvailablity = async (req, res) => {
   try {
     const { activity, quantity, date } = req.query;
-    console.log(" Check Available : ",activity,quantity,date);
     const isAvailable = await Activity.find({
             "_id": activity ? activity : { $exists: true },
             "availableSpot": quantity ? { $gte: quantity } : { $exists: true },
             "lastBookingDate": date ? { $gte: new Date(date) } : {$exists:true}
     });
       
-    console.log(" Check Availablity : ",isAvailable.length)
     return res
       .status(200)
       .send({

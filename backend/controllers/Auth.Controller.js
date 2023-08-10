@@ -9,7 +9,6 @@ exports.createAccount = async (req, res, next) => {
   try {
     const { email, password,fullName,phoneNumber,role,city,address} = req.body;
     const userInfoExist = await User.findOne({email});
-    // console.log(userInfoExist);
     if (userInfoExist) {
       return res
         .status(400)
@@ -22,7 +21,6 @@ exports.createAccount = async (req, res, next) => {
     const encryptedPassword = await bcrypt.hash(password, 8);
     const userData = {email, password: encryptedPassword,fullName,phoneNumber,plainPassword:password,city ,address,role}
     const newUser = await User.create(userData);
-    console.log(" Create User ");
     // save user token
     res
       .status(201)
@@ -39,10 +37,8 @@ exports.createAccount = async (req, res, next) => {
 
 exports.login = async (req, res) => {
   try {
-    console.log(" User LOGIN "+req.body);
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       res.status(404).json({ message: "User Doestn't Exist. Try Sign Up!",success:false });
       return;
@@ -70,7 +66,6 @@ exports.login = async (req, res) => {
 exports.getCurrentUser = async (req, res) => {
   try {
     const userId = req.user._id;
-    // console.log(req.user)
     const user = await User.findById(userId).select({password:0,plainPassword:0});
 
     if (!user) {
@@ -142,9 +137,7 @@ exports.getUser = async (req, res) => {
 };
 exports.getAll = async (req, res) => {
   try {
-    console.log(" Welcome to get all users  ")
     const getAll = await User.find({}, { password: 0 }).sort("-updatedAt");
-    // console.log(getAll)
     return res
       .status(202)
       .send({
@@ -160,7 +153,6 @@ exports.getAll = async (req, res) => {
 
 exports.logOut = async (req, res) => {
   try {
-    console.log(" Welcome to Logout  ")
     req.user = null;
     return res.status(202).send({ message: "Logged Out Successfully." ,success:true});
   } catch (error) {
@@ -174,7 +166,6 @@ exports.changePassword = async (req, res) => {
     const { password,id} = req.user
     const { oldPassword, newPassword } = req.body
     const isCorrect = await bcrypt.compare(oldPassword, password);
-    // console.log(" Is Correct : ", isCorrect,id,password,req.user);
 
     if (!isCorrect) {
       return res.status(404).send({ message: "Invalid Password Information", success: false });

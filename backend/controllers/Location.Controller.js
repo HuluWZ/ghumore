@@ -8,12 +8,9 @@ exports.createLocation = async (req, res, next) => {
   try {    
     const locationData = req.body
     if (req.file) {
-      console.log(" File ",req.file,req.files)
       const { url } = await uploadToCloud(req.file.filename);
       locationData.image = url;
-      console.log(" URL ", url);
     }
-    console.log(" Welcome ", locationData,req.file);
     let newLocation = await Location.create(locationData);
     
     res
@@ -33,7 +30,6 @@ exports.createLocation = async (req, res, next) => {
 
 exports.updateLocation = async (req, res, next) => {
   try {
-    console.log(" Update Location API ", req.params.id, req.body)
     let locationInfo = req.body;
     const { id } = req.params;
     const updatedLocation = await Location.findOneAndUpdate(
@@ -53,7 +49,6 @@ exports.updateLocation = async (req, res, next) => {
 
 exports.deleteLocation = async (req, res) => {
   try {
-    console.log(" Delete Booking ", req.params.id)
     const {id} = req.params;
     await Location.deleteOne({_id:id});
     return res
@@ -67,9 +62,7 @@ exports.deleteLocation = async (req, res) => {
 
 exports.getLocation = async (req, res) => {
   try {
-    console.log(" Get Location ", req.params.id)
     const getLocation = await Location.findById(req.params.id);
-    console.log(getLocation);
     return res.status(202).send({
       location: getLocation,
       message: "Success !",

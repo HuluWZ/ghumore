@@ -36,7 +36,6 @@ exports.createBooking = async (req, res, next) => {
 
 exports.updateBooking = async (req, res, next) => {
   try {
-    console.log(" Update Booking API ", req.params.id, req.body)
     let bookingInfo = req.body;
     const { id } = req.params;
     // TODO check for options and update total price with quantity
@@ -57,7 +56,6 @@ exports.updateBooking = async (req, res, next) => {
 
 exports.deleteBooking = async (req, res) => {
   try {
-    console.log(" Delete Booking ", req.params.id)
     const {id} = req.params;
     await Booking.deleteOne({_id:id});
     return res
@@ -71,8 +69,6 @@ exports.deleteBooking = async (req, res) => {
 
 exports.getBooking = async (req, res) => {
   try {
-    console.log(" Get Booking ", req.params.id)
-    // console.log(" b ", req.params)
     const getBooking = await Booking.findById(req.params.id)
       .populate({
         path: 'activity',
@@ -89,7 +85,6 @@ exports.getBooking = async (req, res) => {
       })
       .populate("user", { password: 0, plainPassword: 0, createdAt: 0, updatedAt: 0 })
       .sort("-updatedAt");
-    // console.log(getBooking);
     return res.status(202).send({
       booking: getBooking,
       message: "Success !",
@@ -136,10 +131,8 @@ exports.getAllBooking = async (req, res) => {
 
 exports.payWithStripeBooking = async (req, res) => {
   try {
-    console.log(" a ")
     const { id } = req.params
     const booking = await Booking.findById(id);
-    console.log(" Booking : ", booking);
 
     const session = await stripe.checkout.sessions.create({ 
     payment_method_types: ["card"], 
@@ -155,8 +148,6 @@ exports.payWithStripeBooking = async (req, res) => {
     cancel_url: "http://localhost:4000/cancel", 
     }); 
     
-    console.log(" Session ID : ", session);
-    // const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Paid" });
     return res
       .status(200)
       .send({
@@ -177,7 +168,6 @@ exports.cancelBooking = async (req, res) => {
     const cancelBooking = await Booking.findByIdAndUpdate(id, { status: "Cancelled" },{
       new: true,
     });
-    console.log(" Cancel Booking ",id,cancelBooking)
     return res
       .status(200)
       .send({
@@ -259,7 +249,6 @@ exports.getMyBooking =async (req, res) => {
         success: true,
       });
   } catch (error) {
-    console.log(error);
     if (error.message) return res.status(404).send({ message: error.message ,success: false});
     return res.status(404).send({ message: error,success: false });
   }
