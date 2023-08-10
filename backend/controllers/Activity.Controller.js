@@ -61,25 +61,14 @@ exports.createActivity = async (req, res, next) => {
   try {    
     console.log(" Creating activity ")
     var activityData = req.body
-    // activityData = {...activityData}
-    var optionsFilter = [];
-    var imagesFilter = []
-    console.log(req.files)
-    const optionsData = activityData.options.map((option) => optionsFilter.push(JSON.parse(option)))
-    // const imagesDate = activityData.images.map((image) => imagesFilter.push(JSON.parse(image)))
-    
-    // console.log(" Option  Filter - ",optionsData,optionsFilter," Image Filter - ",imagesDate,optionsFilter)
-    activityData.options = optionsFilter
+    console.log(req.files,activityData.options)
     activityData.availableSpot = activityData.totalCapacity
-    // activityData.images = imagesFilter
-    // console.log()
     let newActivity = await Activity.create(activityData);
     console.log(newActivity)
     var imageURLList = await uploadImages(req.files)
     // save user token
     console.log(" URL - ",imageURLList)
     newActivity.images = imageURLList
-    // newActivity.options = optionsFilter
     res
       .status(201)
       .send({
@@ -153,7 +142,7 @@ exports.getAllActivity = async (req, res) => {
   try {
     const getAll = await Activity.find({}).populate('location')
       .populate('category')
-      .sort("-updatedAt");;
+      .sort("-updatedAt");
     console.log(" Get All Activity ");
     return res
       .status(202)
