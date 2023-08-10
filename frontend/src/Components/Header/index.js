@@ -173,7 +173,7 @@ export default function Header() {
             />
           </div>
 
-          <div className="location">
+          <div className="activities">
             <div className="location-tag">
               <img className="" alt="" src="/location.svg" />
               Location
@@ -205,7 +205,7 @@ export default function Header() {
             )}
           </div>
 
-          <div className="location">
+          <div className="activities">
             <div className="location-tag">
               <img className="" alt="" src="/location.svg" />
               Category
