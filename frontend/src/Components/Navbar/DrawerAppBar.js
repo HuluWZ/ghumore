@@ -20,6 +20,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import Login from "../../Pages/Login";
+import { message } from "antd";
+import { fetchAllCategories } from "../../apiCalls/categories";
+import { fetchAllLocations } from "../../apiCalls/location";
+import Register from "../../Pages/Register";
+import Modal from "../../Pages/Modal";
+import ModalSign from "../../Pages/ModalSign";
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -66,12 +73,15 @@ function DrawerAppBar(props) {
     <Box onClick={handleDrawerToggle}>
       <Divider />
       <List>
-        <Link to='/'>  <img
+        <div  onClick={() => {
+                handleLinkClick("Home");
+                navigate("/");
+              }} to='/'>  <img
             className="overflow-hidden cursor-pointer"
             alt=""
             src="/gumo-re-indiafinal-11.svg"
             onClick={() => navigate("/")}
-          /></Link>
+          /></div>
        <ListItem disablePadding>
             
             <ListItemButton sx={{ textAlign: 'center' }}
@@ -149,6 +159,9 @@ function DrawerAppBar(props) {
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
+  
+
+
   return (
     <div>
       
@@ -156,7 +169,7 @@ function DrawerAppBar(props) {
    
       <CssBaseline />
       
-      <AppBar className='Navbar main-navbar' style={{background: '#f8f9fa', position: 'fixed', top: '20px'}} component="nav">
+      <AppBar id="mynav" className='Navbar main-navbar' style={{background: '#f8f9fa', position: 'fixed'}} component="nav">
         <Toolbar>
           <IconButton
             color="black"
@@ -341,9 +354,18 @@ function DrawerAppBar(props) {
         </Typography>
       </Box>
     </Box>
+    <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <CustomModal modalType={modaltype} />
+      </Modal>
+      <ModalSign open={isSignModalOpen} setOpen={setIsSignModalOpen}>
+        <AccountModal modalType={modaltype} modalState={setIsSignModalOpen} />
+      </ModalSign>
     </div>
   );
 }
+
+
+
 
 DrawerAppBar.propTypes = {
   /**
@@ -352,5 +374,140 @@ DrawerAppBar.propTypes = {
    */
   window: PropTypes.func,
 };
+
+
+function CustomModal({ modalType }) {
+  const [experienceList, setExperienceList] = useState([]);
+  const [locationList, setLocationList] = useState([]);
+
+  const navigate = useNavigate();
+
+  const addCategoriesToExperienceList = async () => {
+    try {
+      const response = await fetchAllCategories();
+      console.log(response.category, "my response data");
+      console.log(typeof response.category);
+      if (response.success) {
+        const categories = response.category;
+
+        // Function to group experiences into arrays of four elements each
+        const groupExperiences = (experiences, groupSize) => {
+          const grouped = [];
+          for (let i = 0; i < experiences.length; i += groupSize) {
+            grouped.push(experiences.slice(i, i + groupSize));
+          }
+          return grouped;
+        };
+
+        const updatedCategories = groupExperiences(categories, 4);
+
+        // Update the state with the fetched data
+        console.log(response.category, "my response category");
+        setExperienceList(updatedCategories);
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const addLocationToDestinationList = async () => {
+    try {
+      const response = await fetchAllLocations();
+      console.log(response.location, "my response data");
+      console.log(typeof response.location);
+      if (response.success) {
+        const locations = response.location;
+
+        // Function to group experiences into arrays of four elements each
+        const groupDestinations = (destinations, groupSize) => {
+          const grouped = [];
+          for (let i = 0; i < destinations.length; i += groupSize) {
+            grouped.push(destinations.slice(i, i + groupSize));
+          }
+          return grouped;
+        };
+
+        const updatedLocations = groupDestinations(locations, 4);
+
+        // Update the state with the fetched data
+        console.log(response.location, "my response locarion");
+        setLocationList(updatedLocations);
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (modalType === "experience") {
+      addCategoriesToExperienceList();
+    }else if (modalType === "destination") {
+      addLocationToDestinationList();
+    }
+  }, [modalType]);
+  // const experienceList = [
+  //   ["Skydiving", "Trekking", "Paragliding", "Tree Ziplining"],
+  //   ["Sightseeing", "Rafting", "Water Sports", "Dinner & Buffet"],
+  //   ["Tours", "Movie Passes", "Bungee Jumping", "Dinner & Buffet"],
+  //   ["Tours", "Movie Passes", "Bungee Jumping", "Dinner & Buffet"],
+  //   ["Rafting", "Sightseeing", "Water Sports", "Dinner & Buffet"],
+  // ];
+
+  // Now call the addCategoriesToExperienceList function to fetch categories and add them to the experienceList
+  if (!modalType) return null;
+  
+
+  if (modalType === "experience")
+    return (
+      <div className="modal-display">
+        <h2 className="modal-display-header">All Experience</h2>
+        <div className="modal-list">
+          {experienceList.map((expSec) => (
+            <div className="modal-list-section">
+              <ul>
+                {expSec ? expSec.map((exp) => <li onClick={() => navigate(`/search?category=${exp.name}&location=&activity=`)}>{exp.name}</li>) : null}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  if (modalType === "destination")
+    return (
+      <div className="modal-display">
+        <h2 className="modal-display-header">All Destinations</h2>
+        <div className="modal-list">
+          {locationList.map((expSec) => (
+            <div className="modal-list-section">
+              <ul>
+              {expSec ? expSec.map((exp) => <li onClick={() => navigate(`/search?category=&location=${exp.name}&activity=`)}>{exp.name}</li>) : null}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+}
+
+function AccountModal({ modalType, modalState }) {
+  console.log(modalType, "sign");
+  if (modalType === "login")
+    return (
+      <div className="ModalSign">
+        <Login modalState={modalState} />
+      </div>
+    );
+  if (modalType === "signup")
+    return (
+      <div className="ModalSign">
+        {/* <div className="close-button font-bold" onClick={modalState(false)}>x</div> */}
+        <Register modalState={modalState} />
+      </div>
+    );
+}
+
 
 export default DrawerAppBar;

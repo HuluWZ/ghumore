@@ -10,8 +10,9 @@
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
 }
 .Modal {
+  overflow-x: scroll;
   position: fixed;
-  top: calc(10vh + 1px);
+  top: calc(10vh + 50px);
   max-width: 80%;
   /* left: 50%; */
   background-color: #fff;
@@ -36,6 +37,9 @@
   position: relative;
   width: -moz-fit-content;
   width: fit-content;
+  @media only screen and (max-width: 600px) {
+    
+  }
 }
 .modal-display-header::after {
   content: "";
@@ -89,13 +93,14 @@
 @media only screen and (max-width: 900px) {
   /*Tablets [601px -> 1200px]*/
   .Modal {
+    overflow-y: scroll;
     position: fixed;
-    top: calc(40vh + 1px);
+    top: calc(25vh + 1px);
     max-width: 80%;
-    /* left: 50%; */
+    max-height: 650px;
     background-color: #fff;
     padding: 50px;
-    z-index: 900;
+    z-index: 10900;
     left: 10%;
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
   }
@@ -106,7 +111,7 @@
     /* left: 50%; */
     background-color: #fff;
     /* padding: 50px; */
-    z-index: 900;
+    z-index: 110900;
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.8);
   }
 }
