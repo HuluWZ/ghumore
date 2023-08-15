@@ -1,4 +1,5 @@
 const { Activity } = require("../models/Activity");
+const { Feedback } = require("../models/Feedback");
 const uploadToCloud = require("../config/cloudnary");
 const { json } = require("body-parser");
 
@@ -117,6 +118,13 @@ exports.deleteActivity = async (req, res) => {
 exports.getActivity = async (req, res) => {
   try {
     const getActivity = await Activity.findById(req.params.id).populate("location").populate("category");
+    const getAll = await Feedback.find({ activity: req.params.id },{activity:0}).populate("user", { fullName: 1, email: 1, phoneNumber: 1 });
+    let total = 0
+    const totalRating = getAll.map((item)=> total += item.rating)
+    getActivity.reviews = getAll
+    getActivity.averageRating = total / getAll.length 
+    getActivity.totalReview = getAll.length
+    console.log("Get Review = ",total,getAll.length)
     return res.status(202).send({
       activity:getActivity? getActivity: "Activity Not Found",
       message: "Success !",
@@ -127,11 +135,22 @@ exports.getActivity = async (req, res) => {
     return res.status(404).send({ message: error });
   }
 };
+
 exports.getAllActivity = async (req, res) => {
   try {
     const getAll = await Activity.find({}).populate('location')
       .populate('category')
       .sort("-updatedAt");
+    
+    for (const activity of getAll) {
+      const getAllFeedback = await Feedback.find({ activity: activity.id },{activity:0}).populate("user", { fullName: 1, email: 1, phoneNumber: 1 });
+      let total = 0
+      const totalRating = getAllFeedback.map((item) => total += item.rating)
+      activity.reviews = getAllFeedback
+      activity.averageRating = total / getAllFeedback.length 
+      activity.totalReview = getAllFeedback.length
+    }
+  
     return res
       .status(202)
       .send({

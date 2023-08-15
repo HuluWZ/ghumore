@@ -87,9 +87,21 @@ const ActivitySchema = mongoose.Schema(
       type: Number,
       min: 4,
       max: 5,
-      default:4.5,
-      required:[true,"Reviews is required"]
-    }
+    },
+    reviews: [
+      {
+      }
+    ],
+    totalReview: {
+      type: Number,
+      min: 0,
+      default:0
+    }, 
+    averageRating: {
+      type: Number,
+      min: 1,
+      max: 5,
+    },
   },
   { timestamps: true }
 );
