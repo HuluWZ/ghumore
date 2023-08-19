@@ -13,7 +13,6 @@ const uploadToCloud = async function (locaFilePath) {
   try {
     var mainFolderName = "public";
     var filePathOnCloudinary = mainFolderName + "/" + locaFilePath;
-    // console.log(locaFilePath.split(".")[0], filePathOnCloudinary);
     console.log(filePathOnCloudinary)
 
     const result = await cloudinary.uploader

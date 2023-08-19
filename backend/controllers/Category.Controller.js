@@ -9,7 +9,7 @@ exports.createCategory = async (req, res, next) => {
     const CategoryData = req.body
      if (req.file) {
       const { url } = await uploadToCloud(req.file.filename);
-      CategoryData.image = url;
+       CategoryData.image = url;
     }
     let newCategory = await Category.create(CategoryData);
     

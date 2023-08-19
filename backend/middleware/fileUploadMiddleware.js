@@ -5,8 +5,8 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const productImageStorage = multer.diskStorage({
   destination: "public",
   filename: (req, file, cb) => {
-    // console.log(file);
-    cb(null, file.originalname);
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
   },
   fileFilter(req, file, cb) {
     // console.log(file, file.mimetype)
