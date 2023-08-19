@@ -1,5 +1,6 @@
 const { Category } = require("../models/Category");
 require("dotenv").config();
+const mongoose = require("mongoose");
 
 const uploadToCloud = require("../config/cloudnary");
 
@@ -61,11 +62,11 @@ exports.deleteCategory = async (req, res) => {
 
 exports.getCategory = async (req, res) => {
   try {
-    const getCategory = await Category.findById(req.params.id);
+    var category =   await Category.findById(req.params.id).populate("parent");
     return res.status(202).send({
-      category: getCategory,
+      category: category,
       message: "Success !",
-      success: getCategory?true:false
+      success: category?true:false
     });
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message,success: false });
@@ -75,7 +76,7 @@ exports.getCategory = async (req, res) => {
 
 exports.getAllCategory = async (req, res) => {
   try {
-    const getAll = await Category.find({}).sort("-updatedAt");
+    const getAll = await Category.find({}).populate("parent").sort("-updatedAt");
     return res
       .status(202)
       .send({

@@ -8,13 +8,12 @@ const CategorySchema = mongoose.Schema(
       required: [true, "Category Name is required"],
     },
     parent: {
-      type: String,
-      ref: mongoose.SchemaTypes.ObjectId,
-      name:"Category"
+      type: mongoose.SchemaTypes.ObjectId,
+      ref:"Category"
     },
     image:{
       type: String,
-      required:true
+      required: [true, "Category  is required"],
     }
   },
   { timestamps: true }
