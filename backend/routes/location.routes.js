@@ -12,7 +12,7 @@ const { uploadAnyImages,uploadImage,uploadImages } = require("../middleware/file
 const router = express.Router();
 // User Account Router
 router.post("/create/",uploadImage,createLocation);
-router.put("/update/:id", updateLocation);
+router.put("/update/:id", uploadAnyImages,updateLocation);
 router.get("/get/:id", getLocation);
 router.get("/get/", getAllLocation);
 router.delete("/delete/:id", deleteLocation);

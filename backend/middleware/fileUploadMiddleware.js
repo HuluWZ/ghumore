@@ -94,6 +94,7 @@ exports.uploadAnyImages = multer({
 }).any();
 
 
+
 exports.uploadImages = multer({
   storage: productImageStorage,
   limits: { fileSize: 1024 * 1024 * 5 },

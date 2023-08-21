@@ -30,8 +30,12 @@ exports.createCategory = async (req, res, next) => {
 
 exports.updateCategory = async (req, res, next) => {
   try {
-    let CategoryInfo = req.body;
+    var CategoryInfo = req.body;
     const { id } = req.params;
+    if (req.files.length > 0) {
+      const { url } = await uploadToCloud(req.files[0].filename);
+      CategoryInfo.image = url;
+    }
     const updatedCategory = await Category.findOneAndUpdate(
       { _id: id },
       CategoryInfo,

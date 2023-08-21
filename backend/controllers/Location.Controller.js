@@ -30,8 +30,13 @@ exports.createLocation = async (req, res, next) => {
 
 exports.updateLocation = async (req, res, next) => {
   try {
-    let locationInfo = req.body;
+    var locationInfo = req.body;
     const { id } = req.params;
+    if (req.files.length > 0) {
+      const { url } = await uploadToCloud(req.files[0].filename);
+      locationInfo.image = url;
+      console.log(" Image url ",url,req.file)
+    }
     const updatedLocation = await Location.findOneAndUpdate(
       { _id: id },
       locationInfo,

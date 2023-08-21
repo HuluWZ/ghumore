@@ -12,7 +12,7 @@ const { uploadAnyImages,uploadImage,uploadImages } = require("../middleware/file
 const router = express.Router();
 // User Account Router
 router.post("/create/", uploadImage,createCategory);
-router.put("/update/:id", updateCategory);
+router.put("/update/:id",uploadAnyImages, updateCategory);
 router.get("/get/:id", getCategory);
 router.get("/get/", getAllCategory);
 router.delete("/delete/:id", deleteCategory);
