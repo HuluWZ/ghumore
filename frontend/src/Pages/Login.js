@@ -26,16 +26,17 @@ export default function Login({ modalState }) {
 
       console.log(response, "response");
       if (response.success) {
-        message.success(response.message);
+        message.success("Login Successfully");
         console.log(response.token, "response token");
         localStorage.setItem("token", response.token);
         window.location.href = "/";
       } else {
-        throw new Error(response.message);
+        // throw new Error(response.message);
+        message.error("Invalid Credentials!");
       }
     } catch (error) {
       message.error(error.message);
-      // console.log(error.message,'error')
+      console.log(error,'error')
     }
   };
   useEffect(() => {
