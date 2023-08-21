@@ -32,7 +32,7 @@ exports.updateCategory = async (req, res, next) => {
   try {
     var CategoryInfo = req.body;
     const { id } = req.params;
-    if (req.files.length > 0) {
+    if (req.files && req.files!=undefined) {
       const { url } = await uploadToCloud(req.files[0].filename);
       CategoryInfo.image = url;
     }

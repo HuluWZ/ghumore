@@ -32,7 +32,8 @@ exports.updateLocation = async (req, res, next) => {
   try {
     var locationInfo = req.body;
     const { id } = req.params;
-    if (req.files.length > 0) {
+
+    if (req.files && req.files!=undefined) {
       const { url } = await uploadToCloud(req.files[0].filename);
       locationInfo.image = url;
       console.log(" Image url ",url,req.file)
