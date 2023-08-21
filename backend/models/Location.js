@@ -8,9 +8,8 @@ const LocationSchema = mongoose.Schema(
       required: [true, "Location Name is required"],
     },
     parent: {
-      type: String,
-      ref: mongoose.SchemaTypes.ObjectId,
-      name:"Location"
+      type: mongoose.SchemaTypes.ObjectId,
+      ref:"Location"
     },
     image:{
       type: String,

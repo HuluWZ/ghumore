@@ -62,7 +62,7 @@ exports.deleteLocation = async (req, res) => {
 
 exports.getLocation = async (req, res) => {
   try {
-    const getLocation = await Location.findById(req.params.id);
+    const getLocation = await Location.findById(req.params.id).populate("parent");
     return res.status(202).send({
       location: getLocation,
       message: "Success !",
@@ -76,7 +76,7 @@ exports.getLocation = async (req, res) => {
 
 exports.getAllLocation = async (req, res) => {
   try {
-    const getAll = await Location.find({}).sort("-updatedAt");
+    const getAll = await Location.find({}).populate("parent").sort("-updatedAt");
     return res
       .status(202)
       .send({
