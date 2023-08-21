@@ -9,7 +9,8 @@ const {
   cancelBooking,
   confirmBooking,
   payWithStripeBooking,
-  getMyBooking
+  getMyBooking,
+  getBookingWeekly
 } = require("../controllers/Booking.Controller");
 
 
@@ -20,6 +21,7 @@ router.post("/create/",validateToken,createBooking);
 router.put("/update/:id", updateBooking);
 router.get("/get/my/",validateToken,getMyBooking);
 router.get("/get/:id", getBooking);
+router.get("/week/", getBookingWeekly);
 router.get("/get/", getAllBooking);
 router.delete("/delete/:id", deleteBooking);
 router.put("/cancel/:id", cancelBooking);

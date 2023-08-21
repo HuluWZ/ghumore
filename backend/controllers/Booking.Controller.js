@@ -7,6 +7,27 @@ require("dotenv").config();
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); 
 
+const getCurrentWeekDays = ()=>{
+  const today = new Date();
+const currentDay = today.getDay(); // 0 (Sunday) to 6 (Saturday)
+
+// Calculate the date of the Monday of the current week
+const mondayDate = new Date(today);
+mondayDate.setDate(today.getDate() - currentDay + 1);
+
+const daysInWeek = [];
+for (let i = 0; i < 7; i++) {
+  const date = new Date(mondayDate);
+  date.setDate(mondayDate.getDate() + i);
+
+  const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  daysInWeek.push(formattedDate);
+}
+
+console.log(daysInWeek);
+return daysInWeek
+}
+
 exports.createBooking = async (req, res, next) => {
   try {    
     const bookingData = req.body
@@ -200,6 +221,38 @@ exports.confirmBooking = async (req, res) => {
     return res.status(404).send({ message: error ,success: false});
   }
 };
+
+exports.getBookingWeekly = async (req, res) => {
+  try {
+    var result = [];
+    const weekdays = getCurrentWeekDays();
+    for (const week of weekdays) {
+      const currentBooking = await Booking.find({
+        $expr: {
+      $eq: [
+       { $dateToString: { format: '%Y-%m-%d', date: '$date' } },
+       { $dateToString: { format: '%Y-%m-%d', date: new Date(week) } }
+      ]
+  }
+
+      });
+      result.push(currentBooking.length)
+    }
+    
+    return res
+      .status(200)
+      .send({
+        booking: result,
+        days:weekdays,
+        message: "Weekly result !",
+        success: true
+      });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error ,success: false});
+  }
+};
+
 
 exports.getMyBooking =async (req, res) => {
   try {
