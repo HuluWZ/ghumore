@@ -18,6 +18,7 @@ const locationApi = require('./routes/location.routes');
 const categoryApi = require('./routes/category.routes');
 const discountApi = require('./routes/discount.routes');
 const feedbackApi = require('./routes/feedback.routes');
+const contactApi = require('./routes/contact.routes');
 
 const session = require('express-session');
 const app = express();
@@ -42,6 +43,7 @@ app.use("/api/location/", locationApi);
 app.use("/api/category/", categoryApi);
 app.use("/api/discount/", discountApi);
 app.use("/api/feedback/", feedbackApi);
+app.use('/api/contact/', contactApi);
 
 app.get("/", function (req, res) {
   res.send("Ghumore India App API Gateway.");
