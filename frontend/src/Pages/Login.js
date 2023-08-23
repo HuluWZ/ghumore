@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { LoginUser } from "../apiCalls/users";
 import { setLoader } from "../redux/loaderSlice";
 import { Form, Input, message } from "antd";
+import { useState } from 'react';
 import "./register.css";
 
 const rules = [
@@ -16,6 +17,8 @@ const rules = [
 export default function Login({ modalState }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loginMessage, setLoginMessage] = useState('');
+  const [isSuccess, setIsSucess] = useState('green');
   const onFinish = async (values) => {
     console.log(values, "login");
     try {
@@ -26,22 +29,27 @@ export default function Login({ modalState }) {
 
       console.log(response, "response");
       if (response.success) {
+        setLoginMessage('Loged in Successfully!')
+        setIsSucess('green')
         message.success("Login Successfully");
-        console.log(response.token, "response token");
         localStorage.setItem("token", response.token);
         window.location.href = "/";
       } else {
         // throw new Error(response.message);
+        setLoginMessage('Invalid Credentials!')
+        setIsSucess('red')
         message.error("Invalid Credentials!");
       }
+      // setLoginMessage('')
     } catch (error) {
       message.error(error.message);
       console.log(error,'error')
     }
   };
   useEffect(() => {
+    setLoginMessage('')
     if (localStorage.getItem("token")) {
-      navigate("/");
+      navigate("/");  
     }
   }, [navigate]);
 
@@ -65,6 +73,7 @@ export default function Login({ modalState }) {
           </div>
           <h2>Login</h2>
           <Form onFinish={onFinish} className="form">
+            <label style={{ color: isSuccess }} >{ loginMessage}</label>
             <div className="email-div">
               <label>Email</label>
               <Form.Item rules={rules} className="form-item" name="email">
@@ -76,6 +85,8 @@ export default function Login({ modalState }) {
               <Form.Item className="form-item" rules={rules} name="password">
                 <Input type="password" placeholder="Password" />
               </Form.Item>
+            </div>
+            <div>
             </div>
             <div className="button-div">
               <button

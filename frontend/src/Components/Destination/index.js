@@ -32,7 +32,7 @@ export default function Destination() {
         const locations = response.location;
 
         // Update the state with the fetched data
-        console.log(response.location, "my response locarion");
+        console.log(response.location, "my response Location");
         const element = []
         for (let index = 0; index < 10; index++) {
             element.push(response.location[index])

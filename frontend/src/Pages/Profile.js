@@ -37,7 +37,9 @@ export default function Profile() {
   const [activeForm, setActiveForm] = useState("profile-detail-form");
 
   const handleChangeForm = (formId) => {
+    console.log(" FORMD ID = ", formId);
     setActiveForm(formId);
+    console.log(" FORM DATA ", activeForm);
   };
 
   const handlePasswordSubmit = async (values) => {
@@ -91,13 +93,26 @@ export default function Profile() {
     }
   };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   console.log(" Name ",name,value,e.target)
+  //   setData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  //   console.log(" Data ",data)
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(" Name ",name,value,e.target)
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    console.log(" Data ",data)
   };
+
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
@@ -148,6 +163,18 @@ export default function Profile() {
     }
   }
 
+  // useEffect(() => {
+  //   if (user) {
+  //     setData({
+  //       fullName: user.fullName || "",
+  //       phone: user.phone || "",
+  //       email: user.email || "",
+  //       address: user.address || "",
+  //       city: user.city || "",
+  //     });
+  //     setPhone(user.phoneNumber || "");
+  //   }
+  // }, [user, upcomingBooking]);
   useEffect(() => {
     if (user) {
       setData({
@@ -159,7 +186,7 @@ export default function Profile() {
       });
       setPhone(user.phoneNumber || "");
     }
-  }, [user, upcomingBooking]);
+  }, [user]);
   getMyBooking();
 
   if (!user) {

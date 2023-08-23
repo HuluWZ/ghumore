@@ -3,14 +3,15 @@ import "./securecheckout.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoader } from "../redux/loaderSlice";
-import { Form, message, Input } from "antd";
+import { Form, message, Input,Button  } from "antd";
 import { createBooking } from "../apiCalls/booking";
+import { useForm } from 'antd/lib/form/Form';
 
 export default function SecureCheckout() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [formInstance] = Form.useForm();
 
   const { selectedActivity, selectedOption, adults, infants, date, selectedTime, activityId } =
     location.state || {};
@@ -98,7 +99,7 @@ export default function SecureCheckout() {
 
   return (
     <div className="SecureCheckoutPage">
-      <Form onFinish={onFinish}>
+      <Form onFinish={onFinish} form={formInstance}>
         <div className="secure-checkout-form">
           <h1>Secure Checkout</h1>
           <h2>Contact Detail</h2>
@@ -115,14 +116,36 @@ export default function SecureCheckout() {
               </Form.Item>
             </div>
             <div>
-              <Form.Item name="email" noStyle label="Email">
+              <Form.Item name="email" noStyle
+                label="Email"
+                rules={[
+                {
+                  required: true,
+                  message: 'Please enter  email address.',
+                }
+               ]}
+              >
                 <label>Email</label>
-
-                <Input required placeholder="johnkevin@gmail.com" />
+                <Input placeholder="johnkevin@gmail.com" />
               </Form.Item>
-              <Form.Item noStyle name="mobile" label="Mobile">
+              <Form.Item noStyle
+                name="mobile"
+                label="Mobile"
+                 rules={[
+                      {
+                       required: true,
+                       message: 'Please enter your mobile number.',
+                      },
+                      {
+                        pattern: /^\d{10}$/, // Adjust the pattern as needed
+                        message: 'Please enter a valid 10-digit mobile number only.',
+                      },
+                 ]}
+                validateStatus={formInstance.getFieldError('mobile') ? 'error' : ''}
+                help={formInstance.getFieldError('mobile')?.[0]}
+              >
                 <label>Mobile</label>
-                <Input required placeholder="John" />
+                <Input required placeholder="9291927548" />
               </Form.Item>
             </div>
           </div>
@@ -138,7 +161,7 @@ export default function SecureCheckout() {
                       label="First Name"
                       key={`travlerName${i}`}>
                       <label>First Name</label>
-                      <Input placeholder="John" />
+                      <Input required placeholder="John" />
                     </Form.Item>
                   </div>
                   <div className="traveler-field">
@@ -148,7 +171,7 @@ export default function SecureCheckout() {
                       label="Last Name"
                       key={`travelerMobile${i}`}>
                       <label>Last Name</label>
-                      <Input placeholder="Kevin" />
+                      <Input required placeholder="Kevin" />
                     </Form.Item>
                   </div>
                 </>
@@ -159,7 +182,7 @@ export default function SecureCheckout() {
           <div className="last-detail-form">
             <Form.Item name="pickupLocation" noStyle label="Pickup Location">
               <label>Pickup Location</label>
-              <Input placeholder="Enter your pickup location" />
+              <Input required placeholder="Enter your pickup location" />
             </Form.Item>
           </div>
           <h2>Enter Promo (Coupon) Code</h2>
@@ -168,13 +191,25 @@ export default function SecureCheckout() {
               <label>Promo Code</label>
               <Input
                 type="text"
+                required
                 placeholder="Enter Coupon code if you have any"
               />
             </Form.Item>
           </div>
-          <button className="next-btn rounded-lg bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] box-border w-[501px] flex flex-row py-4 px-8 items-center justify-center cursor-pointer text-white font-helvetica border-[1px] border-solid border-button-stroke">
+          {/* 
+          <button 
+          className="next-btn rounded-lg bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] box-border w-[501px] flex flex-row py-4 px-8 items-center justify-center cursor-pointer text-white font-helvetica border-[1px] border-solid border-button-stroke">
             Next
-          </button>
+          </button> 
+          */}
+          <Form.Item noStyle>
+            <Button type="primary" htmlType="submit"
+              className="next-btn rounded-lg bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] box-border w-[501px] flex flex-row py-4 px-8 items-center justify-center cursor-pointer text-white font-helvetica border-[1px] border-solid border-button-stroke"
+            >
+              Next
+          </Button>
+        </Form.Item>
+
         </div>
       </Form>
       {/* selectedOption, adults, infants, date, selectedTime */}

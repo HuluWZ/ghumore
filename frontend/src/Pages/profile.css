@@ -88,15 +88,15 @@ h1 {
   height: 10rem;
 }
 .profile-form-navbar {
-  width: 30%;
-  height: 100%;
+  width: 40%;
+  height: 150%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .profile-form-navbar > * {
-  margin: 20px;
+  margin: 10px;
 }
 .profile-form-navbar-options > * {
   margin-top: 20px;

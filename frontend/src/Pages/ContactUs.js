@@ -1,18 +1,44 @@
 import { useState } from "react";
 import React from "react";
+import axios from 'axios';
 import "./radical.css";
 
+const api = 'https://ghumore-travel.onrender.com/api/contact'
 export default function ContactUs() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [isSucess, setSucess] = useState('green');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
+    try {
     event.preventDefault();
-    // Perform form submission logic here
-    console.log("Full Name:", fullName);
-    console.log("Email:", email);
-    console.log("Message:", message);
+    console.log({ fullName, email, message });
+    const response = await axios.post(`${api}/create`, {
+      fullName,
+      email,
+      message,
+    });
+    const data = response.data
+    console.log(" Respone ", response);
+    if (data.success) {
+      // Display the success message
+      console.log("Success:", response.data);
+      setMessage('');
+      setEmail('');
+      setFullName('')
+      setSubmitMessage('Form submitted successfully')
+      setSucess('green')
+    } else {
+      setSubmitMessage('Unable to submitt form')
+      setSucess('red')
+      console.log("Unexpected response:", response);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+
   };
   return (
     <div className="ContactUs">
@@ -48,6 +74,7 @@ export default function ContactUs() {
                     className="custom-fields"
                     placeholder="Full Name"
                     value={fullName}
+                    required={true}
                     onChange={(event) => setFullName(event.target.value)}
                   />
                   <div className="form-line"></div>
@@ -58,6 +85,7 @@ export default function ContactUs() {
                     type="email"
                     placeholder="Email"
                     value={email}
+                    required={true}
                     onChange={(event) => setEmail(event.target.value)}
                   />
                   <div className="form-line"></div>
@@ -66,12 +94,18 @@ export default function ContactUs() {
                   <textarea
                     className="custom-new-fields"
                     placeholder="Message"
+                    row={4}
                     value={message}
+                    required={true}   
                     onChange={(event) =>
                       setMessage(event.target.value)
                     }></textarea>
                   <div className="form-line"></div>
                 </div>
+                  <label style={{ color:isSucess}}>{submitMessage}</label>
+                <div>
+                </div>
+
                 <button
                   className="btn-contact rounded-sm bg-darkslateblue-100 flex flex-row py-6 px-[120px] items-center justify-center text-5xl text-white"
                   type="submit">
