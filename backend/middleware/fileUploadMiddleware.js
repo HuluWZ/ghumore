@@ -6,7 +6,7 @@ const productImageStorage = multer.diskStorage({
   destination: "public",
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/")[1];
-    cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
+    cb(null, `${file.fieldname}-${file.originalname}-${Date.now()}.${ext}`);
   },
   fileFilter(req, file, cb) {
     // console.log(file, file.mimetype)

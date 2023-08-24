@@ -77,13 +77,17 @@ exports.createActivity = async (req, res, next) => {
 
 exports.updateActivity = async (req, res, next) => {
   try {
-    let activityInfo = req.body;
+    var activityInfo = req.body;
     const { id } = req.params;
     const { files } = req
-    if (files.length > 0) {
+    // console.log(files,req.files?"File":"No File")
+    if (files) {
+      console.log("Image ", files);
       var imageURLList = await uploadImages(files);
+      console.log("Image URL = ",imageURLList);
       activityInfo.images = imageURLList
     }
+  
     const updatedActivity = await Activity.findOneAndUpdate(
       { _id: id },
       activityInfo,
