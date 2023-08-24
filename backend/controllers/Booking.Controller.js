@@ -254,6 +254,27 @@ exports.getBookingWeekly = async (req, res) => {
 };
 
 
+exports.getApprovedTotalPrice = async (req, res) => {
+  try {
+    
+    const currentBooking = await Booking.aggregate([
+      { "$match": { "status": { "$in": ["Approved", "Completed", "Paid"] } } },
+      {"$group": {"_id": null, "total_price": {"$sum": "$totalPrice"}}}
+   ])
+    return res
+      .status(200)
+      .send({
+        totalSales: currentBooking[0],
+        message: "Approved Total Price result !",
+        success: true
+      });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error ,success: false});
+  }
+};
+
+
 exports.getMyBooking =async (req, res) => {
   try {
     const { _id } = req.user

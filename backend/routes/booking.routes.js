@@ -10,7 +10,8 @@ const {
   confirmBooking,
   payWithStripeBooking,
   getMyBooking,
-  getBookingWeekly
+  getBookingWeekly,
+  getApprovedTotalPrice
 } = require("../controllers/Booking.Controller");
 
 
@@ -22,6 +23,7 @@ router.put("/update/:id", updateBooking);
 router.get("/get/my/",validateToken,getMyBooking);
 router.get("/get/:id", getBooking);
 router.get("/week/", getBookingWeekly);
+router.get("/approved/", getApprovedTotalPrice);
 router.get("/get/", getAllBooking);
 router.delete("/delete/:id", deleteBooking);
 router.put("/cancel/:id", cancelBooking);
