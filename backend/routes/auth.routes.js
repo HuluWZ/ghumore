@@ -9,7 +9,9 @@ const {
   getCurrentUser,
   getAll,
   logOut,
-  changePassword
+  changePassword,
+  forgotPassword,
+  resetPassword
 } = require("../controllers/Auth.Controller");
 
 const router = express.Router();
@@ -24,6 +26,9 @@ router.get("/get/", getAll);
 router.delete("/delete/:id", deleteAccount);
 router.get("/logout", validateToken,logOut);
 router.put("/change/password/", validateToken, changePassword);
+// FORGOT AND RESET PASSWORD
+router.post('/forgot', forgotPassword)
+router.post('/reset/:token', resetPassword);
 
 // Google authentication route
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));

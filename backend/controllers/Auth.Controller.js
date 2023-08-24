@@ -2,8 +2,10 @@ const { User } = require("../models/User");
 const { sign } = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require('crypto');
 require("dotenv").config();
 
+const generateToken= () => crypto.randomBytes(20).toString('hex');
 
 exports.createAccount = async (req, res, next) => {
   try {
@@ -185,5 +187,55 @@ exports.changePassword = async (req, res) => {
   } catch (error) {
     if (error.message) return res.status(404).send({ message: error.message,success:false });
     return res.status(404).send({ message: error ,success:false});
+  }
+};
+
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    // console.log(" User ",user)
+    if (!user) {
+      return res.status(404).json({ message: 'User not found',success:false });
+    }
+    const token = generateToken();
+    user.resetToken = token;
+    user.resetTokenExpiration = Date.now() + (60000 * 15); // 15 Minutes
+    await user.save();
+    
+    return res.status(201).send({
+      message: "Reset Link sent to your email Successfully.",
+      Token: token,
+      success: true
+    });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message });
+    return res.status(404).send({ message: error });
+  }
+};
+
+
+exports.resetPassword = async (req, res) => {
+  try {
+      const { token } = req.params;
+      const { password } = req.body;
+      const user = await User.findOne({
+        resetToken: token,
+        resetTokenExpiration: { $gt: Date.now() },
+      });
+     if (!user) {
+       return res.status(400).json({ message: 'Invalid or expired token',success:false });
+     }
+
+    user.password = await bcrypt.hash(password, 10);// Remember to hash and salt the password
+    user.plainPassword = password
+    user.resetToken = undefined;
+    user.resetTokenExpiration = undefined;
+    await user.save();
+
+    return res.status(201).send({ message: "Password reset Successfully.",success:true});
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message });
+    return res.status(404).send({ message: error });
   }
 };

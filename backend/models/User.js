@@ -40,7 +40,16 @@ const UserSchema = mongoose.Schema(
       type: String,
       enum: USER_TYPES,
       default: "USER",
+    },
+    resetToken: {
+      type: String,
+      trim:true
+    },
+    resetTokenExpiration: {
+      type: Number,
+      trim: true
     }
+
   },
   { timestamps: true }
 );
