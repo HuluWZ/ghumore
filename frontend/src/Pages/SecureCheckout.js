@@ -17,7 +17,37 @@ export default function SecureCheckout() {
     location.state || {};
 
   console.log(selectedActivity, "selected option")
+   
+const validateInput = (rule, value, callback) => {
+    if (/^[a-zA-Z ]*$/.test(value)) {
+      callback(); // Validation successful
+    } else {
+      callback('Only alphabets are allowed'); // Validation failed
+    }
+};
 
+const validatePhoneNumber = (rule, value, callback) => {
+    if (/^[0-9]{10}$/.test(value)) {
+      callback(); // Validation successful
+    } else {
+      callback('Invalid phone number. It should be a 10-digit number.'); // Validation failed
+    }
+  };
+const validateEmail = (rule, value, callback) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(value)) {
+      callback(); // Validation successful
+    } else {
+      callback('Invalid email address'); // Validation failed
+    }
+  };
+const validatePassword = (rule, value, callback) => {
+    if (value.length >= 8) {
+      callback(); // Validation successful
+    } else {
+      callback('Password must be at least 8 characters long'); // Validation failed
+    }
+  };
 
   const numberRange = Array.from(
     { length: infants + adults },
@@ -72,7 +102,7 @@ export default function SecureCheckout() {
       totalPrice: totalPrice,
       date: date,
     };
-    console.log(selectedOption, "selectedOption");
+    console.log(formData,selectedOption, "selectedOption");
 
     try {
       dispatch(setLoader(true));
@@ -99,53 +129,41 @@ export default function SecureCheckout() {
 
   return (
     <div className="SecureCheckoutPage">
-      <Form onFinish={onFinish} form={formInstance}>
+      <Form onFinish={onFinish} className="form">
         <div className="secure-checkout-form">
           <h1>Secure Checkout</h1>
           <h2>Contact Detail</h2>
           <div className="contact-detail-form">
             <div>
-              <Form.Item noStyle name="firstname" label="First Name">
+              <Form.Item  name="firstname"  rules={[{required: true, validator: validateInput},       ]}>
+                <div className="form-item">
                 <label>First Name</label>
-
-                <Input required placeholder="John" />
+                <Input type='text' name="firstname" required placeholder="John" />
+                </div>
               </Form.Item>
-              <Form.Item noStyle name="lastname" label="Last Name">
+              <Form.Item  name="lastname"  rules={[{required: true, validator: validateInput},       ]}>
+                <div className="form-item">
                 <label>Last Name</label>
-                <Input required placeholder="Kevin" />
+                <Input type="text" required placeholder="Kevin" />
+                </div>
               </Form.Item>
             </div>
             <div>
-              <Form.Item name="email" noStyle
-                label="Email"
-                rules={[
-                {
-                  required: true,
-                  message: 'Please enter  email address.',
-                }
-               ]}
+              <Form.Item name="email" 
+                 rules={[{required: true, validator: validateEmail}, ]}
               >
+                <div className="form-item">
                 <label>Email</label>
-                <Input placeholder="johnkevin@gmail.com" />
+                <Input type="email" placeholder="johnkevin@gmail.com" />
+                </div>
               </Form.Item>
-              <Form.Item noStyle
-                name="mobile"
-                label="Mobile"
-                 rules={[
-                      {
-                       required: true,
-                       message: 'Please enter your mobile number.',
-                      },
-                      {
-                        pattern: /^\d{10}$/, // Adjust the pattern as needed
-                        message: 'Please enter a valid 10-digit mobile number only.',
-                      },
-                 ]}
-                validateStatus={formInstance.getFieldError('mobile') ? 'error' : ''}
-                help={formInstance.getFieldError('mobile')?.[0]}
+              <Form.Item  name="mobile"
+                rules={[{required: true, validator: validatePhoneNumber}, ]}
               >
+                <div className="form-item">
                 <label>Mobile</label>
-                <Input required placeholder="9291927548" />
+                <Input type="text" required placeholder="9291927548" />
+                </div>
               </Form.Item>
             </div>
           </div>
@@ -157,43 +175,51 @@ export default function SecureCheckout() {
                   <div className="traveler-field">
                     <Form.Item
                       name={`firstName${i}`}
-                      noStyle
-                      label="First Name"
-                      key={`travlerName${i}`}>
+                      key={`travlerName${i}`}
+                      rules={[{ required: true, validator: validateInput },]}
+                    >
+                      <div className="form-item">
                       <label>First Name</label>
-                      <Input required placeholder="John" />
+                      <Input  type="text"  required placeholder="John" />
+                      </div>
                     </Form.Item>
                   </div>
                   <div className="traveler-field">
                     <Form.Item
-                      noStyle
                       name={`lastName${i}`}
-                      label="Last Name"
-                      key={`travelerMobile${i}`}>
+                      key={`travelerMobile${i}`}
+                      rules={[{ required: true, validator: validateInput },]}
+                    >
+                      <div className="form-item">
                       <label>Last Name</label>
-                      <Input required placeholder="Kevin" />
+                      <Input type="text" required placeholder="Kevin" />
+                      </div>
                     </Form.Item>
                   </div>
                 </>
               );
             })}
           </div>
-          ;<h2>Pickup Point</h2>
+          <h2>Pickup Point</h2>
           <div className="last-detail-form">
-            <Form.Item name="pickupLocation" noStyle label="Pickup Location">
+            <Form.Item name="pickupLocation" rules={[{ required: true },]}>
+              <div className="form-item">   
               <label>Pickup Location</label>
-              <Input required placeholder="Enter your pickup location" />
+              <Input type="text" required placeholder="Enter your pickup location" />
+             </div>
             </Form.Item>
           </div>
           <h2>Enter Promo (Coupon) Code</h2>
           <div className="last-detail-form">
-            <Form.Item noStyle name="promoCode">
+            <Form.Item name="promoCode" rules={[{ required: true },]}>
+              <div className="form-item">
               <label>Promo Code</label>
               <Input
                 type="text"
                 required
                 placeholder="Enter Coupon code if you have any"
               />
+              </div>
             </Form.Item>
           </div>
           {/* 

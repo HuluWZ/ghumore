@@ -151,12 +151,12 @@ export default function Navbar() {
           ) : (
             <>
               <button
-                  onClick={() => {
-                  navigate("/register");
-                  setModalType("signup");
-                  setIsModalOpen(false);
-                  setIsSignModalOpen(true);
-                }}
+                //   onClick={() => {
+                //   navigate("/register");
+                //   setModalType("signup");
+                //   setIsModalOpen(false);
+                //   setIsSignModalOpen(true);
+                // }}
                 className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-darkslateblue-100">
                 <img
                   className="w-5 h-5 overflow-hidden"
@@ -164,16 +164,16 @@ export default function Navbar() {
                   src="/sign-in.svg"
                 />
                 <div className="text-base font-semibold font-poppins text-darkslateblue-200">
-                Sign up 
+                <Link to="/login">Sign up</Link> 
                 </div>
               </button>
               <button
-                onClick={() => {
-                  navigate("/login");
-                  setModalType("login");
-                  setIsModalOpen(false);
-                  setIsSignModalOpen(true);
-                }}
+                // onClick={() => {
+                //   navigate("/login");
+                //   setModalType("login");
+                //   setIsModalOpen(false);
+                //   setIsSignModalOpen(true);
+                // }}
                 className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
                 <img
                   className="w-5 h-5 overflow-hidden"
@@ -181,7 +181,7 @@ export default function Navbar() {
                   src="/sign-in1.svg"
                 />
                 <div className="text-base font-semibold font-lato text-white">
-                 Login
+                 <Link to="/login">Login</Link>
                 </div>
               </button>
             </>

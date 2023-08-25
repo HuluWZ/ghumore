@@ -22,6 +22,12 @@
 .booking-container {
   width: 90%;
 }
+.form {
+  display: flex;
+  flex-direction: column;
+  /* overflow: hidden; */
+  width: 60%;
+}
 .bookings {
   background-color: white;
   box-shadow: 0px 10px 35px -10px rgba(0, 0, 0, 0.1);

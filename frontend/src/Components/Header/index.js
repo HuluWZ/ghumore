@@ -18,6 +18,7 @@ export default function Header() {
   const [selectedLocation, setSelectedLocation] = useState("");
 
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [error, SetError] = useState('');
 
   const dropdownRef = useRef();
   const navigate = useNavigate();
@@ -26,7 +27,13 @@ export default function Header() {
   const handleActivityChange = (event) => {
     setIsCategoryOpen(false)
     setIsLocationOpen(false)
-    setActivity(event.target.value);
+    const { value } = event.target;
+    if (/^[a-zA-Z]*$/.test(value)) {
+      SetError(''); // Validation successful
+    } else {
+      SetError('Only alphabets are allowed'); // Validation failed
+    }
+    setActivity(value);
   };
 
   // location change
@@ -244,7 +251,11 @@ export default function Header() {
               Search
             </button>
           </div>
+      </div>
+                  <span style={{ color:"red"}}>{error}</span>
         </div>
+      <div>
+
       </div>
       <div className="near-me">
         <img className="" alt="" src="/gps-fixed.svg" />

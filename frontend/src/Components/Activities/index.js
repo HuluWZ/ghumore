@@ -52,8 +52,8 @@ export default function Activity() {
               
                 {/* <li className="font-thin">hybrid cycle</li>
                 <li className="font-thin">breakfast lunch</li> */}
-                <span className="font-thin">hybrid cycle</span>
-                <span className="font-thin">breakfast lunch</span>
+                <span className="font-thin">{i.location.name} </span>
+              <span className="font-thin">{i.category.name}</span>
               
               <p className="font-thin">
                 from <span className="font-bold text-6xl">{i.price}$</span> per person
@@ -67,7 +67,7 @@ export default function Activity() {
                     alt=""
                     src="/magicstar20.svg"
                   />
-                {i.rating}
+                {i?.averageRating?.toFixed(1) || 0}
               </div>
 
               <div className="card-footer">
@@ -85,7 +85,7 @@ export default function Activity() {
                 </div>
                 <div className="btn-book rounded-23xl bg-ghumore-orange flex flex-row py-1.5 px-2.5 items-center justify-start text-left text-xs">
                   <div className="relative  text-white leading-[132%] font-medium">
-                    2 days tour
+                    {i.duration} {i.durationType ?? "days"}  tour
                   </div>
                 </div>
               </div>

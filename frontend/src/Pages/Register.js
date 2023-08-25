@@ -23,6 +23,7 @@ const rules = [
 ];
 
 const validateInput = (rule, value, callback) => {
+  console.log(" Value Phone ", value);
     if (/^[a-zA-Z ]*$/.test(value)) {
       callback(); // Validation successful
     } else {
@@ -39,7 +40,8 @@ const validatePhoneNumber = (rule, value, callback) => {
       callback('Invalid phone number. It should be a 10-digit number.'); // Validation failed
     }
   };
-  const validateEmail = (rule, value, callback) => {
+const validateEmail = (rule, value, callback) => {
+    console.log(" Value Email ",value)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailRegex.test(value)) {
       callback(); // Validation successful
@@ -47,7 +49,8 @@ const validatePhoneNumber = (rule, value, callback) => {
       callback('Invalid email address'); // Validation failed
     }
   };
-  const validatePassword = (rule, value, callback) => {
+const validatePassword = (rule, value, callback) => {
+  console.log(" Value Password ", value);
     if (value.length >= 8) {
       callback(); // Validation successful
     } else {
@@ -107,6 +110,7 @@ export default function Register({ modalState }) {
   };
 
   const handlePhoneChange = (value) => {
+    console.log(" Phone Change ", value);
     const phoneNumber = value.replace(/\D/g, ""); // Remove non-digit characters
     setPhone(phoneNumber);
     // setPhoneError(false);
@@ -157,14 +161,13 @@ export default function Register({ modalState }) {
           <h2>Create Account</h2>
           <Form onFinish={onFinish} className="form">
             <Form.Item name="fullName" rules={[{required: true, validator: validateInput},       ]}>
-              {/* <div className="form-item"> */}
+              <div className="form-item">
                 <label>Full Name</label>
                 <Input type="text" name="fullName" placeholder="Full Name" />
-              {/* </div> */}
+              </div>
             </Form.Item>
-            <Form.Item name="phone"    rules={[{required: true, validator: validatePhoneNumber}]}
->
-              {/* <div className="form-item"> */}
+            <Form.Item name="phone"    rules={[{required: true, validator: validatePhoneNumber}]}>
+              <div className="form-item">
                 <label>Mobile Number</label>
                 <PhoneInput
                   required
@@ -172,19 +175,19 @@ export default function Register({ modalState }) {
                   value={phone}
                   onChange={handlePhoneChange}
                 />
-              {/* </div> */}
+              </div>
             </Form.Item>
             <Form.Item name="email" rules={[{required:true,validator:validateEmail}]}>
-              {/* <div className="form-item"> */}
+              <div className="form-item">
                 <label>Email</label>
                 <Input type="email" placeholder="Email" />
-              {/* </div> */}
+              </div>
             </Form.Item>
             <Form.Item name="password" rules={[{required:true,validator:validatePassword}]}>
-              {/* <div className="form-item"> */}
+              <div className="form-item">
                 <label>Password</label>
                 <Input type="password" placeholder="Password" />
-              {/* </div> */}
+              </div>
             </Form.Item>
             <div>
           <span>

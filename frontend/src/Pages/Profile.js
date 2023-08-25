@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 // import "./registers.css";
 import "./profile.css";
-import { Form, message, Input } from "antd";
+import { Form, message, Input,Button } from "antd";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -73,13 +73,14 @@ export default function Profile() {
   const [phone, setPhone] = useState("");
 
   const onFinish = async (values) => {
+    console.log("On Finish Called")
     values.phoneNumber = phone;
     console.log(values, "finish");
     try {
       dispatch(setLoader(true));
 
       const response = await UpdateUserProfile(user._id, values);
-      console.log(response, "response");
+      console.log(response,values, " Update Response");
       dispatch(setLoader(false));
       if (response.success) {
         message.success(response.message);
@@ -175,6 +176,7 @@ export default function Profile() {
   //     setPhone(user.phoneNumber || "");
   //   }
   // }, [user, upcomingBooking]);
+
   useEffect(() => {
     if (user) {
       setData({
@@ -267,6 +269,7 @@ export default function Profile() {
                   value={data.fullName}
                   onChange={handleChange}
                   type="text"
+                  required
                   name="fullName"
                   placeholder="Full Name"
                 />
@@ -276,7 +279,6 @@ export default function Profile() {
               <div className="form-item">
                 <label>Mobile Number</label>
                 <PhoneInput
-                  rules={rules}
                   country={"in"}
                   value={phone}
                   onChange={handlePhoneChange}
@@ -290,31 +292,34 @@ export default function Profile() {
                 <Input
                   value={data.email}
                   type="email"
+                  required
                   onChange={handleChange}
                   placeholder="Email"
                   name="email"
                 />
               </div>
             </Form.Item>
-            <Form.Item noStyle name="address">
+            <Form.Item noStyle name="address" rules={rules}>
               <div className="form-item">
                 <label>Address</label>
                 <Input
                   name="address"
                   type="text"
+                  required
                   value={data.address}
                   onChange={handleChange}
                   placeholder="Address"
                 />
               </div>
             </Form.Item>
-            <Form.Item noStyle name="city">
+            <Form.Item noStyle name="city" rules={rules}>
               <div className="form-item">
                 <label>City</label>
                 <Input
                   onChange={handleChange}
                   type="text"
                   placeholder="City"
+                  required
                   value={data.city}
                   name="city"
                 />
@@ -323,6 +328,7 @@ export default function Profile() {
             <button className="submit-btn bg-darkslateblue-100" type="submit">
               Save Changes
             </button>
+            
           </Form>
         </div>
         <div

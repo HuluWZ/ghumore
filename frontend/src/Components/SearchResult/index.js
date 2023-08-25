@@ -279,8 +279,8 @@ const SearchResult = () => {
                   name={item.name}
                   description={item.description}
                   price={item.price}
-                  location={item.area}
-                  rating={item.rating}
+                  location={item.location.name}
+                  rating={item?.averageRating?.toFixed(1) || 0}
                   id={item._id}
                   organizer={item.organizer}
                   duration={item.duration}
