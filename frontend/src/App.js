@@ -28,8 +28,8 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path='/' element={<ProtectedPage><LandingPage/> </ProtectedPage>}/>
-        {/* <Route path='/login' element={<ProtectedPage><Login/> </ProtectedPage>}/> */}
-        {/* <Route path='/register' element={<ProtectedPage><Register/> </ProtectedPage>}/> */}
+        <Route path='/login' element={<ProtectedPage><Login/> </ProtectedPage>}/>
+        <Route path='/register' element={<ProtectedPage><Register/> </ProtectedPage>}/>
         <Route path='/aboutus' element={<ProtectedPage><AboutUs/> </ProtectedPage>}/>
         <Route path='/contactus' element={<ProtectedPage><ContactUs/> </ProtectedPage>}/>
         <Route path='/destinations' element={<ProtectedPage><AllDestination/> </ProtectedPage>}/>

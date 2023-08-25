@@ -6,6 +6,7 @@ import { LoginUser } from "../apiCalls/users";
 import { setLoader } from "../redux/loaderSlice";
 import { Form, Input, message } from "antd";
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import "./register.css";
 
 const rules = [
@@ -24,10 +25,8 @@ export default function Login({ modalState }) {
     try {
       dispatch(setLoader(true));
       const response = await LoginUser(values);
-
       dispatch(setLoader(false));
-
-      console.log(response, "response");
+      console.log(response, " Response");
       if (response.success) {
         setLoginMessage('Loged in Successfully!')
         setIsSucess('green')
@@ -42,7 +41,9 @@ export default function Login({ modalState }) {
       }
       // setLoginMessage('')
     } catch (error) {
-      message.error(error.message);
+      setLoginMessage('Invalid Credentials!')
+      setIsSucess('red')
+      message.error("Invalid Credentials!");
       console.log(error,'error')
     }
   };
@@ -99,7 +100,7 @@ export default function Login({ modalState }) {
           <div id="googleSigninDiv" className="googleSigninDiv"></div>
           {/* <FacebookLoginComponent /> */}
           <span>
-            Dont have an account? <span className="">Signup</span>
+            Dont have an account? <Link to='/register'>Signup</Link>
           </span>
           <span></span>
         </div>

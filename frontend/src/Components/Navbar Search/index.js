@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './navbarsearch.css'
 
 export default function NavbarSearch() {
@@ -21,8 +22,8 @@ export default function NavbarSearch() {
                 </ul>
             </div>
             <div className='auth-items-navbar'>
-                <a href='#'>SignUp</a>
-                <a href='#'>Login</a>
+                <a href='/login'><Link to='login'>Loginn</Link></a>
+                <a href='/register'><Link to='register'>SignUp</Link></a>
                 <a href='#'>Cart</a>
             </div>
         </div>

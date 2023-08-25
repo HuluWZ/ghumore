@@ -1,6 +1,7 @@
 import React from "react";
 import "./footer.css";
 import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -20,16 +21,12 @@ export default function Footer() {
         <div className="footer-lists">
           <h2>About</h2>
           <ul>
+            <li>              <Link to="/aboutus">Company</Link>
+</li>
             <li
-            onClick={() => {
-              navigate(`/aboutus`);
-            }}
-            >Company</li>
-            <li
-              onClick={() => {
-                navigate(`/contactus`);
-              }}>
-              Contact Us
+              
+            >
+              <Link to="/contactus">Contact Us</Link>
             </li>
             <li>Terms and Conditions</li>
           </ul>
@@ -42,22 +39,22 @@ export default function Footer() {
               navigate(`/search?category=&location=&activity=outdoor activities`)
 
             }}
-            >Outdoor Activities</li>
+            ><Link to='/search?category=&location=&activity=outdoor activities'>Outdoor Activities</Link></li>
             <li
             onClick={() => {
               navigate(`/search?category=trekking&location=&activity=`)
             }}
-            >Trekking</li>
+            ><Link to='/search?category=trekking&location=&activity='>Trekking</Link></li>
             <li
             onClick={() => {
               navigate(`/search?category=skydiving&location=&activity=`)
             }}
-            >Skydiving</li>
+            ><Link to='/search?category=skydiving&location=&activity='>Skydiving</Link></li>
             <li
             onClick={() => {
               navigate(`/search?category=tree ziplining&location=&activity=`)
             }}
-            >Tree Ziplining</li>
+            ><Link to="/search?category=tree ziplining&location=&activity=">Tree Ziplining</Link></li>
           </ul>
         </div>
         <div className="footer-lists">
@@ -67,7 +64,7 @@ export default function Footer() {
             onClick={() => {
               navigate(`/destinations`)
             }}
-            >Destinations</li>
+            ><Link to='/destinations'>Destinations</Link></li>
             <li>Terms Of Use</li>
             <li>Security</li>
             <li>Privacy</li>
@@ -78,21 +75,21 @@ export default function Footer() {
           <ul>
             <li
             onClick={() => {
-              navigate(`/`);
+              navigate(`/login`);
             }}
-            >Login</li>
+            ><Link to='/login'>Login</Link></li>
             <li
             onClick={() => {
-              navigate(`/`);
+              navigate(`/register`);
             }}
-            >Register</li>
+            ><Link to='/register'>Register</Link></li>
           </ul>
         </div>
         <div className="footer-paragraph">
           <h3>Pay Safely With US</h3>
           <p>
-            payment information Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Dolorum, repellat.{" "}
+            Experience hassle-free payments with our seamless and secure payment gateway.
+            {" "} 
           </p>
         </div>
       </div>

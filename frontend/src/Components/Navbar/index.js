@@ -10,6 +10,7 @@ import Login from "../../Pages/Login";
 import { message } from "antd";
 import { fetchAllCategories } from "../../apiCalls/categories";
 import { fetchAllLocations } from "../../apiCalls/location";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 export default function Navbar() {
   const { user } = useSelector((state) => state.users);
@@ -150,7 +151,8 @@ export default function Navbar() {
           ) : (
             <>
               <button
-                onClick={() => {
+                  onClick={() => {
+                  navigate("/register");
                   setModalType("signup");
                   setIsModalOpen(false);
                   setIsSignModalOpen(true);
@@ -162,12 +164,12 @@ export default function Navbar() {
                   src="/sign-in.svg"
                 />
                 <div className="text-base font-semibold font-poppins text-darkslateblue-200">
-                  Sign up
+                Sign up 
                 </div>
               </button>
               <button
                 onClick={() => {
-                  // navigate("/login");
+                  navigate("/login");
                   setModalType("login");
                   setIsModalOpen(false);
                   setIsSignModalOpen(true);
@@ -179,7 +181,7 @@ export default function Navbar() {
                   src="/sign-in1.svg"
                 />
                 <div className="text-base font-semibold font-lato text-white">
-                  Login
+                 Login
                 </div>
               </button>
             </>

@@ -284,10 +284,11 @@ function DrawerAppBar(props) {
           ) : (
             <>
               <button
-                onClick={() => {
-                  setModalType("signup");
-                  setIsModalOpen(false);
-                  setIsSignModalOpen(true);
+                      onClick={() => {
+                    navigate('/register')
+                  // setModalType("signup");
+                  // setIsModalOpen(false);
+                  // setIsSignModalOpen(true);
                 }}
                 className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-darkslateblue-100">
                 <img
@@ -301,10 +302,10 @@ function DrawerAppBar(props) {
               </button>
               <button
                 onClick={() => {
-                  // navigate("/login");
-                  setModalType("login");
-                  setIsModalOpen(false);
-                  setIsSignModalOpen(true);
+                  navigate("/login");
+                  // setModalType("login");
+                  // setIsModalOpen(false);
+                  // setIsSignModalOpen(true);
                 }}
                 className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
                 <img
