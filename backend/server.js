@@ -49,6 +49,11 @@ app.get("/", function (req, res) {
   res.send("Ghumore India App API Gateway.");
 });
 
+app.get("/profile", (req, res) => {
+  console.log(" Profile Page ",req," Response ",res)
+  req.send(req.user)
+})
+
 app.use((err, req, res) => {
   if (err.name === "ValidationError") {
     var valErrors = [];

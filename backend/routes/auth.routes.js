@@ -34,11 +34,16 @@ router.post('/reset/:token', resetPassword);
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Google authentication callback route
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
+  console.log(" Request ",req," Response ",res," Redirection ")
   // Redirect or respond as needed after successful authentication
-  res.redirect('/profile');
+  res.redirect('http://localhost:3000/profile');
 });
-
+// Go To Profile
+// router.get("/profile", (req, res) => {
+//   console.log(" Profile Page ",req," Response ",res)
+//   req.send(req.user)
+// })
 // Facebook authentication route
 router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 

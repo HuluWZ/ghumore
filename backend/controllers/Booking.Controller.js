@@ -116,6 +116,36 @@ exports.getBooking = async (req, res) => {
     return res.status(404).send({ message: error ,success: false});
   }
 };
+exports.getMyCartBooking = async (req, res) => {
+  try {
+    const user = req.user.id
+    console.log(" User ",req.user)
+    const getBooking = await Booking.find({user:user,status:{ "$in": [ "Pending", "Confirmed","Waiting"] } })
+      .populate({
+        path: 'activity',
+        populate: [
+        {
+          path: 'location',
+          model: 'Location',
+        },
+        {
+          path: 'category',
+          model: 'Category',
+        }
+        ] ,
+      })
+      .sort("-updatedAt");
+    return res.status(202).send({
+      totalCart : getBooking?.length || 0,
+      cart: getBooking,
+      message: "Success !",
+      success: getBooking?true:false
+    });
+  } catch (error) {
+    if (error.message) return res.status(404).send({ message: error.message,success: false });
+    return res.status(404).send({ message: error ,success: false});
+  }
+};
 exports.getAllBooking = async (req, res) => {
   try {
     const getAll = await Booking.find({})
