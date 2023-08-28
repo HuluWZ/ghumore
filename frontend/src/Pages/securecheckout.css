@@ -21,7 +21,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  /* overflow: hidden; */
   width: 60%;
 }
 
@@ -78,13 +77,13 @@
   margin: 10px;
   align-items: start;
 }
-.contact-detail-form > input {
-  /* width: 50%; */
+/* .contact-detail-form > input {
+  width: 50%;
 }
 .contact-detail-form > label {
-  /* margin: 20px; */
+  margin: 20px;
   
-}
+} */
 .book-now-input {
   position: absolute;
   left: 50%;
@@ -265,7 +264,5 @@ h2 {
   }
   .review-order-detail{
     max-width: 90%;
-  }
-  .pickup-input-form {
   }
 }

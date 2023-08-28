@@ -78,6 +78,7 @@ export default function Navbar() {
             <li
               className={activeLink === "Experience" ? "active" : ""}
               onClick={() => {
+                navigate("/")
                 handleLinkClick("Experience");
                 setModalType("experience");
                 setIsModalOpen(true);
@@ -87,6 +88,7 @@ export default function Navbar() {
             <li
               className={activeLink === "Destination" ? "active" : ""}
               onClick={() => {
+                                navigate("/")
                 setModalType("destination");
                 handleLinkClick("Destination");
                 setIsModalOpen(true);
@@ -147,6 +149,12 @@ export default function Navbar() {
                   Profile
                 </div>
               </button>
+            <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
+            <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
+            <div className="text-base font-semibold font-lato text-darkslateblue-100">
+              <Link to="/cart">Cart</Link>
+            </div>
+          </button>
             </>
           ) : (
             <>
@@ -184,15 +192,15 @@ export default function Navbar() {
                  <Link to="/login">Login</Link>
                 </div>
               </button>
-            </>
-          )}
-
           <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
             <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
             <div className="text-base font-semibold font-lato text-darkslateblue-100">
-              Cart
+              <Link to="/cart">Cart</Link>
             </div>
           </button>
+            </>
+          )}
+
         </div>
       </div>
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>

@@ -7,6 +7,8 @@ import { Form, message, Input,Button  } from "antd";
 import { createBooking } from "../apiCalls/booking";
 import { useForm } from 'antd/lib/form/Form';
 
+var token = localStorage.getItem("token")
+
 export default function SecureCheckout() {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -102,12 +104,12 @@ const validatePassword = (rule, value, callback) => {
       totalPrice: totalPrice,
       date: date,
     };
-    console.log(formData,selectedOption, "selectedOption");
-
+    console.log(formData,values,selectedOption, "selectedOption");
     try {
       dispatch(setLoader(true));
-      const response = await createBooking(formData);
-      console.log(response, "response");
+      console.log(" Create Booking ",token)
+      const response = await createBooking(formData,token);
+      console.log(response, "Create response");
       dispatch(setLoader(false));
       if (response.success) {
         message.success(response.message);
@@ -222,19 +224,19 @@ const validatePassword = (rule, value, callback) => {
               </div>
             </Form.Item>
           </div>
-          {/* 
+          
           <button 
           className="next-btn rounded-lg bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] box-border w-[501px] flex flex-row py-4 px-8 items-center justify-center cursor-pointer text-white font-helvetica border-[1px] border-solid border-button-stroke">
             Next
           </button> 
-          */}
-          <Form.Item noStyle>
+          
+          {/* <Form.Item noStyle>
             <Button type="primary" htmlType="submit"
               className="next-btn rounded-lg bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] box-border w-[501px] flex flex-row py-4 px-8 items-center justify-center cursor-pointer text-white font-helvetica border-[1px] border-solid border-button-stroke"
             >
               Next
           </Button>
-        </Form.Item>
+        </Form.Item> */}
 
         </div>
       </Form>

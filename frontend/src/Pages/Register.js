@@ -64,6 +64,7 @@ export default function Register({ modalState }) {
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
   const onGoogleFinish = (values) => {
+    
     // authenticateWithGoogle("email")
     // console.log("Encoded JWT ID token: " + values.credential);
 
@@ -85,6 +86,8 @@ export default function Register({ modalState }) {
       console.log(error.message, "error");
     }
   };
+    const [form] = Form.useForm();
+
   const onFinish = async (values) => {
     if (!phone || phone.length < 8) {
       setPhoneError(true);
@@ -101,9 +104,13 @@ export default function Register({ modalState }) {
         message.success(response.message);
         navigate("/login");
       } else {
+    form.resetFields();
+        setPhone('')
         throw new Error(response.message);
       }
     } catch (error) {
+           form.resetFields();
+        setPhone('')
       message.error(error.message);
       console.log(error.message, "error");
     }
@@ -191,7 +198,7 @@ export default function Register({ modalState }) {
             </Form.Item>
             <div>
           <span>
-            Already have account? <Link to='/login'>Login</Link>
+            Already have account?<Link to='/login'>Login</Link>
           </span>
               <button className="submit-btn bg-darkslateblue-100" type="submit">
                 Submit

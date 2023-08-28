@@ -25,6 +25,15 @@ export const LoginUser = async (payload) => {
   }
 };
 
+export const SocailAuth = async (payload) => {
+  try {
+    const response = await axiosInstance.post("/api/auth/socail/", payload);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 // get current user
 export const GetCurrentUser = async () => {
   try {

@@ -50,8 +50,6 @@ export default function Activity() {
               <h2 className="activity-title">{i.name}</h2>
               <span className="font-bold text-4xl">{i.area}</span>
               
-                {/* <li className="font-thin">hybrid cycle</li>
-                <li className="font-thin">breakfast lunch</li> */}
                 <span className="font-thin">{i.location.name} </span>
               <span className="font-thin">{i.category.name}</span>
               

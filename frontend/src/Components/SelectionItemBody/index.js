@@ -383,7 +383,7 @@ export default function SelectedItemBody({ item }) {
         <div className="map">
           <div className="google-map-code">
             <iframe
-              src={item.location}
+              src={item.location.url}
               width="600"
               height="450"
               // style="border:0;"

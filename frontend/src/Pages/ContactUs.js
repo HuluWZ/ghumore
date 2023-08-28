@@ -28,7 +28,7 @@ export default function ContactUs() {
       setMessage('');
       setEmail('');
       setFullName('')
-      setSubmitMessage('Form submitted successfully')
+      setSubmitMessage("Thank you for contacting us! We'll get back to you soon.")
       setSucess('green')
     } else {
       setSubmitMessage('Unable to submitt form')
@@ -102,20 +102,29 @@ export default function ContactUs() {
                     }></textarea>
                   <div className="form-line"></div>
                 </div>
-                  <label style={{ color:isSucess}}>{submitMessage}</label>
+                <div>
+                  <label
+                    style={{ color: isSucess }}>
+                    {submitMessage}
+                  </label>
+                </div>
+                <br>
+                </br>
                 <div>
                 </div>
-
                 <button
-                  className="btn-contact rounded-sm bg-darkslateblue-100 flex flex-row py-6 px-[120px] items-center justify-center text-5xl text-white"
-                  type="submit">
+                    className="btn-contact rounded-sm bg-darkslateblue-100 flex flex-row py-6 px-[120px] items-center justify-center text-5xl text-white"
+                    type="submit"
+                    style={{ "margin-left": "50px" }}
+                  >
                   Contact Us
                 </button>
+
               </form>
             </div>
             <div className="address">
               <h2>Contact</h2>
-              <p>ghumoreindia@gmail.com</p>
+              <a href="mailto:ghumoreindia@gmail.com">ghumoreindia@gmail.com</a>
               <h2>Address</h2>
               <p>Banjara Hills, Hyderabad, India</p>
             </div>

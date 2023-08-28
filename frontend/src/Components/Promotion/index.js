@@ -44,7 +44,6 @@ export default function Promotion() {
             <div className=" rounded-md bg-sandybrown-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-1.5 px-6 items-center justify-center text-center text-sm border-[1px] border-solid border-button-stroke">
               {/* <div className="relative leading-[24px]">Book Now</div> */}
               <button className="relative  leading-[24px]" variant="contained" onClick={handleClick}>Book Now</button>
-
             </div>
           </div>
         </div>

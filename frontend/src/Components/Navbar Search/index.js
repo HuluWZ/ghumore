@@ -24,7 +24,7 @@ export default function NavbarSearch() {
             <div className='auth-items-navbar'>
                 <a href='/login'><Link to='login'>Loginn</Link></a>
                 <a href='/register'><Link to='register'>SignUp</Link></a>
-                <a href='#'>Cart</a>
+                <a href='/cart'><Link to="cart">Cart</Link></a>
             </div>
         </div>
     </div>

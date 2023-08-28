@@ -10,6 +10,7 @@ import NotFound from "./Pages/notFound";
 import Spinner from "./Pages/Spinner";
 import SelectedItem from "./Pages/SelectedItem";
 import Profile from "./Pages/Profile";
+import Cart from "./Pages/Cart";
 import SecureCheckout from "./Pages/SecureCheckout";
 import SecurePay from "./Pages/SecurePay";
 import SecurePayConfirm from "./Pages/SecurePayConfirm";
@@ -34,7 +35,8 @@ function App() {
         <Route path='/contactus' element={<ProtectedPage><ContactUs/> </ProtectedPage>}/>
         <Route path='/destinations' element={<ProtectedPage><AllDestination/> </ProtectedPage>}/>
         <Route path='/select' element={<ProtectedPage><SelectedItem/> </ProtectedPage>}/>
-        <Route path='/profile' element={<ProtectedPage><Profile/> </ProtectedPage>}/>
+        <Route path='/profile' element={<ProtectedPage><Profile /> </ProtectedPage>} />
+        <Route path='/cart' element={<ProtectedPage><Cart/> </ProtectedPage>}/>
         <Route path='/search/:location?/:name?/:activity?' element={<ProtectedPage><Search/> </ProtectedPage>}/>
         <Route path="/securecheckout" element={<SecureCheckout /> } />
         <Route path="/securepay" element={<ProtectedPage><SecurePay /></ProtectedPage> } />

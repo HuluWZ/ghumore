@@ -203,7 +203,8 @@ function DrawerAppBar(props) {
             <li
               className={activeLink === "Experience" ? "active" : ""}
               style={{color: 'black'}}
-              onClick={() => {
+                  onClick={() => {
+                navigate("/")
                 handleLinkClick("Experience");
                 setModalType("experience");
                 setIsModalOpen(true);
@@ -213,7 +214,8 @@ function DrawerAppBar(props) {
             <li
               className={activeLink === "Destination" ? "active" : ""}
               style={{color: 'black'}}
-              onClick={() => {
+                  onClick={() => {
+                navigate("/")
                 setModalType("destination");
                 handleLinkClick("Destination");
                 setIsModalOpen(true);
@@ -323,7 +325,7 @@ function DrawerAppBar(props) {
           <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
             <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
             <div className="text-base font-semibold font-lato text-darkslateblue-100">
-              Cart
+              <Link to="/cart">Cart</Link>
             </div>
           </button>
         </div>

@@ -1,11 +1,15 @@
 import axiosInstance from "./axiosinstance";
 
 // Create Booking
-export const createBooking = async (bookingData) => {
+export const createBooking = async (bookingData,token) => {
   try {
     const response = await axiosInstance.post(
       `/api/booking/create`,
-      bookingData
+      bookingData,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
     );
     return response.data;
   } catch (error) {
@@ -112,6 +116,19 @@ const authenticateWithFacebook = async () => {
 export const getMyBookings = async (token) => {
   try {
     const response = await axiosInstance.get(`/api/booking/get/my/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getMyCartBookings = async (token) => {
+  try {
+    const response = await axiosInstance.get(`/api/booking/cart/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
