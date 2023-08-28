@@ -119,7 +119,6 @@ exports.getBooking = async (req, res) => {
 exports.getMyCartBooking = async (req, res) => {
   try {
     const user = req.user.id
-    console.log(" User ",req.user)
     const getBooking = await Booking.find({user:user,status:{ "$in": [ "Pending", "Confirmed","Waiting"] } })
       .populate({
         path: 'activity',

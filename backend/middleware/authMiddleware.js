@@ -8,15 +8,13 @@ const validateToken = async(req, res, next) => {
     return res.json({ error: "Authentication header is not provided" });
   }
   const accessToken = header.split("Bearer ")[1];
-
   if (!accessToken) {
     return res.json({ error: "Authentication Tokens are not provided" });
   } else {
     try {
       const validToken = verify(accessToken, process.env.JWT_TOKEN_SECRET_KEY);
       const userInfo = await User.findById(validToken.user_id);
-      req.user = userInfo;
-      // console.log("User ",req.user);      
+      req.user = userInfo ;
       if (validToken) {
         return next();
       }

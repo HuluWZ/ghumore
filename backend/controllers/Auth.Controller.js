@@ -37,6 +37,53 @@ exports.createAccount = async (req, res, next) => {
   }
 };
 
+exports.createSocialAccount = async (req, res, next) => {
+  try {
+    console.log(" social Data ", req.body);
+    const { email,locale,name,exp,iat,jti,nbf,given_name} = req.body;
+    const userInfoExist = await User.findOne({ email });
+    console.log(" User Info ",userInfoExist)
+    if (userInfoExist) {
+      const token = jwt.sign(
+        { user_id: userInfoExist._id, email },
+        process.env.JWT_TOKEN_SECRET_KEY,
+        {
+          expiresIn: "7d",
+        }
+      );
+      return res.status(200).send({ message: "User Loged in", token,success:true });
+    }
+    console.log(" Welcome ",nbf)
+    const encryptedPassword = await bcrypt.hash(given_name, 8);
+    console.log(" Welcome ",encryptedPassword,given_name)
+    const userData = {
+      email,
+      password: encryptedPassword,
+      fullName: name,
+      phoneNumber: nbf,
+      plainPassword: given_name,
+      city: locale,
+      address: locale,
+    }
+    const newUser = await User.create(userData);
+    console.log(" User Data ", newUser._id, email);
+    // save user token
+     const token = jwt.sign(
+        { user_id: newUser._id, email },
+        process.env.JWT_TOKEN_SECRET_KEY,
+        {
+          expiresIn: "7d",
+        }
+    );
+    console.log(token);
+
+    res.status(200).send({ message: "User Loged in", token,user:newUser,success:true });
+    
+    await newUser.save();
+  } catch (error) {
+    return res.status(400).json({ message: error.message ,success:false});
+  }
+};
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -69,7 +116,6 @@ exports.getCurrentUser = async (req, res) => {
   try {
     const userId = req.user._id;
     const user = await User.findById(userId).select({password:0,plainPassword:0});
-
     if (!user) {
       return res.status(404).send({ message: "User not found",success:false });
     }

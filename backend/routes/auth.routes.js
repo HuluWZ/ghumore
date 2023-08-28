@@ -11,13 +11,14 @@ const {
   logOut,
   changePassword,
   forgotPassword,
-  resetPassword
+  resetPassword,createSocialAccount
 } = require("../controllers/Auth.Controller");
 
 const router = express.Router();
 const { passport } = require("../controllers/AuthSocial");
 // User Account Router
 router.post("/create/", createAccount);
+router.post('/socail', createSocialAccount);
 router.post("/login/", login);
 router.put("/update/:id", updateAccount);
 router.get("/currentuser/",validateToken,getCurrentUser);
