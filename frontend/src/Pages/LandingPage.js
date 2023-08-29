@@ -16,46 +16,29 @@ import '../App.css';
 
 
 function LandingPage() {
-    return (
-      <div className="App">
-        {/* <Navbar/> */}
-        <Header/>
-        <br/>
-        <br/>
-        <br/>
-        <Activity/>
-        <br/>
-        <br/>
-        <br/>
-        <Destination/>
-        <br/>
-        <br/>
-        <br/>
-        <Company/>
-        <br/>
-        <br/>
-        <br/>
-        <Experience/>
-        <br/>
-        <br/>
-        <br/>
-        <BaliExperience/>
-        <br/>
-        <br/>
-        <br/>
-        <Promotion/>
-        <br/>
-        <br/>
-        <br/>
-        <Testimonial/>
-        <br/>
-        <br/>
-        <br/>
-        <Poster/>
-        {/* <Footer/> */}
-      </div>
-    );
-  }
-  
-  export default LandingPage;
-  
+  return (
+    <div className="App container flex flex-col justify-center overflow-x-hidden">
+      {/* <Navbar/> */}
+      <Header />
+
+      <Activity />
+
+      <Destination />
+
+      <Company />
+
+      <Experience />
+
+      <BaliExperience />
+
+      <Promotion />
+
+      <Testimonial />
+
+      <Poster />
+      {/* <Footer/> */}
+    </div>
+  );
+}
+
+export default LandingPage;

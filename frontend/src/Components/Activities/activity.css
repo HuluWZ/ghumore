@@ -3,11 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    min-height: 70vh;
 }
 .activities{
-    width: 100vw;
+    /* width: 100vw; */
     flex-wrap: wrap;
     display: flex;
     flex-direction: row;

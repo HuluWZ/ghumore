@@ -11,17 +11,17 @@ export default function Destination() {
 
   const Component = (props) => {
     const loaded = useProgressiveImage(props.source)
-    
+
     return (
-      <div 
-       onClick={()=>navigate(`/search?category=&location=${props.name}&activity=`)}
-       style={{ backgroundImage: `url(${loaded || props.placeholder})` }} 
-       className={`destination-card bg-cover bg-no-repeat bg-[top] rounded-2xl w-[330px] h-[224.03px]`}
-       />
+      <div
+        onClick={() => navigate(`/search?category=&location=${props.name}&activity=`)}
+        style={{ backgroundImage: `url(${loaded || props.placeholder})` }}
+        className={`destination-card bg-cover bg-no-repeat bg-[top] rounded-2xl w-[330px] h-[224.03px]`}
+      />
     )
   }
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const [locationList, setLocationList] = useState([]);
   const addLocationToDestinationList = async () => {
     try {
@@ -35,8 +35,8 @@ export default function Destination() {
         console.log(response.location, "my response Location");
         const element = []
         for (let index = 0; index < 10; index++) {
-            element.push(response.location[index])
-            
+          element.push(response.location[index])
+
         }
         setLocationList(element);
       } else {
@@ -49,30 +49,38 @@ export default function Destination() {
 
   useEffect(() => {
     addLocationToDestinationList();
-  },[]);
+  }, []);
 
   return (
-    <div className="Destinaiton">
-      <h1>Top Destination & Cities</h1>
-      <button 
-      onClick={() => {
-        navigate(`/destinations`);
-      }}
-      className="destn-btn py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center m-8 justify-center gap-2 border border-solid w-32 border-button-stroke">
-        <div className="text-base font-semibold text-white">View All</div>
-      </button>
+    <div className="Destinaiton ">
+      <h1 className="text-[30px]">Top Destination & Cities</h1>
+      <div className=' bg-orange-600 p-[2px] w-48  mb-10 flex justify-center' ><hr /></div>
+      {/* <button
+        onClick={() => {
+          navigate(`/destinations`);
+        }}
+        className="destn-btn py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center m-8 justify-center gap-2 border border-solid w-32 border-button-stroke">
+        <div className="text-base font-semibold text-white ">View All</div>
+      </button> */}
       <div className="destination-cards">
         {locationList.map((destination) => {
-            console.log(locationList, "list");
-            return (<Component   
-            name= {destination.name}
+          console.log(locationList, "list");
+          return (<Component
+            name={destination.name}
             source={destination.image}
             placeholder="new image"
-            >
+          >
             <h1>{destination.name}</h1>
           </Component>)
         })}
       </div>
+      <button
+        onClick={() => {
+          navigate(`/destinations`);
+        }}
+        className="destn-btn py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center m-8 sm:flex sm:items-center-center justify-center gap-2 border border-solid w-32 border-button-stroke">
+        <div className="text-base font-semibold text-white ">View All</div>
+      </button>
     </div>
   );
 }

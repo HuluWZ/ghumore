@@ -32,34 +32,39 @@ const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
 function DrawerAppBar(props) {
-    const { user } = useSelector((state) => state.users);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isSignModalOpen, setIsSignModalOpen] = useState(false);
-    const [modaltype, setModalType] = useState("");
-    const [activeLink, setActiveLink] = useState("Home");
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [modalOpen, setModalOpen] = useState(false);
-    const handleLinkClick = async (link) => {
-        setActiveLink(link);
-        if (link === "Testimonials") {
-          await navigate("/");
-          const testimonialSection = document.getElementById("testimonial");
-          testimonialSection.scrollIntoView({ behavior: "smooth" });
-        }
-        if (link !== "Destination") {
-          setIsModalOpen(false);
-        }
-        if (link !== "login" || link !== "signup") {
-          setIsSignModalOpen(false);
-        }
-      };
-    
-      const handleLogout = () => {
-        dispatch(logout());
-        localStorage.removeItem("token");
-        navigate("/");
-      };
+  const { user } = useSelector((state) => state.users);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSignModalOpen, setIsSignModalOpen] = useState(false);
+  const [modaltype, setModalType] = useState("");
+  const [activeLink, setActiveLink] = useState("Home");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [modalOpen, setModalOpen] = useState(false);
+
+
+  const handleLinkClick = async (link) => {
+    setActiveLink(link);
+
+    if (link === "Testimonials") {
+      setIsModalOpen(false)
+      await navigate("/");
+      const testimonialSection = document.getElementById("testimonial");
+      testimonialSection.scrollIntoView({ behavior: "smooth" });
+    }
+    if (link !== "Destination") {
+      setIsModalOpen(false);
+    }
+    if (link !== "login" || link !== "signup") {
+      setIsSignModalOpen(false);
+    }
+  };
+
+
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -69,35 +74,35 @@ function DrawerAppBar(props) {
   };
 
   const drawer = (
-    <div style={{display: 'flex'}} className='drawerAlignment' >
-    <Box onClick={handleDrawerToggle}>
-      <Divider />
-      <List>
-        <div  onClick={() => {
-                handleLinkClick("Home");
-                navigate("/");
-              }} to='/'>  <img
-            className="overflow-hidden cursor-pointer"
-            alt=""
-            src="/gumo-re-indiafinal-11.svg"
-            onClick={() => navigate("/")}
-          /></div>
-       <ListItem disablePadding>
-            
+    <div style={{ display: 'flex' }} className='drawerAlignment' >
+      <Box onClick={handleDrawerToggle}>
+        <Divider />
+        <List>
+          <div onClick={() => {
+            handleLinkClick("Home");
+            navigate("/");
+          }} to='/'>  <img
+              className="overflow-hidden cursor-pointer"
+              alt=""
+              src="/gumo-re-indiafinal-11.svg"
+              onClick={() => navigate("/")}
+            /></div>
+          <ListItem disablePadding>
+
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Home" ? "active" : ""}
-              style={{color: 'black'}}
+              style={{ color: 'black' }}
               onClick={() => {
                 handleLinkClick("Home");
                 navigate("/");
               }}>
               Home
             </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
+          </ListItem>
+          <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Experience" ? "active" : ""}
-              style={{color: 'black'}}
+              style={{ color: 'black' }}
               onClick={() => {
                 handleLinkClick("Experience");
                 setModalType("experience");
@@ -105,260 +110,285 @@ function DrawerAppBar(props) {
               }}>
               Experience
             </ListItemButton>
-    </ListItem>
-     <ListItem disablePadding>
+          </ListItem>
+          <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Destination" ? "active" : ""}
-              style={{color: 'black'}}
+              style={{ color: 'black' }}
               onClick={() => {
                 setModalType("destination");
                 handleLinkClick("Destination");
                 setIsModalOpen(true);
               }}>
               Destination
-              </ListItemButton>
-              </ListItem>
-    <ListItem disablePadding>
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Testimonials" ? "active" : ""}
-              style={{color: 'black'}}
+              style={{ color: 'black' }}
               onClick={() => {
                 setModalType("testimonial");
                 handleLinkClick("Testimonials");
               }}>
               Testimonials
             </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
+          </ListItem>
+          <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "About" ? "active" : ""}
-              style={{color: 'black'}}
+              style={{ color: 'black' }}
               onClick={() => {
                 handleLinkClick("About");
                 navigate("/aboutus");
               }}>
               About Us
             </ListItemButton>
-            </ListItem>
-        <ListItem disablePadding>
+          </ListItem>
+          <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}
               className={activeLink === "Contact" ? "active" : ""}
-              style={{color: 'black'}}
+              style={{ color: 'black' }}
               onClick={() => {
                 handleLinkClick("Contact");
                 navigate("/contactus");
               }}>
               Contact Us
             </ListItemButton>
-            </ListItem>
-            
-      </List>
-    </Box>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "Contact" ? "active" : ""}
+              style={{ color: 'black' }}
+              onClick={() => {
+                handleLinkClick("Contact");
+                navigate("/register");
+              }}>
+              SignUp
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}
+              className={activeLink === "Contact" ? "active" : ""}
+              style={{ color: 'black' }}
+              onClick={() => {
+                handleLinkClick("Contact");
+                navigate("/login");
+              }}>
+              Login
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
     </div>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
-  
+
 
 
   return (
     <div>
-      
-    <Box sx={{ display: 'flex' }}>
-   
-      <CssBaseline />
-      
-      <AppBar id="mynav" className='Navbar main-navbar' style={{background: '#f8f9fa', position: 'fixed'}} component="nav">
-        <Toolbar>
-          <IconButton
-            color="black"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon color='black' />
-          </IconButton>
-          <div className="navbar-logo p-10 mr-64">
-          <img
-            className="overflow-hidden cursor-pointer"
-            alt=""
-            src="/gumo-re-indiafinal-11.svg"
-            onClick={() => navigate("/")}
-          />
-        </div>
-          <Box className='ml-12' sx={{ display: { xs: 'none', sm: 'block' } }}>
-          <ul className="item-list">
-            <li
-              className={activeLink === "Home" ? "active" : ""}
-              style={{color: 'black'}}
-              onClick={() => {
-                handleLinkClick("Home");
-                navigate("/");
-              
-              }}>
-              Home
-            </li>
-            <li
-              className={activeLink === "Experience" ? "active" : ""}
-              style={{color: 'black'}}
-                  onClick={() => {
-                navigate("/")
-                handleLinkClick("Experience");
-                setModalType("experience");
-                setIsModalOpen(true);
-              }}>
-              Experience
-            </li>
-            <li
-              className={activeLink === "Destination" ? "active" : ""}
-              style={{color: 'black'}}
-                  onClick={() => {
-                navigate("/")
-                setModalType("destination");
-                handleLinkClick("Destination");
-                setIsModalOpen(true);
-              }}>
-              Destination
-            </li>
-            <li
-              className={activeLink === "Testimonials" ? "active" : ""}
-              style={{color: 'black'}}
-              onClick={() => {
-                setModalType("testimonial");
-                handleLinkClick("Testimonials");
-              }}>
-              Testimonials
-            </li>
-            <li
-              className={activeLink === "About" ? "active" : ""}
-              style={{color: 'black'}}
-              onClick={() => {
-                handleLinkClick("About");
-                navigate("/aboutus");
-              }}>
-              About Us
-            </li>
-            <li
-              className={activeLink === "Contact" ? "active" : ""}
-              style={{color: 'black'}}
-              onClick={() => {
-                handleLinkClick("Contact");
-                navigate("/contactus");
-              }}>
-              Contact Us
-            </li>
-          
-            </ul>
 
-            
-          
-          </Box>
-          <div sx={{ display: { xs: 'none', sm: 'block' } }} className="flex xs-none gap-2 p-10 mt-2 navbuttons   sm:mt-0">
-          {user && user.fullName ? (
-            <>
-              <button
-                onClick={handleLogout}
-                className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
-                <img
-                  className="w-5 h-5 overflow-hidden"
-                  alt=""
-                  src="/sign-in1.svg"
-                />
-                <div className="text-base font-semibold font-lato text-white">
-                  Log Out
-                </div>
-              </button>
-              <button
-                onClick={() => navigate("/profile")}
-                className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
-                <img
-                  className="w-5 h-5 overflow-hidden"
-                  alt=""
-                  src="/sign-in1.svg"
-                />
-                <div className="text-base font-semibold font-lato text-white">
-                  Profile
-                </div>
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                      // onClick={() => {
-                    // navigate('/register')
-                  // setModalType("signup");
-                  // setIsModalOpen(false);
-                  // setIsSignModalOpen(true);
-                // }}
-                className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-darkslateblue-100">
-                <img
-                  className="w-5 h-5 overflow-hidden"
-                  alt=""
-                  src="/sign-in.svg"
-                />
-                <div className="text-base font-semibold font-poppins text-darkslateblue-200">
-                 <Link to="/register">Signup</Link> 
-                </div>
-              </button>
-              <button
-                // onClick={() => {
-                //   navigate("/login");
-                //   // setModalType("login");
-                //   // setIsModalOpen(false);
-                //   // setIsSignModalOpen(true);
-                // }}
-                className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
-                <img
-                  className="w-5 h-5 overflow-hidden"
-                  alt=""
-                  src="/sign-in1.svg"
-                />
-                <div className="text-base font-semibold font-lato text-white">
-                 <Link to='/login'>Login</Link> 
-                </div>
-              </button>
-            </>
-          )}
+      <Box sx={{ display: 'flex' }}>
 
-          <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
-            <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
-            <div className="text-base font-semibold font-lato text-darkslateblue-100">
-              <Link to="/cart">Cart</Link>
+        <CssBaseline />
+
+        <AppBar id="mynav" className='Navbar md:h-28 bg-white flex flex-row text-[15px]' style={{ background: '#f8f9fa', position: 'fixed' }} component="nav">
+          <Toolbar className=' flex flex-row md:justify-center md:items-center'>
+            <div className=' ml-5'>
+              <IconButton
+                className=' '
+                color="black"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon color='black' />
+              </IconButton></div>
+
+
+            <div className="p-7 md:mr-48">
+              <img
+                className="overflow-hidden cursor-pointer  w-14 h-14 md:w-24 md:h-24 ml-12 md:ml-1"
+                alt=""
+                src="/gumo-re-indiafinal-11.svg"
+                onClick={() => navigate("/")}
+              />
             </div>
-          </button>
-        </div>
-        </Toolbar>
-      </AppBar>
-      <Box component="nav" style={{alignItems: 'left'}}>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }} 
-          sx={{
-            display: { xs: 'inline-block', sm: 'none' },
-            alignItems: 'start', justifyContent: 'flex-start',
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
+            <Box className='ml-14' sx={{ display: { xs: 'none', sm: 'block' } }}>
+              <ul className="item-list">
+                <li
+                  className={activeLink === "Home" ? "active" : ""}
+                  style={{ color: 'black' }}
+                  onClick={() => {
+                    handleLinkClick("Home");
+                    navigate("/");
+
+                  }}>
+                  Home
+                </li>
+                <li
+                  className={activeLink === "Experience" ? "active" : ""}
+                  style={{ color: 'black' }}
+                  onClick={() => {
+                    navigate("/")
+                    handleLinkClick("Experience");
+                    setModalType("experience");
+                    setIsModalOpen(true);
+                  }}>
+                  Experience
+                </li>
+                <li
+                  className={activeLink === "Destination" ? "active" : ""}
+                  style={{ color: 'black' }}
+                  onClick={() => {
+                    navigate("/")
+                    setModalType("destination");
+                    handleLinkClick("Destination");
+                    setIsModalOpen(true);
+                  }}>
+                  Destination
+                </li>
+                <li
+                  className={activeLink === "Testimonials" ? "active" : ""}
+                  style={{ color: 'black' }}
+                  onClick={() => {
+                    setModalType("testimonial");
+                    handleLinkClick("Testimonials");
+                  }}>
+                  Testimonials
+                </li>
+                <li
+                  className={activeLink === "About" ? "active" : ""}
+                  style={{ color: 'black', }}
+                  onClick={() => {
+                    handleLinkClick("About");
+                    navigate("/aboutus");
+                  }}>
+                  About Us
+                </li>
+                <li
+                  className={activeLink === "Contact" ? "active" : ""}
+                  style={{ color: 'black' }}
+                  onClick={() => {
+                    handleLinkClick("Contact");
+                    navigate("/contactus");
+                  }}>
+                  Contact Us
+                </li>
+
+              </ul>
+
+
+
+            </Box>
+            <div sx={{ display: { xs: 'none', sm: 'block' } }} className="flex xs-none gap-2 p-10 mt-2 navbuttons   sm:mt-0">
+              {user && user.fullName ? (
+                <>
+                  <button
+                    onClick={handleLogout}
+                    className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                    <img
+                      className="w-5 h-5 overflow-hidden"
+                      alt=""
+                      src="/sign-in1.svg"
+                    />
+                    <div className="text-base font-semibold font-lato text-white">
+                      Log Out
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => navigate("/profile")}
+                    className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                    <img
+                      className="w-5 h-5 overflow-hidden"
+                      alt=""
+                      src="/sign-in1.svg"
+                    />
+                    <div className="text-base font-semibold font-lato text-white">
+                      Profile
+                    </div>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    // onClick={() => {
+                    // navigate('/register')
+                    // setModalType("signup");
+                    // setIsModalOpen(false);
+                    // setIsSignModalOpen(true);
+                    // }}
+                    className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-darkslateblue-100">
+                    <img
+                      className="w-5 h-5 overflow-hidden"
+                      alt=""
+                      src="/sign-in.svg"
+                    />
+                    <div className="text-base font-semibold font-poppins text-darkslateblue-200">
+                      <Link to="/register">Signup</Link>
+                    </div>
+                  </button>
+                  <button
+                    // onClick={() => {
+                    //   navigate("/login");
+                    //   // setModalType("login");
+                    //   // setIsModalOpen(false);
+                    //   // setIsSignModalOpen(true);
+                    // }}
+                    className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                    <img
+                      className="w-5 h-5 overflow-hidden"
+                      alt=""
+                      src="/sign-in1.svg"
+                    />
+                    <div className="text-base font-semibold font-lato text-white">
+                      <Link to='/login'>Login</Link>
+                    </div>
+                  </button>
+                </>
+              )}
+
+              <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
+                <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
+                <div className="text-base font-semibold font-lato text-darkslateblue-100">
+                  <Link to="/cart">Cart</Link>
+                </div>
+              </button>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <Box component="nav" style={{ alignItems: 'left' }}>
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'inline-block', sm: 'none' },
+              alignItems: 'start', justifyContent: 'flex-start',
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+        <Box component="main" sx={{ p: 3 }}>
+          <Toolbar />
+          <Typography>
+
+          </Typography>
+        </Box>
       </Box>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-        <Typography>
-         
-        </Typography>
-      </Box>
-    </Box>
-    <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <CustomModal modalType={modaltype} />
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <CustomModal modalType={modaltype} setIsModalOpen={setIsModalOpen} />
       </Modal>
       <ModalSign open={isSignModalOpen} setOpen={setIsSignModalOpen}>
         <AccountModal modalType={modaltype} modalState={setIsSignModalOpen} />
@@ -379,7 +409,7 @@ DrawerAppBar.propTypes = {
 };
 
 
-function CustomModal({ modalType }) {
+function CustomModal({ modalType, setIsModalOpen }) {
   const [experienceList, setExperienceList] = useState([]);
   const [locationList, setLocationList] = useState([]);
 
@@ -444,10 +474,20 @@ function CustomModal({ modalType }) {
     }
   };
 
+  const onExperienceClick = (name) => {
+    setIsModalOpen(false)
+    navigate(`/search?category=${name}&location=&activity=`)
+
+  }
+  const onDestinationClick = (name) => {
+    setIsModalOpen(false)
+    navigate(`/search?category=&location=${name}&activity=`)
+  }
+
   useEffect(() => {
     if (modalType === "experience") {
       addCategoriesToExperienceList();
-    }else if (modalType === "destination") {
+    } else if (modalType === "destination") {
       addLocationToDestinationList();
     }
   }, [modalType]);
@@ -461,7 +501,7 @@ function CustomModal({ modalType }) {
 
   // Now call the addCategoriesToExperienceList function to fetch categories and add them to the experienceList
   if (!modalType) return null;
-  
+
 
   if (modalType === "experience")
     return (
@@ -471,7 +511,7 @@ function CustomModal({ modalType }) {
           {experienceList.map((expSec) => (
             <div className="modal-list-section">
               <ul>
-                {expSec ? expSec.map((exp) => <li onClick={() => navigate(`/search?category=${exp.name}&location=&activity=`)}>{exp.name}</li>) : null}
+                {expSec ? expSec.map((exp) => <li onClick={() => { onExperienceClick(exp.name) }}>{exp.name}</li>) : null}
               </ul>
             </div>
           ))}
@@ -486,7 +526,7 @@ function CustomModal({ modalType }) {
           {locationList.map((expSec) => (
             <div className="modal-list-section">
               <ul>
-              {expSec ? expSec.map((exp) => <li onClick={() => navigate(`/search?category=&location=${exp.name}&activity=`)}>{exp.name}</li>) : null}
+                {expSec ? expSec.map((exp) => <li onClick={() => { onDestinationClick(exp.name) }}>{exp.name}</li>) : null}
               </ul>
             </div>
           ))}

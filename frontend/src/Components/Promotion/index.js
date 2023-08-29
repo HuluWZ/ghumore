@@ -1,17 +1,19 @@
 import React from "react";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./promotion.css";
 
 export default function Promotion() {
-    const history = useNavigate ();
+  const history = useNavigate();
 
   const handleClick = () => {
     history('search?category=&location=&activity=');
   };
 
   return (
-    <div className="Promotion">
+    <div className="Promotion max-w-screen hidden">
       <h1>Promotion & Exclusive Offers</h1>
+      <hr className=' bg-orange-600 p-[2px] w-48 ml-24 md:ml-[670px] mb-10' />
+
       <div className="promotion-cards">
         <div className="promotion-card">
           <div className="promotion-card-image">
@@ -21,12 +23,13 @@ export default function Promotion() {
               src="/image1@2x.png"
             />
           </div>
-          <div className="promotion-card-detail">
+          <div className="promotion-card-detail mt-6">
             <div className="inline-block w-[249px]">{`Get Up to 25% OFF* on Flights, Hotels & Holidays`}</div>
             <div className="text-smi leading-[16px] text-darkslategray-100 inline-block w-[244px]">{`& get your next refreshing break sorted!`}</div>
-            <div className=" rounded-md bg-sandybrown-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-1.5 px-6 items-center justify-center text-center text-sm border-[1px] border-solid border-button-stroke">
+            <div className=" w-24 ml-16
+             rounded-md bg-sandybrown-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] flex flex-row py-1.5 items-center justify-center text-center text-sm border-[1px] border-solid border-button-stroke">
               {/* <div className="relative leading-[24px]">Book Now</div> */}
-              <button className="relative  leading-[24px]" variant="contained" onClick={handleClick}>Book Now</button>
+              <button className=" w-16" variant="contained" onClick={handleClick}>Book Now</button>
             </div>
           </div>
         </div>
@@ -38,12 +41,13 @@ export default function Promotion() {
               src="/image2@2x.png"
             />
           </div>
-          <div className="promotion-card-detail">
+          <div className="promotion-card-detail mt-6">
             <div className="inline-block w-[249px]">{`Get Up to 25% OFF* on Flights, Hotels & Holidays`}</div>
             <div className="text-smi leading-[16px] text-darkslategray-100 inline-block w-[244px]">{`& get your next refreshing break sorted!`}</div>
-            <div className=" rounded-md bg-sandybrown-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-1.5 px-6 items-center justify-center text-center text-sm border-[1px] border-solid border-button-stroke">
+            <div className=" w-24 ml-16
+             rounded-md bg-sandybrown-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] flex flex-row py-1.5 items-center justify-center text-center text-sm border-[1px] border-solid border-button-stroke">
               {/* <div className="relative leading-[24px]">Book Now</div> */}
-              <button className="relative  leading-[24px]" variant="contained" onClick={handleClick}>Book Now</button>
+              <button className=" w-16" variant="contained" onClick={handleClick}>Book Now</button>
             </div>
           </div>
         </div>
@@ -55,11 +59,13 @@ export default function Promotion() {
               src="/image1@2x.png"
             />
           </div>
-          <div className="promotion-card-detail">
+          <div className="promotion-card-detail mt-6">
             <div className="leading-[22px] inline-block w-[249px]">{`Get Up to 25% OFF* on Flights, Hotels & Holidays`}</div>
             <div className="text-smi leading-[16px] text-darkslategray-100 inline-block w-[244px]">{`& get your next refreshing break sorted!`}</div>
-            <div className=" rounded-md bg-sandybrown-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-1.5 px-6 items-center justify-center text-center text-sm border-[1px] border-solid border-button-stroke">
-              <button className="relative  leading-[24px]" variant="contained" onClick={handleClick}>Book Now</button>
+            <div className=" w-24 ml-16
+             rounded-md bg-sandybrown-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] flex flex-row py-1.5 items-center justify-center text-center text-sm border-[1px] border-solid border-button-stroke">
+              {/* <div className="relative leading-[24px]">Book Now</div> */}
+              <button className=" w-16" variant="contained" onClick={handleClick}>Book Now</button>
             </div>
           </div>
         </div>

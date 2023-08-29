@@ -2,9 +2,9 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    width: 100vw;
+    /* width: 100vw; */
     margin-left: 5%;
-    margin-top: 5%;
+    margin-top: 5%; 
     /* flex-wrap: wrap; */
 }
 .text-header{
@@ -18,7 +18,7 @@
     flex-wrap: wrap;
 }
 .SearchHeader .tags span{
-    margin: 20px;
+    margin: 15px;
     padding: 6px;
     border-radius: 1rem;
     background-color: rgba(0, 0, 0, .1);

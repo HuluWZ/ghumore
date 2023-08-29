@@ -24,39 +24,39 @@ const rules = [
 
 const validateInput = (rule, value, callback) => {
   console.log(" Value Phone ", value);
-    if (/^[a-zA-Z ]*$/.test(value)) {
-      callback(); // Validation successful
-    } else {
-      callback('Only alphabets are allowed'); // Validation failed
-    }
+  if (/^[a-zA-Z ]*$/.test(value)) {
+    callback(); // Validation successful
+  } else {
+    callback('Only alphabets are allowed'); // Validation failed
+  }
 };
 
 const validatePhoneNumber = (rule, value, callback) => {
   const val = value.split("+")[1].replace(/[\s-]+/g, '')
   console.log(" Validation Phone = ", value.split("+")[1].replace(/[\s-]+/g, ''));
-    if (/^[0-9]{12}$/.test(val)) {
-      callback(); // Validation successful
-    } else {
-      callback('Invalid phone number. It should be a 10-digit number.'); // Validation failed
-    }
-  };
+  if (/^[0-9]{12}$/.test(val)) {
+    callback(); // Validation successful
+  } else {
+    callback('Invalid phone number. It should be a 10-digit number.'); // Validation failed
+  }
+};
 const validateEmail = (rule, value, callback) => {
-    console.log(" Value Email ",value)
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailRegex.test(value)) {
-      callback(); // Validation successful
-    } else {
-      callback('Invalid email address'); // Validation failed
-    }
-  };
+  console.log(" Value Email ", value)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (emailRegex.test(value)) {
+    callback(); // Validation successful
+  } else {
+    callback('Invalid email address'); // Validation failed
+  }
+};
 const validatePassword = (rule, value, callback) => {
   console.log(" Value Password ", value);
-    if (value.length >= 8) {
-      callback(); // Validation successful
-    } else {
-      callback('Password must be at least 8 characters long'); // Validation failed
-    }
-  };
+  if (value.length >= 8) {
+    callback(); // Validation successful
+  } else {
+    callback('Password must be at least 8 characters long'); // Validation failed
+  }
+};
 
 export default function Register({ modalState }) {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ export default function Register({ modalState }) {
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
   const onGoogleFinish = (values) => {
-    
+
     // authenticateWithGoogle("email")
     // console.log("Encoded JWT ID token: " + values.credential);
 
@@ -86,7 +86,7 @@ export default function Register({ modalState }) {
       console.log(error.message, "error");
     }
   };
-    const [form] = Form.useForm();
+  const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     if (!phone || phone.length < 8) {
@@ -104,13 +104,13 @@ export default function Register({ modalState }) {
         message.success(response.message);
         navigate("/login");
       } else {
-    form.resetFields();
+        form.resetFields();
         setPhone('')
         throw new Error(response.message);
       }
     } catch (error) {
-           form.resetFields();
-        setPhone('')
+      form.resetFields();
+      setPhone('')
       message.error(error.message);
       console.log(error.message, "error");
     }
@@ -148,33 +148,31 @@ export default function Register({ modalState }) {
   // }, []); 
 
   return (
-    <div className="Register">
-      {/* <Navbar /> */}
-      <div className="register-form-container">
+    <div className="Register pb-[50px] mt-[100px] ">
+
+      <div className="flex flex-row  ml-[-50px]">
         <div className="register-form-image">
-          <img className="object-cover" alt="" src="/rectangle-10891@2x.png" />
+          <img className="object-cover mt-16" alt="" src="/rectangle-10891@2x.png" />
         </div>
         <div className="register-form">
-          <div className="close-button font-bold" onClick={()=>modalState(false)}>
-            x
-          </div>
+
           <div className="register-form-icon">
             <img
-              className="overflow-hidden"
+              className=""
               alt=""
               src="/gumo-re-indiafinal-128.svg"
             />
           </div>
           <h2>Create Account</h2>
           <Form onFinish={onFinish} className="form">
-            <Form.Item name="fullName" rules={[{required: true, validator: validateInput},       ]}>
+            <Form.Item name="fullName" rules={[{ required: true, validator: validateInput },]}>
               <div className="form-item">
-                <label>Full Name</label>
-                <Input type="text" name="fullName" placeholder="Full Name" />
+                <label>Full Name: </label>
+                <Input type="text" name="fullName" className=" md:w-[300px] w-[200px]" placeholder="Full Name" />
               </div>
             </Form.Item>
-            <Form.Item name="phone"    rules={[{required: true, validator: validatePhoneNumber}]}>
-              <div className="form-item">
+            <Form.Item name="phone" rules={[{ required: true, validator: validatePhoneNumber }]}>
+              <div>
                 <label>Mobile Number</label>
                 <PhoneInput
                   required
@@ -184,22 +182,22 @@ export default function Register({ modalState }) {
                 />
               </div>
             </Form.Item>
-            <Form.Item name="email" rules={[{required:true,validator:validateEmail}]}>
+            <Form.Item name="email" rules={[{ required: true, validator: validateEmail }]}>
               <div className="form-item">
-                <label>Email</label>
-                <Input type="email" placeholder="Email" />
+                <label>Email:</label>
+                <Input type="email" placeholder="Email" className=" md:w-[300px] w-[200px]" />
               </div>
             </Form.Item>
-            <Form.Item name="password" rules={[{required:true,validator:validatePassword}]}>
+            <Form.Item name="password" rules={[{ required: true, validator: validatePassword }]}>
               <div className="form-item">
                 <label>Password</label>
-                <Input type="password" placeholder="Password" />
+                <Input type="password" placeholder="Password" className=" md:w-[300px] w-[200px]" />
               </div>
             </Form.Item>
             <div>
-          <span>
-            Already have account?<Link to='/login'>Login</Link>
-          </span>
+              <span>
+                Already have account?<Link to='/login'>Login</Link>
+              </span>
               <button className="submit-btn bg-darkslateblue-100" type="submit">
                 Submit
               </button>

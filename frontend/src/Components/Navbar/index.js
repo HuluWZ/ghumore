@@ -32,6 +32,7 @@ export default function Navbar() {
 
   const handleLinkClick = async (link) => {
     setActiveLink(link);
+    handleCloseModal()
     if (link === "Testimonials") {
       await navigate("/");
       const testimonialSection = document.getElementById("testimonial");
@@ -81,14 +82,14 @@ export default function Navbar() {
                 navigate("/")
                 handleLinkClick("Experience");
                 setModalType("experience");
-                setIsModalOpen(true);
+                setIsModalOpen(false);
               }}>
               Experience
             </li>
             <li
               className={activeLink === "Destination" ? "active" : ""}
               onClick={() => {
-                                navigate("/")
+                navigate("/")
                 setModalType("destination");
                 handleLinkClick("Destination");
                 setIsModalOpen(true);
@@ -149,12 +150,12 @@ export default function Navbar() {
                   Profile
                 </div>
               </button>
-            <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
-            <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
-            <div className="text-base font-semibold font-lato text-darkslateblue-100">
-              <Link to="/cart">Cart</Link>
-            </div>
-          </button>
+              <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
+                <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
+                <div className="text-base font-semibold font-lato text-darkslateblue-100">
+                  <Link to="/cart">Cart</Link>
+                </div>
+              </button>
             </>
           ) : (
             <>
@@ -172,7 +173,7 @@ export default function Navbar() {
                   src="/sign-in.svg"
                 />
                 <div className="text-base font-semibold font-poppins text-darkslateblue-200">
-                <Link to="/login">Sign up</Link> 
+                  <Link to="/login">Sign up</Link>
                 </div>
               </button>
               <button
@@ -189,15 +190,15 @@ export default function Navbar() {
                   src="/sign-in1.svg"
                 />
                 <div className="text-base font-semibold font-lato text-white">
-                 <Link to="/login">Login</Link>
+                  <Link to="/login">Login</Link>
                 </div>
               </button>
-          <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
-            <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
-            <div className="text-base font-semibold font-lato text-darkslateblue-100">
-              <Link to="/cart">Cart</Link>
-            </div>
-          </button>
+              <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
+                <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
+                <div className="text-base font-semibold font-lato text-darkslateblue-100">
+                  <Link to="/cart">Cart</Link>
+                </div>
+              </button>
             </>
           )}
 
@@ -283,7 +284,7 @@ function CustomModal({ modalType }) {
   useEffect(() => {
     if (modalType === "experience") {
       addCategoriesToExperienceList();
-    }else if (modalType === "destination") {
+    } else if (modalType === "destination") {
       addLocationToDestinationList();
     }
   }, [modalType]);
@@ -297,7 +298,7 @@ function CustomModal({ modalType }) {
 
   // Now call the addCategoriesToExperienceList function to fetch categories and add them to the experienceList
   if (!modalType) return null;
-  
+
 
   if (modalType === "experience")
     return (
@@ -322,7 +323,7 @@ function CustomModal({ modalType }) {
           {locationList.map((expSec) => (
             <div className="modal-list-section">
               <ul>
-              {expSec ? expSec.map((exp) => <li onClick={() => navigate(`/search?category=&location=${exp.name}&activity=`)}>{exp.name}</li>) : null}
+                {expSec ? expSec.map((exp) => <li onClick={() => navigate(`/search?category=&location=${exp.name}&activity=`)}>{exp.name}</li>) : null}
               </ul>
             </div>
           ))}

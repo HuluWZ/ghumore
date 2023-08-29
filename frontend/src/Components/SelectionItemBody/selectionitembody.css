@@ -7,7 +7,7 @@
   height: 50vh;
 }
 .SelectedItemBody {
-  text-align: left;
+  /* text-align: left; */
 }
 .booking-section {
   display: flex;
@@ -34,15 +34,15 @@
 }
 
 .item-image-book {
-  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
+  box-shadow: 0px 10px 15px -3px rgba(241, 10, 10, 0.2);
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
-  max-width: 600px;
-  min-width: 400px;
+  /* max-width: 600px;
+  min-width: 400px; */
   /* background-color: blue; */
   border-radius: 1rem;
-  margin: 10px;
+  /* margin: 10px; */
   padding: 10px;
 }
 .option-card {
@@ -91,8 +91,8 @@
   height: 700px;
 }
 .map {
-  width: 50vw;
-  height: 70vh;
+  /* width: 50vw; */
+  /* height: 70vh; */
 }
 .map-container {
   width: 50vw;
@@ -106,28 +106,30 @@ h1 {
   position: relative;
 }
 .select-checkbox{
-  position: absolute;
+  /* position: absolute;
   width: 7rem;
   top: 5px;
-  right: 5px;
+  right: 5px; */
 }
 .recomendation-cards {
   width: 90vw;
-  min-height: 30vh;
+ 
+  /* min-height: 30vh; */
   display: flex;
   justify-content: space-between;
-  margin: 50px;
+  /* margin: 50px; */
 }
 .date-top{
   position: relative;
 }
 .recomendation-card {
-  text-align: left;
+
+  text-align: center;
   width: 300px;
 }
 .recomendation-card-image {
-  width: 300px;
-  height: 200px;
+  /* width: 300px;
+  height: 200px; */
 }
 @media only screen and (max-width: 900px) {
   /*Tablets [601px -> 1200px]*/

@@ -28,12 +28,12 @@ const SearchResult = () => {
   const maxLocationsToShow = 3;
 
   const addLocationToDestinationList = async () => {
-    console.log( "here")
+    console.log("here")
     try {
       const response = await fetchAllLocations();
       if (response.success) {
         const element = [];
-        for (let index = 0; index<response.location.length; index++) {
+        for (let index = 0; index < response.location.length; index++) {
           element.push(response.location[index].name);
         }
         setLocations(element);
@@ -51,7 +51,7 @@ const SearchResult = () => {
       const response = await fetchAllCategories();
       if (response.success) {
         const element = [];
-        for (let index = 0; index<response.category.length; index++) {
+        for (let index = 0; index < response.category.length; index++) {
           element.push(response.category[index].name);
         }
         console.log(element, "exprerience");
@@ -177,14 +177,13 @@ const SearchResult = () => {
     <div className="SearchResult">
       <div className="search-container">
         <div className="filter">
-          <div className="experience-filter">
+          <div className="  experience-filter">
             <h2>All things to do</h2>
             {visibleExperiences.map((experience) => (
               <div
                 key={experience}
-                className={`experience-item ${
-                  experience === selectedExperience ? "selected" : ""
-                }`}
+                className={`experience-item ${experience === selectedExperience ? "selected" : ""
+                  }`}
                 onClick={() => handleExperienceSelection(experience)}>
                 <span>{experience}</span>
               </div>
@@ -197,14 +196,13 @@ const SearchResult = () => {
               </div>
             )}
           </div>
-          <div className="location-filter">
+          <div className="  location-filter">
             <h2>All locations</h2>
             {visibleLocations.map((location) => (
               <div
                 key={location}
-                className={`location-item ${
-                  location === selectedLocation ? "selected" : ""
-                }`}
+                className={`location-item ${location === selectedLocation ? "selected" : ""
+                  }`}
                 onClick={() => handleLocationSelection(location)}>
                 <span
                   className={
@@ -244,7 +242,7 @@ const SearchResult = () => {
               </div>
             ))}
           </div>
-          <div className="price-filter">
+          <div className="hidden price-filter">
             <h2>Price Range</h2>
             <div className="price-slider">
               <Slider
@@ -295,10 +293,10 @@ const SearchResult = () => {
           </div>
         </div>
       </div>
-      <h1>Recommended Tours & Experiences</h1>
+      {/* <h1 className=" text-[25px]">Recommended Tours & Experiences</h1>
       <div className="recomendation-cards">
-        {/* Recommended tours and experiences can be added here */}
-      </div>
+        Recommended tours and experiences can be added here
+      </div> */}
     </div>
   );
 };

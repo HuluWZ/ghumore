@@ -11,56 +11,54 @@ export default function ContactUs() {
   const [submitMessage, setSubmitMessage] = useState("");
   const [isSucess, setSucess] = useState('green');
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     try {
-    event.preventDefault();
-    console.log({ fullName, email, message });
-    const response = await axios.post(`${api}/create`, {
-      fullName,
-      email,
-      message,
-    });
-    const data = response.data
-    console.log(" Respone ", response);
-    if (data.success) {
-      // Display the success message
-      console.log("Success:", response.data);
-      setMessage('');
-      setEmail('');
-      setFullName('')
-      setSubmitMessage("Thank you for contacting us! We'll get back to you soon.")
-      setSucess('green')
-    } else {
-      setSubmitMessage('Unable to submitt form')
-      setSucess('red')
-      console.log("Unexpected response:", response);
+      event.preventDefault();
+      console.log({ fullName, email, message });
+      const response = await axios.post(`${api}/create`, {
+        fullName,
+        email,
+        message,
+      });
+      const data = response.data
+      console.log(" Respone ", response);
+      if (data.success) {
+        // Display the success message
+        console.log("Success:", response.data);
+        setMessage('');
+        setEmail('');
+        setFullName('')
+        setSubmitMessage("Thank you for contacting us! We'll get back to you soon.")
+        setSucess('green')
+      } else {
+        setSubmitMessage('Unable to submitt form')
+        setSucess('red')
+        console.log("Unexpected response:", response);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-  } catch (error) {
-    console.error("Error:", error);
-  }
 
   };
   return (
-    <div className="ContactUs">
+    <div className="ContactUs flex flex-col justify-center overflow-x-hidden">
       <div className="header-contact-us Poster w-[1920px] h-[400px] bg-[url(/public/image87@2x.png)] bg-cover bg-no-repeat bg-[top] font-lato">
         <div className="font-semibold [text-shadow:0px_2px_3px_rgba(0,_0,_0,_0.25)]">
           Contact us
         </div>
       </div>
-      <br/>
-        <br/>
-        <br/>
-      <div className="main-contact-us">
+      <br />
+      <br />
+      <br />
+      <div className="main-contact-us flex justify-center">
         <div className="image-section">
           <img
-            className="rounded-3xs w-[430px] h-[540px] m-16 object-cover"
+            className="hidden md:block rounded-3xs w-[430px] h-[540px] m-12 object-cover"
             alt=""
             src="/unsplashtyandmpxwhc@2x.png"
           />
         </div>
-        <br />
-        <br />
-        <br />
+
         <div className="form-section-extra">
           <div className="font-bold font-extrabold">
             <h1> Contact Us</h1>
@@ -96,7 +94,7 @@ export default function ContactUs() {
                     placeholder="Message"
                     row={4}
                     value={message}
-                    required={true}   
+                    required={true}
                     onChange={(event) =>
                       setMessage(event.target.value)
                     }></textarea>
@@ -113,17 +111,17 @@ export default function ContactUs() {
                 <div>
                 </div>
                 <button
-                    className="btn-contact rounded-sm bg-darkslateblue-100 flex flex-row py-6 px-[120px] items-center justify-center text-5xl text-white"
-                    type="submit"
-                    style={{ "margin-left": "50px" }}
-                  >
+                  className="btn-contact rounded-sm bg-darkslateblue-100 flex flex-row py-6 px-[120px] items-center justify-center text-5xl text-white"
+                  type="submit"
+                  style={{ "margin-left": "50px" }}
+                >
                   Contact Us
                 </button>
 
               </form>
             </div>
-            <div className="address">
-              <h2>Contact</h2>
+            <div className="address md:ml-24 md:mt-16 mb-5">
+              <h2>Email</h2>
               <a href="mailto:ghumoreindia@gmail.com">ghumoreindia@gmail.com</a>
               <h2>Address</h2>
               <p>Banjara Hills, Hyderabad, India</p>
@@ -131,9 +129,7 @@ export default function ContactUs() {
           </div>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
+
     </div>
   );
 }

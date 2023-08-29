@@ -1,16 +1,13 @@
 import React from "react";
 import "./searchheader.css";
 
-export default function SearchHeader({item}) {
+export default function SearchHeader({ item }) {
   return (
     <div className="SearchHeader">
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+
       <div>Home/India</div>
       <h1 className="text-header">
-      India Tours, Activities & Excursions
+        India Tours, Activities & Excursions
       </h1>
       <div className="tags">
         <span>Cruises & Sailing</span>
@@ -24,7 +21,7 @@ export default function SearchHeader({item}) {
         <span>Bus Tours</span>
         <span>Trekking</span>
         <span>Nature and Wildlife Tours</span>
-        
+
       </div>
     </div>
   );

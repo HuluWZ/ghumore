@@ -10,13 +10,13 @@ export default function SelectedItem() {
   let locate = useLocation();
   console.log(locate, 'selected')
   return (
-    <div className='SelectedItem'>
-        {/* <NavbarSearch/>
+    <div className='SelectedItem overflow-x-hidden max-w-screen'>
+      {/* <NavbarSearch/>
          */}
-         {/* <Navbar/> */}
-        <SearchHeader item={locate.state.item}/>
-        <SelectedItemBody item={locate.state.item}/>
-        {/* <Footer/> */}
+      {/* <Navbar/> */}
+      <SearchHeader item={locate.state.item} />
+      <SelectedItemBody item={locate.state.item} />
+      {/* <Footer/> */}
     </div>
   )
 }

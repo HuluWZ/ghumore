@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 // import "./registers.css";
 import "./profile.css";
-import { Form, message, Input,Button } from "antd";
+import { Form, message, Input, Button } from "antd";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -80,7 +80,7 @@ export default function Profile() {
       dispatch(setLoader(true));
 
       const response = await UpdateUserProfile(user._id, values);
-      console.log(response,values, " Update Response");
+      console.log(response, values, " Update Response");
       dispatch(setLoader(false));
       if (response.success) {
         message.success(response.message);
@@ -106,12 +106,12 @@ export default function Profile() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(" Name ",name,value,e.target)
+    console.log(" Name ", name, value, e.target)
     setData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    console.log(" Data ",data)
+    console.log(" Data ", data)
   };
 
 
@@ -146,17 +146,17 @@ export default function Profile() {
       message.error(error.message);
     }
   };
-  const cancelBookings = async (id,)=>{
+  const cancelBookings = async (id,) => {
     const token = localStorage.getItem("token")
     try {
       dispatch(setLoader(true))
       const response = await cancelBooking(id);
-      console.log("response",response.message)
+      console.log("response", response.message)
       dispatch(setLoader(false))
-      if (response.success){
+      if (response.success) {
         message.success(response.message)
       }
-      else{
+      else {
         throw new Error(response.error)
       }
     } catch (error) {
@@ -196,47 +196,37 @@ export default function Profile() {
   }
 
   return (
-    <div className="Profile">
-      <div className="header-contact-us mt-24 Poster w-[1920px] h-[400px] bg-[url(/public/image90@2x.png)] bg-cover bg-no-repeat bg-[top] font-lato">
+    <div>
+      <div className="header-contact-us Poster w-[1920px] h-[400px] bg-[url(/public/image90@2x.png)] bg-cover bg-no-repeat bg-[top] font-lato">
         <div className="font-semibold [text-shadow:0px_2px_3px_rgba(0,_0,_0,_0.25)]">
           My Account
         </div>
       </div>
       {/* <Navbar /> */}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div className="profile-form-container">
-        <div className="profile-form-navbar">
+
+      <div className="profile-form-container ml-40 my-40">
+        <div className="profile-form-navbar ">
           <div className="profile-image"></div>
           <h2>Profile</h2>
           <div className="profile-form-navbar-options">
             <button
               onClick={() => handleChangeForm("profile-detail-form")}
-              className={`form-option-btn ${
-                activeForm === "profile-detail-form" ? "active" : ""
-              }`}
+              className={`form-option-btn ${activeForm === "profile-detail-form" ? "active" : ""
+                }`}
               type="button">
               Profile Detail
             </button>
             <button
               onClick={() => handleChangeForm("my-booking-form")}
-              className={`form-option-btn ${
-                activeForm === "my-booking-form" ? "active" : ""
-              }`}
+              className={`form-option-btn ${activeForm === "my-booking-form" ? "active" : ""
+                }`}
               type="button">
               My Booking
             </button>
             <button
               onClick={() => handleChangeForm("change-password-form")}
-              className={`form-option-btn ${
-                activeForm === "change-password-form" ? "active" : ""
-              }`}
+              className={`form-option-btn ${activeForm === "change-password-form" ? "active" : ""
+                }`}
               type="button">
               Change Password
             </button>
@@ -328,7 +318,7 @@ export default function Profile() {
             <button className="submit-btn bg-darkslateblue-100" type="submit">
               Save Changes
             </button>
-            
+
           </Form>
         </div>
         <div
@@ -451,17 +441,17 @@ export default function Profile() {
                       <span>{u.status}</span>
                     </div>
                     <div className="single-book-col">
-                      
+
                       <div className="rounded-md bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                         <div className="">{`View & Manage`}</div>
                       </div>
-                      <div 
-                      onClick={
-                      ()=>{
-                        cancelBookings(u.activity)
-                      }
-                      }
-                      className="rounded-md bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                      <div
+                        onClick={
+                          () => {
+                            cancelBookings(u.activity)
+                          }
+                        }
+                        className="rounded-md bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                         <div className="font-semibold">Cancel Booking</div>
                       </div>
                     </div>
@@ -521,19 +511,7 @@ export default function Profile() {
                   placeholder="Old Password"
                 />
               </div>
-              {/* <Form onFinish={onFinish} className="form">
-            <Form.Item name="fullName" rules={rules}>
-              <div className="form-item">
-                <label>Full Name</label>
-                <Input
-                  value={data.fullName}
-                  onChange={handleChange}
-                  type="text"
-                  name="fullName"
-                  placeholder="Full Name"
-                />
-              </div>
-            </Form.Item> */}
+
             </Form.Item>
             <Form.Item noStyle name="newPassword">
               <div className="form-item">
