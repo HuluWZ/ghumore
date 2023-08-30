@@ -17,7 +17,7 @@ export default function Activity() {
         const response = await getAllActivity();
         if (response.success) {
           setResult(response.activity);
-          console.log(response.activity);
+          console.log('this is the top activities', response.activity);
         } else {
           throw new Error(response.message);
         }
@@ -59,12 +59,12 @@ export default function Activity() {
               <p className="font-thin">
                 from <span className="font-bold text-6xl">{i.price}$</span> per person
               </p>
-              <div className="relative text-sm font-semibold flex font-barlow text-secondary text-left">
+              <div className=" text-sm font-semibold flex font-barlow text-secondary text-left">
                 {/* {[0, 1, 3, 4].map(() => (
                   
                 ))} */}
                 <img
-                  className="relative w-[15.55px] h-[15.64px]"
+                  className=" w-[15.55px] h-[15.64px]"
                   alt=""
                   src="/magicstar20.svg"
                 />
@@ -72,20 +72,23 @@ export default function Activity() {
               </div>
 
               <div className="card-footer">
+                {console.log('item to add', i)}
                 <div
                   onClick={() => {
                     console.log(i, "book");
                     navigate("/select", {
                       state: { item: { ...i } },
+
                     });
                   }}
+
                   className="btn-book rounded-lg bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-1.5 px-6 items-center justify-center border-[1px] border-solid border-button-stroke">
-                  <div className="relative text-white leading-[24px]">
+                  <div className=" text-white leading-[24px]">
                     Book Now
                   </div>
                 </div>
                 <div className="btn-book rounded-23xl bg-ghumore-orange flex flex-row py-1.5 px-2.5 items-center justify-start text-left text-xs">
-                  <div className="relative  text-white leading-[132%] font-medium">
+                  <div className="  text-white leading-[132%] font-medium">
                     {i.duration} {i.durationType ?? "days"}  tour
                   </div>
                 </div>

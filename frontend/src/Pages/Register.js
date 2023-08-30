@@ -195,12 +195,18 @@ export default function Register({ modalState }) {
               </div>
             </Form.Item>
             <div>
-              <span>
-                Already have account?<Link to='/login'>Login</Link>
-              </span>
               <button className="submit-btn bg-darkslateblue-100" type="submit">
                 Submit
               </button>
+              <span>
+                Already have an account?
+                <Link to='/login'>
+                  <span className="hover:text-blue-500 cursor-pointer ml-1">
+                    Login
+                  </span>
+                </Link>
+              </span>
+
             </div>
           </Form>
           {/* <div id="googleSigninDiv" className="googleSigninDiv"></div> */}

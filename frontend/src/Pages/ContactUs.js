@@ -115,7 +115,7 @@ export default function ContactUs() {
                   type="submit"
                   style={{ "margin-left": "50px" }}
                 >
-                  Contact Us
+                  Send
                 </button>
 
               </form>

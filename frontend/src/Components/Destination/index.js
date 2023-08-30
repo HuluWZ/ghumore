@@ -10,6 +10,7 @@ export default function Destination() {
 
 
   const Component = (props) => {
+    console.log(props)
     const loaded = useProgressiveImage(props.source)
 
     return (
@@ -17,7 +18,9 @@ export default function Destination() {
         onClick={() => navigate(`/search?category=&location=${props.name}&activity=`)}
         style={{ backgroundImage: `url(${loaded || props.placeholder})` }}
         className={`destination-card bg-cover bg-no-repeat bg-[top] rounded-2xl w-[330px] h-[224.03px]`}
-      />
+      >
+        <div className=" bg-black-100 bg-opacity-25 w-full "><h1 >{props.name}</h1></div>
+      </div>
     )
   }
 
@@ -65,20 +68,21 @@ export default function Destination() {
       <div className="destination-cards">
         {locationList.map((destination) => {
           console.log(locationList, "list");
-          return (<Component
-            name={destination.name}
-            source={destination.image}
-            placeholder="new image"
-          >
-            <h1>{destination.name}</h1>
-          </Component>)
+          return (
+            <Component
+              name={destination.name}
+              source={destination.image}
+              placeholder="new image"
+            >
+              <h1>{destination.name}</h1>
+            </Component>)
         })}
       </div>
       <button
         onClick={() => {
           navigate(`/destinations`);
         }}
-        className="destn-btn py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center m-8 sm:flex sm:items-center-center justify-center gap-2 border border-solid w-32 border-button-stroke">
+        className="md:destn-btn py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center m-8 sm:flex sm:items-center-center justify-center gap-2 border border-solid w-32 border-button-stroke">
         <div className="text-base font-semibold text-white ">View All</div>
       </button>
     </div>

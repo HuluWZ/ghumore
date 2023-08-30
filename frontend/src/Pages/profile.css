@@ -5,18 +5,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  /* position: relative; */
 }
 .profile-form-container {
   background-color: white;
-  top: 40vh;
+  top: 45vh;
   z-index: 100;
   position: absolute;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.4);
   border-radius: 5px;
-  display: flex;
+  /* display: flex; */
   width: 80vw;
-  height: 110vh;
+  height: 120vh;
   font-size: 1.2rem;
 }
 .booking-container {
@@ -29,19 +29,20 @@
   width: 60%;
 }
 .bookings {
-  background-color: white;
+  background-color: rgb(242, 242, 242);
   box-shadow: 0px 10px 35px -10px rgba(0, 0, 0, 0.1);
   /* background-color: rgba(0,0,0,0.1); */
   text-align: left;
-  padding: 20px 40px;
-  min-width: 600px;
-  width: 100%;
-  box-shadow: 5px 15px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  min-width: 380px;
+  /* width: 100%; */
+  /* box-shadow: 5px 15px 15px -3px rgba(0, 0, 0, 0.1); */
 }
 .upcoming-booking {
   padding: 20px 40px;
   min-width: 100%;
   font-size: 1rem;
+  max-height: 110rem;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
 }
@@ -94,7 +95,7 @@ h1 {
   height: 10rem;
 }
 .profile-form-navbar {
-  width: 40%;
+  /* width: 30%; */
   /* height: 150%; */
   display: flex;
   flex-direction: column;
@@ -132,7 +133,7 @@ h1 {
   margin: 10px 0;
 }
 .right-sider {
-  width: 60%;
+  /* width: 70%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,7 +141,7 @@ h1 {
   text-align: center;
   flex-wrap: nowrap;
   border-left: 1px solid grey;
-  margin: 5rem 0;
+  /* margin: 5rem 0; */
 }
 .right-sider > * {
   /* margin-left: 20px;
@@ -178,10 +179,10 @@ input {
 }
 
 .submit-btn {
-  position: relative;
+  /* position: relative; */
   top: 0px;
   width: 80%;
-  padding: 10px;
+  /* padding: 10px;s */
   border-radius: 0.5rem;
   color: white;
 }
@@ -196,6 +197,10 @@ input {
 
 @media only screen and (max-width: 900px) {
   /*Tablets [601px -> 1200px]*/
+  .bookings{
+   width:200px
+
+  }
   .Profile {
     text-align: center;
     min-height: 250vh;
@@ -207,21 +212,21 @@ input {
     /* position: relative; */
   }
   .profile-form-container {
-    background-color: white;
-    top: 40vh;
-    z-index: 100;
-    position: absolute;
+    background-color: rgb(255, 255, 255);
+    /* top: 40vh; */
+    /* z-index: 100; */
+    /* position: absolute; */
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
-    display: flex;
-    min-width: 40vw;
-    min-height: 175vh;
+    /* display: flex; */
+    min-width: 13vw;
+    /* min-height: 195vh; */
     font-size: 1.2rem;
   }
-  .right-sider > * {
+  /* .right-sider > * {
     margin: auto;
     margin-top: 5rem;
-  }
+  } */
   /*  */
   .footer-main {
     display: flex;
@@ -234,15 +239,15 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    width: 90vw;
+    /* width: 90vw; */
     /* min-height: 85vh; */
-    margin: 0;
+    /* margin: 0; */
   }
-  .right-sider {
+  /* .right-sider {
     border-left: none;
     border-top: 1px gray solid;
     text-align: center;
-  }
+  } */
   .profile-form-navbar-options {
     display: flex;
     flex-direction: row;

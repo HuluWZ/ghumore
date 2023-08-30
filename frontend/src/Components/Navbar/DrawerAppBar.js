@@ -505,8 +505,8 @@ function CustomModal({ modalType, setIsModalOpen }) {
 
   if (modalType === "experience")
     return (
-      <div className="modal-display">
-        <h2 className="modal-display-header">All Experience</h2>
+      <div className="">
+        <h2 className="modal-display-header absolute">All Experience</h2>
         <div className="modal-list">
           {experienceList.map((expSec) => (
             <div className="modal-list-section">

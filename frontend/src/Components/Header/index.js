@@ -153,13 +153,14 @@ export default function Header() {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsLocationOpen(false);
+
       }
     };
-    document.addEventListener("click", handleClickOutside);
+    window.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      window.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isLocationOpen]);
 
   return (
     <div className="Header flex items-center overflow-x-hidden justify-center">

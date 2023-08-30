@@ -169,7 +169,12 @@ export default function Login({ modalState }) {
             />
           </GoogleOAuthProvider>
           <span>
-            Dont have an account? <Link to='/register'>Signup</Link>
+            Don't have an account?
+            <Link to='/register'>
+              <span className="hover:text-blue-500 cursor-pointer ml-1">
+                Signup
+              </span>
+            </Link>
           </span>
           <span></span>
         </div>

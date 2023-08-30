@@ -23,14 +23,14 @@ export default function Testimonial() {
             src="/ellipse-1@2x.png"
           />
           <div className="flex flex-col items-center justify-start gap-[4px]">
-            <b className="relative">Eleanor Pena</b>
-            <div className="relative text-sm">UI/UX Designer</div>
+            <b className="">Eleanor Pena</b>
+            <div className=" text-sm">UI/UX Designer</div>
             <div className="flex flex-row items-center justify-center">
-              <img className="relative w-4 h-4" alt="" src="/magicstar3.svg" />
-              <img className="relative w-4 h-4" alt="" src="/magicstar3.svg" />
-              <img className="relative w-4 h-4" alt="" src="/magicstar3.svg" />
-              <img className="relative w-4 h-4" alt="" src="/magicstar3.svg" />
-              <img className="relative w-4 h-4" alt="" src="/magicstar3.svg" />
+              <img className=" w-4 h-4" alt="" src="/magicstar3.svg" />
+              <img className=" w-4 h-4" alt="" src="/magicstar3.svg" />
+              <img className=" w-4 h-4" alt="" src="/magicstar3.svg" />
+              <img className=" w-4 h-4" alt="" src="/magicstar3.svg" />
+              <img className=" w-4 h-4" alt="" src="/magicstar3.svg" />
             </div>
           </div>
           <div className=" text-sm leading-[133%] inline-block w-56">{`Customer testimonials are more effective than paid marketing copy as they take the spotlight away from the seller to shine it on the customers. `}</div>
@@ -47,31 +47,31 @@ export default function Testimonial() {
             src="/ellipse-11@2x.png"
           />
           <div className="flex flex-col items-center justify-start gap-[4px]">
-            <b className="relative">Theresa Webb</b>
-            <div className="relative text-sm">Vlogger</div>
+            <b className="">Theresa Webb</b>
+            <div className=" text-sm">Vlogger</div>
             <div className="flex flex-row items-center justify-center">
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar4.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar4.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar4.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar4.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar4.svg"
               />
@@ -95,31 +95,31 @@ export default function Testimonial() {
             src="/ellipse-12@2x.png"
           />
           <div className="flex flex-col items-center justify-start gap-[4px]">
-            <b className="relative">Annette Black</b>
-            <div className="relative text-sm">Doctor</div>
+            <b className="">Annette Black</b>
+            <div className=" text-sm">Doctor</div>
             <div className="flex flex-row items-center justify-center">
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar3.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar3.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar3.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar3.svg"
               />
               <img
-                className="relative w-4 h-4"
+                className=" w-4 h-4"
                 alt=""
                 src="/magicstar3.svg"
               />

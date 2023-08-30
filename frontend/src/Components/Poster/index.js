@@ -18,7 +18,7 @@ export default function Poster() {
         <div className="text-[15px] md:text-5xl leading-[40px] font-medium">{`Create your own account to get better experience`}</div>
         <div
           className=" rounded-lg bg-darkorange flex flex-row py-4 px-[50px] items-center justify-center cursor-pointer text-xl border-[1px] border-solid border-button-stroke">
-          <b className="relative"><Link to='/register'>Sign up</Link></b>
+          <b className=""><Link to='/register'>Sign up</Link></b>
         </div>
       </div>
     )
