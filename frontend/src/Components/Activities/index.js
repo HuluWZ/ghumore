@@ -3,7 +3,7 @@ import "./activity.css";
 import { getAllActivity } from "../../apiCalls/activities";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
 import BlurImageLoader from 'react-blur-image-loader';
 
 
@@ -31,8 +31,8 @@ export default function Activity() {
 
   return (
     <div className="Activity">
-      <h1 className="md:font-semibold text-[30px]">Best Activities Of The Year</h1>
-      <div className=' bg-orange-600 p-[2px] w-48  mb-10  flex justify-center' ><hr /></div>
+      <h1 className="md:font-semibold md:text-[30px] text-[26px] mt-10">Best Activities Of The Year</h1>
+      <div className=' bg-orange-600 p-[2px] w-48   flex justify-center' ><hr /></div>
 
 
       <div className="activities">
@@ -87,7 +87,7 @@ export default function Activity() {
                     Book Now
                   </div>
                 </div>
-                <div className="btn-book rounded-23xl bg-ghumore-orange flex flex-row py-1.5 px-2.5 items-center justify-start text-left text-xs">
+                <div className="btn-book rounded-lg bg-ghumore-orange flex flex-row py-1.5 px-6 items-center justify-start text-left text-xs">
                   <div className="  text-white leading-[132%] font-medium">
                     {i.duration} {i.durationType ?? "days"}  tour
                   </div>

@@ -55,9 +55,9 @@ export default function Destination() {
   }, []);
 
   return (
-    <div className="Destinaiton ">
+    <div className="Destinaiton mt-4">
       <h1 className="text-[30px]">Top Destination & Cities</h1>
-      <div className=' bg-orange-600 p-[2px] w-48  mb-10 flex justify-center' ><hr /></div>
+      <div className=' bg-orange-600 p-[2px] w-48   flex justify-center' ><hr /></div>
       {/* <button
         onClick={() => {
           navigate(`/destinations`);

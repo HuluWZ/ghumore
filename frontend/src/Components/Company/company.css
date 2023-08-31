@@ -3,17 +3,18 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
 }
 .company-image{
-    width: 30vw;
+    width: 40vw;
     height: 30vw;
     /* background-color: yellow; */
 }
 .company-card{
-    padding-left: 2rem;
-    width: 40vw;
-    height: 35vw;
+   
+    
+    height: 35vw; 
+    width: 100vm;
     color: white;
     background-color: #100534;
     /* background-color: blue; */

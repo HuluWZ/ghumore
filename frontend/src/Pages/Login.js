@@ -111,7 +111,7 @@ export default function Login({ modalState }) {
         </div>
         <div className="register-form">
           <h2>Login</h2>
-          <Form onFinish={onFinish} className="form  ml-8">
+          <Form onFinish={onFinish} className="form mt-3  ml-8">
             <label style={{ color: isSuccess }}>{loginMessage}</label>
             <div className=" ml-12">
               <div className="email-div">

@@ -4,8 +4,8 @@ import './experience.css'
 export default function Experience() {
   return (
     <div className='Experience'>
-      <h1>What We Offer</h1>
-      <hr className=' bg-orange-600 p-[2px] w-48 ml-24 md:ml-[670px] mb-10' />
+      <h2 className=' text-[30px] md:text-[35px]'>What We Offer</h2>
+      <hr className=' bg-orange-600 p-[2px] w-48 ml-24 md:ml-[670px] ' />
       <div className='experience-grid'>
         <div className='experience-card bg-[url(/public/frame-17@3x.png)] bg-cover bg-no-repeat bg-[top]'><span className=''>Trekking</span></div>
         <div className='experience-card bg-[url(/public/frame-16@3x.png)] bg-cover bg-no-repeat bg-[top]'><span>SkyDiving</span></div>
