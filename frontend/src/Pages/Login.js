@@ -97,11 +97,11 @@ export default function Login({ modalState }) {
   };
 
   return (
-    <div className="Register pb-[100px] mt-[100px] ">
+    <div className="Register pb-[100px] mt-[50px] ">
 
       <div className="flex flex-row gap-5 ml-[-50px]">
         <div className="register-form-image">
-          <img className="object-cover" alt="" src="/rectangle-10891@2x.png" />
+          <img className="object-cover hidden md:block" alt="" src="/rectangle-10891@2x.png" />
         </div>
         <div className="register-form">
           <div className="register-form-icon">
@@ -112,21 +112,23 @@ export default function Login({ modalState }) {
             />
           </div>
           <h2>Login</h2>
-          <Form onFinish={onFinish} className="form ">
+          <Form onFinish={onFinish} className="form  ml-8">
             <label style={{ color: isSuccess }} >{loginMessage}</label>
-            <div className="email-div">
-              <label>Email</label>
-              <Form.Item rules={[{ required: true, validator: validateEmail }]} className="form-item " name="email" >
-                <Input type="email" placeholder="Email" className=" w-[300px]" />
-              </Form.Item>
+            <div className=" ml-12">
+              <div className="email-div">
+                <label>Email</label>
+                <Form.Item rules={[{ required: true, validator: validateEmail }]} className="form-item " name="email" >
+                  <Input type="email" placeholder="Email" className="md:w-[300px] w-[250px]" />
+                </Form.Item>
 
-            </div>
+              </div>
 
-            <div className="password-div">
-              <label>Password</label>
-              <Form.Item rules={[{ required: true, validator: validatePassword }]} name="password" >
-                <Input type="password" placeholder="Password" className=" w-[300px]" />
-              </Form.Item>
+              <div className="password-div">
+                <label>Password</label>
+                <Form.Item rules={[{ required: true, validator: validatePassword }]} name="password" >
+                  <Input type="password" placeholder="Password" className=" md:w-[300px] w-[250px]" />
+                </Form.Item>
+              </div>
             </div>
             <div>
             </div>

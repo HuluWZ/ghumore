@@ -148,7 +148,7 @@ export default function Register({ modalState }) {
   // }, []); 
 
   return (
-    <div className="Register pb-[50px] mt-[100px] ">
+    <div className="Register md:pb-[50px] mt-[50px] ">
 
       <div className="flex flex-row  ml-[-50px]">
         <div className="register-form-image">
@@ -164,38 +164,40 @@ export default function Register({ modalState }) {
             />
           </div>
           <h2>Create Account</h2>
-          <Form onFinish={onFinish} className="form">
-            <Form.Item name="fullName" rules={[{ required: true, validator: validateInput },]}>
-              <div className="form-item">
-                <label>Full Name: </label>
-                <Input type="text" name="fullName" className=" md:w-[300px] w-[200px]" placeholder="Full Name" />
-              </div>
-            </Form.Item>
-            <Form.Item name="phone" rules={[{ required: true, validator: validatePhoneNumber }]}>
-              <div>
-                <label>Mobile Number</label>
-                <PhoneInput
-                  required
-                  country={"in"}
-                  value={phone}
-                  onChange={handlePhoneChange}
-                />
-              </div>
-            </Form.Item>
-            <Form.Item name="email" rules={[{ required: true, validator: validateEmail }]}>
-              <div className="form-item">
-                <label>Email:</label>
-                <Input type="email" placeholder="Email" className=" md:w-[300px] w-[200px]" />
-              </div>
-            </Form.Item>
-            <Form.Item name="password" rules={[{ required: true, validator: validatePassword }]}>
-              <div className="form-item">
-                <label>Password</label>
-                <Input type="password" placeholder="Password" className=" md:w-[300px] w-[200px]" />
-              </div>
-            </Form.Item>
+          <Form onFinish={onFinish} className="form ml-8">
+            <div className=" ml-12">
+              <Form.Item name="fullName" rules={[{ required: true, validator: validateInput },]}>
+                <div className="form-item">
+                  <label>Full Name: </label>
+                  <Input type="text" name="fullName" className=" md:w-[300px] w-[200px]" placeholder="Full Name" />
+                </div>
+              </Form.Item>
+              <Form.Item name="phone" rules={[{ required: true, validator: validatePhoneNumber }]}>
+                <div>
+                  <label>Mobile Number</label>
+                  <PhoneInput
+                    required
+                    country={"in"}
+                    value={phone}
+                    onChange={handlePhoneChange}
+                  />
+                </div>
+              </Form.Item>
+              <Form.Item name="email" rules={[{ required: true, validator: validateEmail }]}>
+                <div className="form-item">
+                  <label>Email:</label>
+                  <Input type="email" placeholder="Email" className=" md:w-[300px] w-[200px]" />
+                </div>
+              </Form.Item>
+              <Form.Item name="password" rules={[{ required: true, validator: validatePassword }]}>
+                <div className="form-item">
+                  <label>Password</label>
+                  <Input type="password" placeholder="Password" className=" md:w-[300px] w-[200px]" />
+                </div>
+              </Form.Item>
+            </div>
             <div>
-              <button className="submit-btn bg-darkslateblue-100" type="submit">
+              <button className="submit-btn bg-darkslateblue-100 " type="submit">
                 Submit
               </button>
               <span>

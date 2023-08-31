@@ -45,18 +45,18 @@
 .submit-btn{
   position: relative;
   top: 0px;
-  width: 80%;
+  width: 10%;
   padding: 10px;
   border-radius: .5rem;
   color: white;
-  margin: 20px auto;
+  margin: 10px 40px;
   
 }
 
 
 .form {
   /* overflow: hidden; */
-  width: 120%;
+  width: 10%;
   text-align: left;
 }
 @media only screen and (max-width: 900px){

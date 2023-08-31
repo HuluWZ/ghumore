@@ -156,28 +156,135 @@ function DrawerAppBar(props) {
               Contact Us
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}
-              className={activeLink === "Contact" ? "active" : ""}
-              style={{ color: 'black' }}
-              onClick={() => {
-                handleLinkClick("Contact");
-                navigate("/register");
-              }}>
-              SignUp
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}
-              className={activeLink === "Contact" ? "active" : ""}
-              style={{ color: 'black' }}
-              onClick={() => {
-                handleLinkClick("Contact");
-                navigate("/login");
-              }}>
-              Login
-            </ListItemButton>
-          </ListItem>
+          <div sx={{ display: { xs: 'none', sm: 'block' } }} className="flex xs-none gap-2 p-10 mt-2 navbuttons   sm:mt-0">
+            {user && user.fullName ? (
+              <>
+                <button
+                  onClick={handleLogout}
+                  className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                  <img
+                    className="w-5 h-5 overflow-hidden"
+                    alt=""
+                    src="/sign-in1.svg"
+                  />
+                  <div className="text-base font-semibold font-lato text-white">
+                    Log Out
+                  </div>
+                </button>
+                <button
+                  onClick={() => navigate("/profile")}
+                  className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                  <img
+                    className="w-5 h-5 overflow-hidden"
+                    alt=""
+                    src="/sign-in1.svg"
+                  />
+                  <div className="text-base font-semibold font-lato text-white">
+                    Profile
+                  </div>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  // onClick={() => {
+                  // navigate('/register')
+                  // setModalType("signup");
+                  // setIsModalOpen(false);
+                  // setIsSignModalOpen(true);
+                  // }}
+                  className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-darkslateblue-100">
+                  <img
+                    className="w-5 h-5 overflow-hidden"
+                    alt=""
+                    src="/sign-in.svg"
+                  />
+                  <div className="text-base font-semibold font-poppins text-darkslateblue-200">
+                    <Link to="/register">Signup</Link>
+                  </div>
+                </button>
+                <button
+                  // onClick={() => {
+                  //   navigate("/login");
+                  //   // setModalType("login");
+                  //   // setIsModalOpen(false);
+                  //   // setIsSignModalOpen(true);
+                  // }}
+                  className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                  <img
+                    className="w-5 h-5 overflow-hidden"
+                    alt=""
+                    src="/sign-in1.svg"
+                  />
+                  <div className="text-base font-semibold font-lato text-white">
+                    <Link to='/login'>Login</Link>
+                  </div>
+                </button>
+              </>
+            )}
+
+            <button className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2">
+              <img className="w-5 h-5 overflow-hidden" alt="" src="/cart.svg" />
+              <div className="text-base font-semibold font-lato text-darkslateblue-100">
+                <Link to="/cart">Cart</Link>
+              </div>
+            </button>
+          </div>
+          {user && user.fullName ?
+            <>
+              <ListItem> <button
+                onClick={handleLogout}
+                className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                <img
+                  className="w-5 h-5 overflow-hidden"
+                  alt=""
+                  src="/sign-in1.svg"
+                />
+                <div className="text-base font-semibold font-lato text-white">
+                  Log Out
+                </div>
+              </button> </ListItem>
+              <ListItem> <button
+                onClick={() => navigate("/profile")}
+                className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                <img
+                  className="w-5 h-5 overflow-hidden"
+                  alt=""
+                  src="/sign-in1.svg"
+                />
+                <div className="text-base font-semibold font-lato text-white">
+                  Profile
+                </div>
+              </button> </ListItem>
+            </> :
+            <>
+              <ListItem> <button
+
+                className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-darkslateblue-100">
+                <img
+                  className="w-5 h-5 overflow-hidden"
+                  alt=""
+                  src="/sign-in.svg"
+                />
+                <div className="text-base font-semibold font-poppins text-darkslateblue-200">
+                  <Link to="/register">Signup</Link>
+                </div>
+              </button> </ListItem>
+              <ListItem> <button
+
+                className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
+                <img
+                  className="w-5 h-5 overflow-hidden"
+                  alt=""
+                  src="/sign-in1.svg"
+                />
+                <div className="text-base font-semibold font-lato text-white">
+                  <Link to='/login'>Login</Link>
+                </div>
+              </button> </ListItem>
+            </>
+          }
+
         </List>
       </Box>
     </div>
@@ -316,12 +423,7 @@ function DrawerAppBar(props) {
               ) : (
                 <>
                   <button
-                    // onClick={() => {
-                    // navigate('/register')
-                    // setModalType("signup");
-                    // setIsModalOpen(false);
-                    // setIsSignModalOpen(true);
-                    // }}
+
                     className="py-2 px-4 bg-button-stroke rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-darkslateblue-100">
                     <img
                       className="w-5 h-5 overflow-hidden"
@@ -333,12 +435,7 @@ function DrawerAppBar(props) {
                     </div>
                   </button>
                   <button
-                    // onClick={() => {
-                    //   navigate("/login");
-                    //   // setModalType("login");
-                    //   // setIsModalOpen(false);
-                    //   // setIsSignModalOpen(true);
-                    // }}
+
                     className="py-2 px-4 bg-darkslateblue-100 rounded-md shadow-md flex items-center justify-center gap-2 border border-solid border-button-stroke">
                     <img
                       className="w-5 h-5 overflow-hidden"

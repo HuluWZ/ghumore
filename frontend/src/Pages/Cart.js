@@ -238,7 +238,7 @@ export default function Profile() {
                         <div className="single-book-col">
                           <span className="font-semibold text-sm flex">
                             <img
-                              className="relative w-5 h-5 overflow-hidden shrink-0"
+                              className=" w-5 h-5 overflow-hidden shrink-0"
                               alt=""
                               src="/date4.svg"
                             />
@@ -379,138 +379,6 @@ export default function Profile() {
         </div>
       </div>
     </div>
-    // <div className="Profile">
-    //   <div className="header-contact-us mt-24 Poster w-[1920px] h-[400px] bg-[url(/public/image90@2x.png)] bg-cover bg-no-repeat bg-[top] font-lato">
-    //     <div className="font-semibold [text-shadow:0px_2px_3px_rgba(0,_0,_0,_0.25)]">
-    //       <div>
-    //         My Cart
-    //       </div>
-    //     </div>
-    //   </div>
-    //   {/* <Navbar /> */}
-    //   <br />
-    //   <br />
-    //   <br />
-    //   <div className="profile-form-container mt-64">
-    //     <div className="profile-form-navbar">
-    //       {/* <div className="profile-image"></div> */}
-    //       <h2>Cart</h2>
-    //       <div className="profile-form-navbar-options">
-    //         <button
-    //           onClick={() => handleChangeForm("my-booking-form")}
-    //           className={`form-option-btn ${activeForm === "my-booking-form" ? "active" : "active"
-    //             }`}
-    //           type="button">
-    //           My Cart
-    //         </button>
 
-
-    //       </div>
-    //     </div>
-    //     <div
-    //       className="right-sider booking-container"
-    //       id="my-booking-form"
-    //       style={{
-    //         display: activeForm === "my-booking-form" ? "block" : "block",
-    //       }}>
-    //       <h2>{historyBooking}  Items In Cart</h2>
-    //       <div className="bookings">
-
-    //         {upcomingBooking.map((u) => {
-    //           return (
-    //             <div className="upcoming-booking">
-    //               <div className="single-book">
-    //                 <div className="single-book-col">
-    //                   <span className="font-semibold flex">
-    //                     <img
-    //                       className="relative w-5 h-5 overflow-hidden shrink-0"
-    //                       alt=""
-    //                       src="/passport.svg"
-    //                     />
-    //                     Product
-    //                   </span>
-    //                   <span className="font-semibold inline-block font-medium text-orange-800">
-    //                     {u.option.name}
-    //                   </span>
-    //                 </div>
-    //                 <div className="single-book-col">
-    //                   <span className="font-semibold text-sm flex">
-    //                     <img
-    //                       className="relative w-5 h-5 overflow-hidden shrink-0"
-    //                       alt=""
-    //                       src="/date4.svg"
-    //                     />
-
-    //                   </span>
-    //                   <span>{new Date(u.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-    //                 </div>
-    //                 <div className="single-book-col">
-    //                   <span className="font-semibold flex">
-    //                     <img
-    //                       className="relative w-5 h-5 overflow-hidden shrink-0"
-    //                       alt=""
-    //                       src="/location7.svg"
-    //                     />
-
-    //                   </span>
-    //                   <span>Delhi, India</span>
-    //                 </div>
-    //                 <div className="single-book-col">
-    //                   <span className="font-semibold flex">
-    //                     <img
-    //                       className="relative w-5 h-5 overflow-hidden shrink-0"
-    //                       alt=""
-    //                       src="/table.svg"
-    //                     />
-
-    //                   </span>
-    //                   <span>{u.status}</span>
-    //                 </div>
-    //                 <div className="single-book-col">
-
-    //                   <div className="rounded-md bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
-    //                     <div className=""
-    //                       onClick={
-    //                         () => {
-    //                           deleteBooking(u._id)
-    //                         }
-    //                       }
-    //                     >Delete Booking
-    //                     </div>
-    //                   </div>
-    //                   <div
-    //                     onClick={
-    //                       () => {
-    //                         cancelBookings(u.activity)
-    //                       }
-    //                     }
-    //                     className="rounded-md  bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
-    //                     <div className="font-semibold">Cancel Booking</div>
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           );
-    //         })}
-
-
-    //       </div>
-    //     </div>
-    //     <div
-    //       className="right-sider"
-    //       id="log-out-form"
-    //       style={{
-    //         display: activeForm === "log-out-form" ? "block" : "none",
-    //       }}>
-    //       <h2>Log Out</h2>
-    //       <form onSubmit={handlePasswordSubmit} className="form">
-    //       </form>
-    //     </div>
-    //   </div>
-
-    //   <br />
-    //   <br />
-    //   <br />
-    // </div>
   );
 }
