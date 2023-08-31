@@ -165,7 +165,7 @@ export default function Header() {
   return (
     <div className="Header flex items-center overflow-x-hidden justify-center">
       <div className="search-conainer rounded-2xl bg-gray w-full mt-10">
-        <h2 style={{ fontSize: "1.5rem", marginBottom: "10px" }}>
+        <h2 style={{ fontSize: "1rem", marginBottom: "10px" }}>
           Find Experiences & Activities!
         </h2>
         <div className="search-container-children">
@@ -223,13 +223,7 @@ export default function Header() {
               onChange={handleCategorySearchChange}
               onClick={() => setIsCategoryOpen(true)}
             />
-            {/* <input
-              type="text"
-              placeholder="Delhi, India"
-              value={searchValue}
-              onChange={handleSearchChange}
-              onClick={() => setIsLocationOpen(true)}
-            /> */}
+
             {isCategoryOpen && (
 
               <div className="dropdown md:ml-[840px] ml-14 mt-20 md:mt-20">
@@ -245,42 +239,14 @@ export default function Header() {
               // </div>
             )}
           </div>
-          {/* <div className="activities">
-            <div className="location-tag">
-              <img className="" alt="" src="/location.svg" />
-              Category
-            </div>
-            <input
-              type="text"
-              placeholder="SkyDiving"
-              value={selectedCategory}
-              onChange={handleCategorySearchChange}
-              onClick={() => setIsCategoryOpen(true)}
-            />
-            {isCategoryOpen && (
-              <div className="dropdown">
-                <div className="header-input-search">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    onChange={handleCategorySearchChange}
-                  />
-                </div>
-                <ul className="dropdown-list">
-                  {filteredCategories.slice(0, 10).map((item) => (
-                    <li key={item} onClick={() => handleCategorySelect(item)}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div> */}
+
+
+
           {/* <div className="rounded-tl-none rounded-tr-xl rounded-br-xl rounded-bl-none bg-darkslateblue w-full overflow-hidden flex flex-row py-[2.44rem] px-[2.31rem] box-border items-start justify-start cursor-pointer text-center text-[1.5rem] text-white font-lato search sm:flex-col sm:items-center sm:justify-center"> */}
           <div>
             <button
               onClick={handleSearch}
-              className="button-khart relative uppercase text-white bg-darkslateblue-100 py-4 md:py-10 px-10 rounded ">
+              className="button-khart  uppercase text-white bg-darkslateblue-100 py-4 md:py-10 px-10 rounded ">
               Search
             </button>
           </div>

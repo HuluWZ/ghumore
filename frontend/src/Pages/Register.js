@@ -120,51 +120,25 @@ export default function Register({ modalState }) {
     console.log(" Phone Change ", value);
     const phoneNumber = value.replace(/\D/g, ""); // Remove non-digit characters
     setPhone(phoneNumber);
-    // setPhoneError(false);
-
-    // if (phoneNumber.length < 8) {
-    //   setPhoneError(true);
-    // }
   };
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/");
-  //   }
-  //   /* global google */
-  //   google.accounts.id.initialize({
-  //     client_id:
-  //       "568457192893-r9u8catqupr689p0qaps44p303tcob3f.apps.googleusercontent.com",
-  //     callback: onGoogleFinish,
-  //   });
-  //   console.log("rendered");
-  //   google.accounts.id.renderButton(
-  //     document.getElementById("googleSigninDiv"),
-  //     {
-  //       theme: "outline",
-  //       size: "large",
-  //     }
-  //   );
-  // }, []); 
 
   return (
-    <div className="Register md:pb-[50px] mt-[50px] ">
+    <div className="Register md:pb-[50px] mt-[40px] ">
 
-      <div className="flex flex-row  ml-[-50px]">
+      <div className="flex flex-row w-[50rem] md:ml-1   ml-[-205px] ">
         <div className="register-form-image">
-          <img className="object-cover mt-16" alt="" src="/rectangle-10891@2x.png" />
+          <img
+            className="object-cover hidden md:block"
+            alt=""
+            src="/rectangle-10891@2x.png"
+          />
         </div>
-        <div className="register-form">
+        <div className="register-form  md:mt-0 mt-12 w-[70rem]">
 
-          <div className="register-form-icon">
-            <img
-              className=""
-              alt=""
-              src="/gumo-re-indiafinal-128.svg"
-            />
-          </div>
+
           <h2>Create Account</h2>
-          <Form onFinish={onFinish} className="form ml-8">
+          <Form onFinish={onFinish} className="form  flex flex-row justify-center mb-32 pb-10 ml-8">
             <div className=" ml-12">
               <Form.Item name="fullName" rules={[{ required: true, validator: validateInput },]}>
                 <div className="form-item">
@@ -172,7 +146,7 @@ export default function Register({ modalState }) {
                   <Input type="text" name="fullName" className=" md:w-[300px] w-[200px]" placeholder="Full Name" />
                 </div>
               </Form.Item>
-              <Form.Item name="phone" rules={[{ required: true, validator: validatePhoneNumber }]}>
+              <Form.Item name="phone" className=" w-[200px]" rules={[{ required: true, validator: validatePhoneNumber }]}>
                 <div>
                   <label>Mobile Number</label>
                   <PhoneInput
@@ -196,11 +170,15 @@ export default function Register({ modalState }) {
                 </div>
               </Form.Item>
             </div>
-            <div>
-              <button className="submit-btn bg-darkslateblue-100 " type="submit">
+            <div className=" ml-6">
+
+              {/* <button className="submit-btn bg-darkslateblue-100 " type="submit">
+                Submit
+              </button> */}
+              <button type="submit" className=" bg-darkslateblue-100 ml-16 rounded px-5 mb-4">
                 Submit
               </button>
-              <span>
+              <span className=" ml-8">
                 Already have an account?
                 <Link to='/login'>
                   <span className="hover:text-blue-500 cursor-pointer ml-1">

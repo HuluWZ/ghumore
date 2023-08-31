@@ -588,15 +588,7 @@ function CustomModal({ modalType, setIsModalOpen }) {
       addLocationToDestinationList();
     }
   }, [modalType]);
-  // const experienceList = [
-  //   ["Skydiving", "Trekking", "Paragliding", "Tree Ziplining"],
-  //   ["Sightseeing", "Rafting", "Water Sports", "Dinner & Buffet"],
-  //   ["Tours", "Movie Passes", "Bungee Jumping", "Dinner & Buffet"],
-  //   ["Tours", "Movie Passes", "Bungee Jumping", "Dinner & Buffet"],
-  //   ["Rafting", "Sightseeing", "Water Sports", "Dinner & Buffet"],
-  // ];
 
-  // Now call the addCategoriesToExperienceList function to fetch categories and add them to the experienceList
   if (!modalType) return null;
 
 
@@ -608,7 +600,7 @@ function CustomModal({ modalType, setIsModalOpen }) {
           {experienceList.map((expSec) => (
             <div className="modal-list-section">
               <ul>
-                {expSec ? expSec.map((exp) => <li onClick={() => { onExperienceClick(exp.name) }}>{exp.name}</li>) : null}
+                {expSec ? expSec.map((exp) => <li className="hover:cursor-pointer hover:text-blue-500" onClick={() => { onExperienceClick(exp.name) }}>{exp.name}</li>) : null}
               </ul>
             </div>
           ))}

@@ -298,7 +298,7 @@ export default function SelectedItemBody({ item }) {
 
 
 
-            <SimilarActivity />
+            <SimilarActivity item={item} />
             <LocationMap item={item} />
           </div>
         </div>
