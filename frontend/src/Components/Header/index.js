@@ -196,7 +196,7 @@ export default function Header() {
             />
             {isLocationOpen && (
 
-              <div className="dropdown ml-24 sm:ml-36  md:ml-[317px]  lg:ml-[360px] xsm:ml-[155px] xll:ml-[508px] xm:ml-[538px] xxl:ml-[680px] xml:ml-[550px] mdd:ml-[375px] xl:ml-[440px] mt-20 md:mt-20">
+              <div className="dropdown ml-24 sm:ml-36  md:ml-[317px]  lg:ml-[360px] xsm:ml-[155px] xll:ml-[508px] xm:ml-[538px] xxl:ml-[680px] xml:ml-[550px] mdd:ml-[375px] xl:ml-[474px] mt-20 md:mt-20">
                 <ul className="dropdown-list px-16 ">
                   {filteredLocations.slice(0, 10).map((item) => (
                     <li key={item} onClick={() => handleLocationSelect(item)}>
@@ -225,7 +225,7 @@ export default function Header() {
 
             {isCategoryOpen && (
 
-              <div className="dropdown ml-24 sm:ml-36 msm:ml-[180px] md:ml-[530px] mds:ml-[585px] xsm:ml-[155px] xm:ml-[910px] xll:ml-[850px] xml:ml-[930px] xxl:ml-[1145px] lg:ml-[600px] mdd:ml-[630px] xl:ml-[745px] mt-20 md:mt-20">
+              <div className="dropdown ml-24 sm:ml-36 msm:ml-[180px] md:ml-[530px] mds:ml-[585px] xsm:ml-[155px] xm:ml-[910px] xll:ml-[850px] xml:ml-[930px] xxl:ml-[1145px] lg:ml-[600px] mdd:ml-[630px] xl:ml-[800px] mt-20 md:mt-20">
                 <ul className="dropdown-list px-16 ">
                   {filteredCategories.slice(0, 10).map((item) => (
                     <li key={item} onClick={() => handleCategorySelect(item)}>

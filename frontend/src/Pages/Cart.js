@@ -19,7 +19,13 @@ import {
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { logout } from "../redux/userSlice";
-import { cancelBooking, getMyCartBookings, deleteBooking, getAllCart, deleteCart } from "../apiCalls/booking";
+import {
+  cancelBooking,
+  getMyCartBookings,
+  deleteBooking,
+  getAllCart,
+  deleteCart,
+} from "../apiCalls/booking";
 
 const rules = [{}];
 
@@ -113,22 +119,21 @@ export default function Profile() {
   //   console.log(" Data ",data)
   // };
 
-
-
-
   const [upcomingBooking, setUpcomingBooking] = useState([]);
   const [historyBooking, setHistoryBooking] = useState(0);
 
-
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(3);
+  const itemsPerPage = 5;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   const totalPages = Math.ceil(upcomingBooking.length / itemsPerPage);
+  // console.log(upcomingBooking.length
 
   const handlePageChange = (pageNumber) => {
+    console.log("Current Page:", pageNumber);
+
     setCurrentPage(pageNumber);
   };
   const getMyBooking = async () => {
@@ -139,6 +144,7 @@ export default function Profile() {
       if (response.success) {
         setHistoryBooking(response["totalCart"]);
         setUpcomingBooking(response["cart"]);
+        console.log(upcomingBooking.length)
         // console.log('this is the one i am chekcking ', response.cart.category)
         // console.log("my booking history", historyBooking);
         // console.log("my booking upcoming", upcomingBooking);
@@ -150,24 +156,22 @@ export default function Profile() {
     }
   };
   const DeleteCart = async (id) => {
-
     try {
-      dispatch(setLoader(true))
+      dispatch(setLoader(true));
       const response = await deleteCart(id);
-      console.log('comeon show me the response');
+      console.log("comeon show me the response");
 
-      dispatch(setLoader(false))
+      dispatch(setLoader(false));
       if (response.success) {
-        handleSuccess()
-        message.success(response.message)
-      }
-      else {
-        throw new Error(response.error)
+        handleSuccess();
+        message.success(response.message);
+      } else {
+        throw new Error(response.error);
       }
     } catch (error) {
-      message.error(error.message)
+      message.error(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     if (user) {
@@ -188,8 +192,6 @@ export default function Profile() {
   }
 
   return (
-
-
     <div className="">
       <div className="header-contact-us mb-[-50px] md:mt-7  Poster w-[1920px] h-[400px] bg-[url(/public/image90@2x.png)] bg-cover bg-no-repeat bg-[top] font-lato">
         <div className="font-semibold  [text-shadow:0px_2px_3px_rgba(0,_0,_0,_0.25)]">
@@ -197,20 +199,21 @@ export default function Profile() {
         </div>
       </div>
 
-      <h1 className=" text-[40px] md:text-[60px] md:my-7 "> About  Company </h1>
+      {/* <h1 className=" text-[40px] md:text-[60px] md:my-7 "> About  Company </h1> */}
       <div className=" h-[90%]">
-        <div className=" 
-           px-10 md:w-[1240px]  my-4   flex md:flex-row gap-4 flex-col md:mt-12">
+        <div
+          className=" 
+           px-10 md:w-[1240px]  my-4   flex md:flex-row gap-4 flex-col md:mt-12"
+        >
           <div
             className="  md:w-[90%] 
                w-[380px] md:h-[900px] md:m-[1rem]"
             id="my-booking-form"
           >
-            <h2 className=" text-[35px]">{historyBooking}  Items In Cart</h2>
+            <h2 className=" text-[35px]">{historyBooking} Items In Cart</h2>
             {/* pc web view  */}
             <div className="bookingss  md:pt-20px md:px-40px hidden    md:block">
-              {upcomingBooking.map((u) => {
-
+              {upcomingBooking.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((u) => {
                 return (
                   <div className="upcoming-booking" key={u.activity._id}>
                     <div className="single-book">
@@ -262,18 +265,18 @@ export default function Profile() {
                       </div>
                       <div className="single-book-col">
                         <div className="rounded-md bg-darkslateblue-100 hover:cursor-pointer m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
-                          <div onClick={() => {
-
-                            navigate("/select", {
-
-                              state: { item: { ...u.activity } },
-
-                            });
-                          }} className="">{`Book Now`}</div>
+                          <div
+                            onClick={() => {
+                              navigate("/select", {
+                                state: { item: { ...u.activity } },
+                              });
+                            }}
+                            className=""
+                          >{`Book Now`}</div>
                         </div>
                         <div
                           onClick={() => {
-                            DeleteCart(u.activity._id)
+                            DeleteCart(u.activity._id);
                           }}
                           className="rounded-md bg-red-600 m-2 hover:cursor-pointer shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row md:py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
                         >
@@ -291,18 +294,13 @@ export default function Profile() {
                   <button
                     key={i}
                     onClick={() => handlePageChange(i + 1)}
-                    className={currentPage === i + 1 ? 'active' : ''}
+                    className={currentPage === i + 1 ? "active" : ""}
                   >
                     {i + 1}
                   </button>
                 ))}
               </div>
-
-
-
-
             </div>
-
 
             {/* mobile view  */}
             <div className="bookings  md:py-20px md:px-40px md:hidden">
@@ -335,24 +333,23 @@ export default function Profile() {
                         <span>{u.activity.duration}</span>
                       </div>
 
-
                       <div>
                         <div className="single-book-col">
                           {/* <div className="rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                             <div className="">{`Book now`}</div>
                           </div> */}
-                          <div onClick={() => {
-
-                            navigate("/select", {
-
-                              state: { item: { ...u.activity } },
-
-                            });
-                          }} className="">{`Book Now`}</div>
+                          <div
+                            onClick={() => {
+                              navigate("/select", {
+                                state: { item: { ...u.activity } },
+                              });
+                            }}
+                            className=""
+                          >{`Book Now`}</div>
                         </div>
                         <div
                           onClick={() => {
-                            DeleteCart(u.activity._id)
+                            DeleteCart(u.activity._id);
                           }}
                           className="rounded-md bg-red-600 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row md:py-[3px] md:px-10 h-16 w-16 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
                         >
@@ -361,7 +358,6 @@ export default function Profile() {
                       </div>
                     </div>
                   </div>
-
                 );
               })}
 
@@ -371,28 +367,19 @@ export default function Profile() {
                   <button
                     key={i}
                     onClick={() => handlePageChange(i + 1)}
-                    className={currentPage === i + 1 ? 'active' : ''}
+                    className={currentPage === i + 1 ? "active" : ""}
                   >
                     {i + 1}
                   </button>
                 ))}
               </div>
-
-
-
-
             </div>
           </div>
-
-
         </div>
       </div>
       <br />
       <br />
       <br />
     </div>
-
-
-
   );
 }
