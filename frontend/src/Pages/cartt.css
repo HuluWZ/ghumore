@@ -5,8 +5,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+ 
   /* position: relative; */
 }
+
 .profile-form-container {
   background-color: white;
   top: 45vh;

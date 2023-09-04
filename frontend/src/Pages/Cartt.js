@@ -183,10 +183,10 @@ export default function Cart() {
                     My Cart
                 </div>
             </div>
-            <div>
+            <div className=' w-screen' >
                 <div
                     className=' 
-                   px-10 md:w-[100%] h-[1000px] flex md:flex-row gap-4 flex-col'
+                   px-10  h-[1000px] flex md:flex-row gap-4 flex-col'
                 >
                     <div
                         className='  profile-form  md:w-[70%] 

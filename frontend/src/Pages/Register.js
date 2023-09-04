@@ -152,17 +152,11 @@ export default function Register({ modalState }) {
     <div className="Register md:pb-[50px] mt-[40px] ">
 
       <div className="flex flex-row w-[50rem] md:ml-1   ml-[-205px] ">
-        <div className="register-form-image">
-          <img
-            className="object-cover hidden md:block"
-            alt=""
-            src="/rectangle-10891@2x.png"
-          />
-        </div>
-        <div className="register-form  md:mt-0 mt-20 w-[70rem]">
+
+        <div className="register-form md:ml-[-80px] md:mt-0 mt-20 w-[70rem]">
 
 
-          <h2 className=" ml-[-80px] md:ml-0">Create Account</h2>
+          <h2 className=" ml-[-120px] md:ml-0">Create Account</h2>
           <Form onFinish={onFinish} className="form  flex flex-row justify-center mb-32 pb-10 ml-8">
             <div className=" ml-8">
               <Form.Item name="fullName" rules={[{ required: true, validator: validateInput },]}>

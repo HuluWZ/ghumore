@@ -25,7 +25,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import TermsAndCondition from "./Components/TermsAndCondition";
 import PrivacyPolicy from "./Components/Privacy";
 import BookingDetail from "./Components/BookingDetail";
-import SearchBar from "./Components/SearchBar";
 
 
 function App() {
@@ -45,7 +44,6 @@ function App() {
           <Route path='/select' element={<ProtectedPage><SelectedItem /> </ProtectedPage>} />
           <Route path='/profile' element={<ProtectedPage><Profile /> </ProtectedPage>} />
           <Route path='/cart' element={<ProtectedPage><Cart /> </ProtectedPage>} />
-          <Route path='/search' element={<ProtectedPage><SearchBar /> </ProtectedPage>} />
 
           <Route path='/search/:location?/:name?/:activity?' element={<ProtectedPage><Search /> </ProtectedPage>} />
           <Route path="/securecheckout" element={<SecureCheckout />} />

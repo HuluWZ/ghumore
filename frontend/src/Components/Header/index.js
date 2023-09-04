@@ -191,7 +191,7 @@ export default function Header() {
     setSelectedLocation(suggestion);
     setSearchValue(suggestion);
     // setSearchTerm(suggestion);
-    setShowDropdown(false);
+    setShowDropdown(false)
     // Do something with the selected suggestion, such as initiating a search
   };
 
@@ -200,7 +200,7 @@ export default function Header() {
     setIsCategoryOpen(false);
     setCategoryValue(suggestion)
     // setSearchTerm(suggestion);
-    setShowDropdown(false);
+    setCategoryDropdown(false);
     // Do something with the selected suggestion, such as initiating a search
   };
 
