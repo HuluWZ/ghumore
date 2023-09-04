@@ -15,7 +15,6 @@ module.exports = {
       xll: '1440px',
       xm: '1530px',
       xml: '1560px',
-
       xxl: '1920px',
 
     },

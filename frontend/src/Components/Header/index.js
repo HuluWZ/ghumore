@@ -58,21 +58,6 @@ export default function Header() {
       console.error(error);
     }
   };
-  // const locations = [
-  //   "Delhi, India",
-  //   "Mumbai, India",
-  //   "Bangalore, India",
-  //   "Chennai, India",
-  //   "Kolkata, India",
-  //   "Hyderabad, India",
-  //   "Pune, India",
-  //   "Ahmedabad, India",
-  //   "Jaipur, India",
-  //   "Surat, India",
-  //   // Add more locations here...
-  // ];
-  // Location dropdown functionality
-
 
   const handleSearchChange = (event) => {
     console.log(isLocationOpen)
@@ -162,6 +147,65 @@ export default function Header() {
     };
   }, [isLocationOpen]);
 
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [categoryDropdown, setCategoryDropdown] = useState(false)
+  const [suggestions, setSuggestions] = useState([]);
+  const [categorySuggestions, setCategorySuggestions] = useState([]);
+
+  const handleLocationChange = (e) => {
+    const { value } = e.target;
+    setSearchValue(value);
+
+    // Perform API call or any other logic to fetch suggestions based on the input value
+    // For this example, we'll use a static list of suggestions
+    const locationNamesList = location.map(item => item.name);
+    const suggestions = locationNamesList.filter((item) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    setSuggestions(suggestions);
+
+    // Show or hide the dropdown based on the input value
+    setShowDropdown(value.length > 0);
+  };
+
+  const handleCategoryChange = (e) => {
+    const { value } = e.target;
+    setCategoryValue(value);
+
+    // Perform API call or any other logic to fetch suggestions based on the input value
+    // For this example, we'll use a static list of suggestions
+    const locationNamesList = category.map(item => item.name);
+    const suggestions = locationNamesList.filter((item) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    setCategorySuggestions(suggestions);
+
+    // Show or hide the dropdown based on the input value
+    setCategoryDropdown(value.length > 0);
+  };
+
+  const handleLocationClick = (suggestion) => {
+    setIsLocationOpen(false);
+    setSelectedLocation(suggestion);
+    setSearchValue(suggestion);
+    // setSearchTerm(suggestion);
+    setShowDropdown(false);
+    // Do something with the selected suggestion, such as initiating a search
+  };
+
+  const handleCategoryClick = (suggestion) => {
+    setSelectedCategory(suggestion);
+    setIsCategoryOpen(false);
+    setCategoryValue(suggestion)
+    // setSearchTerm(suggestion);
+    setShowDropdown(false);
+    // Do something with the selected suggestion, such as initiating a search
+  };
+
+
+
   return (
     <div className="Header flex items-center overflow-x-hidden justify-center">
       <div className="search-conainer w-[70%] rounded-2xl bg-gray md:w-[90%] mt-10">
@@ -182,32 +226,33 @@ export default function Header() {
             />
           </div>
 
-          <div className="activities bg-amber-500">
+          <div className="activities ">
             <div className="location-tag">
               <img className="" alt="" src="/location.svg" />
               Location
             </div>
-            <input
-              type="text"
-              placeholder="Delhi, India"
-              value={searchValue}
-              onChange={handleSearchChange}
-              onClick={() => setIsLocationOpen(true)}
-            />
-            {isLocationOpen && (
-
-              <div className="dropdown ml-24 sm:ml-36  md:ml-[317px]  lg:ml-[360px] xsm:ml-[155px] xll:ml-[508px] xm:ml-[538px] xxl:ml-[680px] xml:ml-[550px] mdd:ml-[375px] xl:ml-[474px] mt-20 md:mt-20">
-                <ul className="dropdown-list px-16 ">
-                  {filteredLocations.slice(0, 10).map((item) => (
-                    <li key={item} onClick={() => handleLocationSelect(item)}>
-                      {item}
+            <div className="relative">
+              <input
+                type="text"
+                value={searchValue}
+                onChange={handleLocationChange}
+                className="px-4 py-2 border-0 rounded-md focus:outline-none  "
+                placeholder="Delhi,Inidia"
+              />
+              {showDropdown && (
+                <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
+                  {suggestions.map((suggestion, index) => (
+                    <li
+                      key={index}
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleLocationClick(suggestion)}
+                    >
+                      {suggestion}
                     </li>
                   ))}
                 </ul>
-              </div>
-
-
-            )}
+              )}
+            </div>
           </div>
 
           <div className="activities">
@@ -215,7 +260,29 @@ export default function Header() {
               <img className="" alt="" src="/location.svg" />
               Category
             </div>
-            <input
+            <div className="relative">
+              <input
+                type="text"
+                value={categoryValue}
+                onChange={handleCategoryChange}
+                className=" px-4 py-2 border-0 rounded-md focus:outline-none "
+                placeholder="SkyDiving"
+              />
+              {categoryDropdown && (
+                <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
+                  {categorySuggestions.map((suggestion, index) => (
+                    <li
+                      key={index}
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleCategoryClick(suggestion)}
+                    >
+                      {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            {/* <input
               type="text"
               placeholder="SkyDiving"
               value={categoryValue}
@@ -236,7 +303,7 @@ export default function Header() {
               </div>
 
               // </div>
-            )}
+            )} */}
           </div>
 
 
