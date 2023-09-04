@@ -6,6 +6,8 @@ import { LoginUser, SocailAuth } from "../apiCalls/users";
 import { setLoader } from "../redux/loaderSlice";
 import { Form, Input, message } from "antd";
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./register.css";
 import {
@@ -26,8 +28,18 @@ var clientId =
 export default function Login({ modalState }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
   const [loginMessage, setLoginMessage] = useState("");
   const [isSuccess, setIsSucess] = useState("green");
+
+  const handleError = () => {
+    toast.error('Invalid Email or password');
+  }
+  const handleSuccess = () => {
+    toast.success('Login successful Welcome back!');
+  }
+
   const onFinish = async (values) => {
     console.log(values, "login");
     try {
@@ -39,6 +51,7 @@ export default function Login({ modalState }) {
         setLoginMessage("Loged in Successfully!");
         setIsSucess("green");
         message.success("Login Successfully");
+
         localStorage.setItem("token", response.token);
         window.location.href = "/";
       } else {
@@ -80,6 +93,9 @@ export default function Login({ modalState }) {
     }
   };
 
+
+
+
   const validateEmail = (rule, value, callback) => {
     console.log(" Value Email ", value);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -109,7 +125,7 @@ export default function Login({ modalState }) {
             src="/rectangle-10891@2x.png"
           />
         </div>
-        <div className="register-form">
+        <div className=" ml-12 mt-[-80px] md:mt-10">
           <h2>Login</h2>
           <Form onFinish={onFinish} className="form mt-3  ml-8">
             <label style={{ color: isSuccess }}>{loginMessage}</label>
@@ -154,7 +170,7 @@ export default function Login({ modalState }) {
             </div>
           </Form>
           <div id="googleSigninDiv" className="googleSigninDiv mb-5"></div>
-          <div className=" ml-6">
+          <div className=" ml-20">
 
             <GoogleOAuthProvider clientId={clientId}>
               <GoogleLogin
@@ -185,7 +201,7 @@ export default function Login({ modalState }) {
             <span>
               Don't have an account?
               <Link to="/register">
-                <span className="hover:text-blue-500 cursor-pointer ml-1">
+                <span className="hover:text-blue-500 cursor-pointer">
                   Signup
                 </span>
               </Link>

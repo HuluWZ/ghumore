@@ -57,7 +57,7 @@ export const UpdateUserProfile = async (userId, payload) => {
   }
 };
 
- 
+
 export const authenticateWithGoogle = (scope) => {
   axiosInstance.get('/auth/google', {
     params: {

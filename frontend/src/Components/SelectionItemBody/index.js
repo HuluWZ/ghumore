@@ -11,18 +11,19 @@ import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { addDays } from "date-fns";
 import { checkActivityAvailability } from "../../apiCalls/activities";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../../redux/loaderSlice";
 import ActivityDetail from "../ActivityDetail";
 import SimilarActivity from "../SimilarActivity";
 import LocationMap from "../LocationMap";
+import { createCart } from "../../apiCalls/booking";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SelectedItemBody({ item }) {
-
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   //adult infant modal
-  const [showModal, setShowModal] = useState(false);
-  const buttonRef = useRef(null);
+
   const [date, setDate] = useState(new Date());
   const [adults, setAdults] = useState(1);
   const [infants, setInfant] = useState(0);
@@ -30,7 +31,25 @@ export default function SelectedItemBody({ item }) {
   const [selectedTime, setSelectedTime] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log('this items detail', item)
+
+  const { user } = useSelector((state) => state.users);
+  var token = localStorage.getItem("token");
+
+  const handleAddToCart = async () => {
+    const response = await createCart(item._id, token);
+    if (response.success) {
+      handleSuccess();
+    } else {
+      handleError();
+    }
+  };
+  const handleError = () => {
+    toast.error("not added to cart please try again");
+  };
+  const handleSuccess = () => {
+    toast.success("Activity has been successfully added to cart");
+  };
+
   const handleAdultIncrease = () => {
     setAdults(adults + 1);
   };
@@ -50,15 +69,13 @@ export default function SelectedItemBody({ item }) {
   };
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
-    // console.log(item, "Last Booking Update");
-    // Perform form submission logic here
+
     if (!selectedOption || !selectedTime) {
-      console.log(selectedOption, selectedTime, item)
       return message.error("Fill all the inputs");
     }
     try {
       dispatch(setLoader(true));
-      console.log('its not working')
+      // console.log('its not working')
       const response = await checkActivityAvailability(
         item._id,
         infants + adults,
@@ -66,7 +83,7 @@ export default function SelectedItemBody({ item }) {
       );
       if (response.success) {
         dispatch(setLoader(false));
-        console.log('send gift')
+        // console.log('send gift')
         navigate("/securecheckout", {
           state: {
             selectedActivity: item,
@@ -85,7 +102,6 @@ export default function SelectedItemBody({ item }) {
       dispatch(setLoader(false));
       message.error(error.message);
     }
-
   };
 
   const getExcludedDateIntervals = () => {
@@ -104,17 +120,20 @@ export default function SelectedItemBody({ item }) {
   };
 
   return (
-
-    <div className="grid grid-cols-2 gap-10">
-      <div className=" col-span-1">
+    <div className="grid grid-cols-2 md:ml-10 lg:ml-[-30px] md:gap-10 lg:gap-0">
+      <div className=" col-span-1 md:ml-[-100px] lg:ml-0">
         {/* the images section */}
         <div>
-          <div><h1 className=" ml-7 md:ml-32 text-[30px] w-[500px] mb-4 text-start">{item.name}</h1></div>
+          <div>
+            <h1 className=" ml-7 md:ml-32 text-[30px] w-[500px] mb-4 text-start">
+              {item.name}
+            </h1>
+          </div>
           <div className=" flex flex-col md:flex-row ml-16  w-[900px]">
             <div className="pt-5  ml-[-82px] pr-1 md:ml-0 mb-3 flex  flex-row md:flex-col  px-5 gap-1">
               {item.images.map((img, indx) => {
                 return (
-                  // <div></div> 
+                  // <div></div>
                   <div className="flex gap-1" key={indx}>
                     <img
                       src={img}
@@ -131,21 +150,17 @@ export default function SelectedItemBody({ item }) {
                 );
               })}
             </div>
-            <div className="flex flex-wrap md:justify-center justify-start">
-              <div className="md:w-[600px] md:h-[500px] w-[400px] ml-[-64px] md:ml-4 px-2  overflow-hidden"
-              >
+            <div className="flex flex-wrap lg:justify-center justify-start">
+              <div className="md:w-[600px] md:h-[500px] w-[400px] ml-[-64px] md:ml-4 px-2  overflow-hidden">
                 <img
                   src={item?.images[selectedImageIndex]}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full md:w-[300px] md:h-[300px] h-full"
                   alt=""
                 />
               </div>
             </div>
-            <div>
-
-            </div>
+            <div></div>
           </div>
-
         </div>
         <div className="bg-gray-200 p-4 mt-4 md:hidden">
           <div>
@@ -162,7 +177,6 @@ export default function SelectedItemBody({ item }) {
                         value={date}
                         // customInput={<CustomInput />}
                         excludeDateIntervals={getExcludedDateIntervals()}
-
                       />
                       <div>{/* <h2>Select a date and time:</h2> */}</div>
                     </div>
@@ -221,8 +235,11 @@ export default function SelectedItemBody({ item }) {
                     <label key={i}>
                       <div
                         className={
-                          isSelectedOption ? "option-card selected" : "option-card"
-                        }>
+                          isSelectedOption
+                            ? "option-card selected"
+                            : "option-card"
+                        }
+                      >
                         <div className="form-header flex flex-row">
                           <h2>{option.name}</h2>
                           <input
@@ -240,12 +257,14 @@ export default function SelectedItemBody({ item }) {
                         <span>
                           Total of:{" "}
                           <h2 className="text-bold">
-                            ₹ {(option.unitPrice * (adults + infants)).toFixed(2)}
+                            ₹{" "}
+                            {(option.unitPrice * (adults + infants)).toFixed(2)}
                           </h2>
                         </span>
                         <span>(Including all taxes and booking fees)</span>
                         <br />
-                        <div className="option-card-time-options">
+
+                        <div className="option-card-time-options flex">
                           {option.time.map((t, indx) => {
                             const isSelectedTime =
                               isSelectedOption && selectedTime === t;
@@ -258,7 +277,8 @@ export default function SelectedItemBody({ item }) {
                                 className={className}
                                 onClick={() =>
                                   isSelectedOption && setSelectedTime(t)
-                                }>
+                                }
+                              >
                                 {t}
                               </span>
                             );
@@ -268,17 +288,42 @@ export default function SelectedItemBody({ item }) {
                     </label>
                   );
                 })}
-                <button
-                  type="submit"
-                  // className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                  Book Now
-                </button>
-                <button
-                  type="submit"
-                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                  Send as a Gift
-                </button>
+
+                {user && user.fullName ?
+
+
+                  <div>
+
+                    <button
+                      type="submit"
+                      // className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    >
+                      Book Now
+                    </button>
+                    <button
+                      type="submit"
+                      className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    >
+                      Send as a Gift
+                    </button>
+                    <button
+                      onClick={handleAddToCart}
+                      className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
+                  :
+                  <button
+                    onClick={() => { navigate('/login') }}
+                    // className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  >
+                    Login to Book
+                  </button>
+                }
+
               </div>
             </form>
           </div>
@@ -286,30 +331,22 @@ export default function SelectedItemBody({ item }) {
 
         {/* the bottom overview section */}
         <div className="">
-          <div className=" md:w-[1000px]  w-96 ml-2 md:ml-1  md:flex md:flex-col md:items-center text-left px-16 gap-5">
+          <div className=" md:w-[700px] lg:w-[890px] lg:ml-[-70px] w-96  md:mt-20  lg:mt-0 md:flex md:flex-col md:items-center text-left px-16 gap-5">
             <div className=" md:px-16">
-              <div><ActivityDetail response={item} /></div>
-
+              <div>
+                <ActivityDetail response={item} />
+              </div>
             </div>
-
-
-
-
-
-
-
             <SimilarActivity item={item} />
             <LocationMap item={item} />
           </div>
         </div>
-
       </div>
-
       <div className=" col-span-1 w-96 ml-32">
         {/* sidebar section  */}
         <div>
-          <form onSubmit={handleBookingSubmit}>
-            <div className="item-image-book justify-center items-center w-72 mx-10 my-10 md:my-0">
+          <form className=" hidden md:block md:ml-[-150px] lg:ml-0" onSubmit={handleBookingSubmit}>
+            <div className="item-image-book  justify-center items-center w-72 mx-10 my-10 md:my-0">
               <h1 className=" text-[30px]">Check Availability</h1>
               <div className="status">
                 <div>
@@ -321,7 +358,6 @@ export default function SelectedItemBody({ item }) {
                       value={date}
                       // customInput={<CustomInput />}
                       excludeDateIntervals={getExcludedDateIntervals()}
-
                     />
                     <div>{/* <h2>Select a date and time:</h2> */}</div>
                   </div>
@@ -380,8 +416,11 @@ export default function SelectedItemBody({ item }) {
                   <label key={i}>
                     <div
                       className={
-                        isSelectedOption ? "option-card selected" : "option-card"
-                      }>
+                        isSelectedOption
+                          ? "option-card selected"
+                          : "option-card"
+                      }
+                    >
                       <div className="form-header flex flex-row">
                         <h2>{option.name}</h2>
                         <input
@@ -404,7 +443,7 @@ export default function SelectedItemBody({ item }) {
                       </span>
                       <span>(Including all taxes and booking fees)</span>
                       <br />
-                      <div className="option-card-time-options">
+                      <div className="option-card-time-options flex">
                         {option.time.map((t, indx) => {
                           const isSelectedTime =
                             isSelectedOption && selectedTime === t;
@@ -417,7 +456,8 @@ export default function SelectedItemBody({ item }) {
                               className={className}
                               onClick={() =>
                                 isSelectedOption && setSelectedTime(t)
-                              }>
+                              }
+                            >
                               {t}
                             </span>
                           );
@@ -427,23 +467,46 @@ export default function SelectedItemBody({ item }) {
                   </label>
                 );
               })}
-              <button
-                type="submit"
-                // className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                Book Now
-              </button>
-              <button
-                type="submit"
-                className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                Send as a Gift
-              </button>
+
+              {user && user.fullName ?
+
+
+                <div>
+
+                  <button
+                    type="submit"
+                    // className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  >
+                    Book Now
+                  </button>
+                  <button
+                    type="submit"
+                    className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  >
+                    Send as a Gift
+                  </button>
+                  <button
+                    onClick={handleAddToCart}
+                    className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  >
+                    Add To Cart
+                  </button>
+                </div>
+                :
+                <button
+                  onClick={() => { navigate('/login') }}
+                  // className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                >
+                  Login to Book
+                </button>
+              }
+
             </div>
           </form>
         </div>
-
       </div>{" "}
-
     </div>
   );
 }

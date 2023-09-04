@@ -17,7 +17,7 @@ export default function Activity() {
         const response = await getAllActivity();
         if (response.success) {
           setResult(response.activity);
-          console.log('this is the top activities', response.activity);
+          // console.log('this is the top activities', response.activity);
         } else {
           throw new Error(response.message);
         }

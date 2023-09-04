@@ -5,7 +5,6 @@ import Destination from '../Components/Destination';
 import Experience from '../Components/Experience';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import Navbar from '../Components/Navbar';
 import Poster from '../Components/Poster';
 import Promotion from '../Components/Promotion';
 import Testimonial from '../Components/Testimonial';

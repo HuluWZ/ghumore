@@ -63,6 +63,9 @@
   padding: 0.5rem;
   margin: 5px;
   border-radius: 1rem;
+  /* direction: flex;
+  flex-direction: column;
+  background-color: blue; */
 }
 .time-option.selected {
   background-color: orange;

@@ -7,6 +7,8 @@ import { Form, message, Input, Button } from "antd";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { setLoader } from "../redux/loaderSlice";
 import {
   RegisterUser,
@@ -35,7 +37,12 @@ export default function Profile() {
   });
 
 
-
+  const handleCancelError = () => {
+    toast.error('Canot cancel this booking now');
+  }
+  const handleCancelSuccess = () => {
+    toast.success('successful Canceled!');
+  }
 
   const [activeForm, setActiveForm] = useState("profile-detail-form");
 
@@ -97,15 +104,6 @@ export default function Profile() {
     }
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   console.log(" Name ",name,value,e.target)
-  //   setData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  //   console.log(" Data ",data)
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -160,18 +158,23 @@ export default function Profile() {
       message.error(error.message);
     }
   };
-  const cancelBookings = async (id) => {
+  const cancelBookings = async (activity) => {
+    const id = activity._id;
     const token = localStorage.getItem("token")
     try {
       dispatch(setLoader(true))
-      const response = await cancelBooking(id);
-      console.log("response", response.message)
+      const response = await cancelBooking(id, token);
+      console.log("response if it canceled", response.message)
       dispatch(setLoader(false))
       if (response.success) {
         message.success(response.message)
+        handleCancelSuccess()
+        console.log(response.success)
       }
       else {
-        throw new Error(response.error)
+        console.log(response.error)
+        handleCancelError()
+
       }
     } catch (error) {
       message.error(error.message)
@@ -344,7 +347,7 @@ export default function Profile() {
                 return (
                   <div className="upcoming-booking" key={u.id}>
                     <div className="single-book">
-                      <div className="single-book-col">
+                      <div className="single-book-firstchild">
                         <span className="font-semibold flex">
                           <img
                             className=" w-5 h-5 overflow-hidden shrink-0"
@@ -391,16 +394,17 @@ export default function Profile() {
                         <span>{u.status}</span>
                       </div>
                       <div className="single-book-col">
-                        <div className="rounded-md bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                        <div className=" hover:cursor-pointer rounded-md bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                           <div className="">{`View & Manage`}</div>
                         </div>
                         <div
                           onClick={() => {
                             cancelBookings(u.activity);
+
                           }}
-                          className="rounded-md bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
+                          className="rounded-md hover:cursor-pointer bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
                         >
-                          <div className="font-semibold">Cancel Booking</div>
+                          <div className="font-semibold ">Cancel Booking</div>
                         </div>
                       </div>
                     </div>
@@ -489,16 +493,16 @@ export default function Profile() {
 
 
                       <div className="single-book-col">
-                        <div className="rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                        <div className=" hover:cursor-pointer rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                           <div className="">{`View & Manage`}</div>
                         </div>
                         <div
                           onClick={() => {
                             cancelBookings(u.activity);
                           }}
-                          className="rounded-md bg-red-600 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
+                          className="rounded-md hover:cursor-pointer bg-red-600 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
                         >
-                          <div className="font-semibold">Cancel Booking</div>
+                          <div className="font-semibold ">Cancel Booking</div>
                         </div>
                       </div>
                     </div>

@@ -34,13 +34,8 @@ export default function AllDestination() {
     addLocationToDestinationList();
   }, []);
   return (
-    <div className="Destinaiton">
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+    <div className="Destinaiton mt-5">
+
       <h1>All Destination & Cities</h1>
 
       <div className="destination-cards">
@@ -48,7 +43,7 @@ export default function AllDestination() {
           console.log(locationList, "list");
           return (<div
             onClick={() => navigate(`/search/${destination.name}/ / `)}
-            // style={{backgroundImage: `url(${destination.image})`}} 
+            style={{ backgroundImage: `url(${destination.image})` }}
             className={`destination-card bg-cover bg-no-repeat bg-[top] rounded-2xl w-[330px] h-[224.03px]`}>
             <h1>{destination.name}</h1>
           </div>)

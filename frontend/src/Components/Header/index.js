@@ -164,7 +164,7 @@ export default function Header() {
 
   return (
     <div className="Header flex items-center overflow-x-hidden justify-center">
-      <div className="search-conainer rounded-2xl bg-gray w-full mt-10">
+      <div className="search-conainer w-[70%] rounded-2xl bg-gray md:w-[90%] mt-10">
         <h2 style={{ fontSize: "1rem", marginBottom: "10px" }}>
           Find Experiences & Activities!
         </h2>
@@ -182,7 +182,7 @@ export default function Header() {
             />
           </div>
 
-          <div className="activities">
+          <div className="activities bg-amber-500">
             <div className="location-tag">
               <img className="" alt="" src="/location.svg" />
               Location
@@ -196,8 +196,7 @@ export default function Header() {
             />
             {isLocationOpen && (
 
-              <div className="dropdown md:ml-[580px] ml-14 mt-20 md:mt-20">
-
+              <div className="dropdown ml-24 sm:ml-36  md:ml-[317px]  lg:ml-[360px] xsm:ml-[155px] xll:ml-[508px] xm:ml-[538px] xxl:ml-[680px] xml:ml-[550px] mdd:ml-[375px] xl:ml-[440px] mt-20 md:mt-20">
                 <ul className="dropdown-list px-16 ">
                   {filteredLocations.slice(0, 10).map((item) => (
                     <li key={item} onClick={() => handleLocationSelect(item)}>
@@ -226,7 +225,7 @@ export default function Header() {
 
             {isCategoryOpen && (
 
-              <div className="dropdown md:ml-[840px] ml-14 mt-20 md:mt-20">
+              <div className="dropdown ml-24 sm:ml-36 msm:ml-[180px] md:ml-[530px] mds:ml-[585px] xsm:ml-[155px] xm:ml-[910px] xll:ml-[850px] xml:ml-[930px] xxl:ml-[1145px] lg:ml-[600px] mdd:ml-[630px] xl:ml-[745px] mt-20 md:mt-20">
                 <ul className="dropdown-list px-16 ">
                   {filteredCategories.slice(0, 10).map((item) => (
                     <li key={item} onClick={() => handleCategorySelect(item)}>
@@ -246,7 +245,7 @@ export default function Header() {
           <div>
             <button
               onClick={handleSearch}
-              className="button-khart  uppercase text-white bg-darkslateblue-100 py-4 md:py-10 px-10 rounded ">
+              className="button-khart  uppercase text-white bg-darkslateblue-100 py-7 md:ml-[-30px] md:mt-2 lg:mt-0 lg:ml-0  px-7 md:px-5 lg:py-10 lg:px-7 rounded ">
               Search
             </button>
           </div>

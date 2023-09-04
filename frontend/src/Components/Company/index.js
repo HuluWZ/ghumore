@@ -4,7 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Company() {
   return (
-    <div className="Company mb-10">
+    <div className="Company mb-10 md:ml-24 ml-5">
       <div className="company-image">
         <LazyLoadImage className=" rounded w-[760px] h-[477px] object-cover" src="/image8@2x.png" lazy="lazy" />
       </div>

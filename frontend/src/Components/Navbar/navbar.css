@@ -1,16 +1,17 @@
 .Navbar{
     position:fixed;
-  
+  width: 100%;
     z-index: 1000;
     border-bottom: black 1px solid;
+ 
    
 }
-#mynav{
+/* #mynav{
     top: 20px;
     @media only screen and (max-width: 600px){
         top: 0px;
     }
-}
+} */
 .yellow-bar{
     background-color: #fda71a;
     width: 100vw;
@@ -105,16 +106,17 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        
         /* margin-bottom: 25rem; */
     
     }
     .main-items-navbar .item-list{
         flex-direction: column;
     }
-    .logo{
+    /* .logo{
         height: 100px;
         width: 100px;
-    }
+    } */
 }
 @media only screen and (max-width: 600px){
 	/*Big smartphones [426px -> 600px]*/

@@ -2,15 +2,20 @@ import React from "react";
 import "./footer.css";
 import { useNavigate } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import TermsAndCondition from "../TermsAndCondition";
+
+
 
 export default function Footer() {
+
+
   const navigate = useNavigate();
   return (
     <footer className="Footer">
       <div className="footer-main">
         <div className="footer-logo mt-5">
           <img
-            className="footer-logo overflow-hidden cursor-pointer"
+            className="footer-logo overflow-hidden cursor-pointer md:w-24 md:h-24 lg:w-36 lg:h-36"
             alt=""
             src="/gumo-re-indiafinal-11.svg"
             onClick={() => {
@@ -28,7 +33,8 @@ export default function Footer() {
             <li>
               <Link to="/contactus">Contact Us</Link>
             </li>
-            <li><Link to="/contactus">Terms and Conditions</Link> </li>
+
+            <li><Link to="/termsandconditions">Terms and Conditions</Link> </li>
           </ul>
         </div>
           <div className="footer-lists">
@@ -84,11 +90,16 @@ export default function Footer() {
               >
                 <Link to="/destinations">Destinations</Link>
               </li>
-              <li>Terms Of Use</li>
-              <li>Security</li>
-              <li>Privacy</li>
+
+              <li><Link to="/privacypolicy">Privacy</Link> </li>
+
+
             </ul>
           </div>
+
+
+
+
 
           <div className="footer-lists">
             <h2>Company</h2>

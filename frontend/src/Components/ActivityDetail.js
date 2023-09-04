@@ -10,6 +10,7 @@ const ActivityDetail = ({ response }) => {
         color: 'black',
         fontWeight: 'bold',
         fontSize: '35px',
+
     };
 
     const filterAndStyleH4 = (htmlContent) => {

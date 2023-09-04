@@ -1,11 +1,11 @@
 import axiosInstance from "./axiosinstance";
 
 // Create Booking
-export const createBooking = async (bookingData,token) => {
+export const createBooking = async (bookingData, token) => {
   try {
     const response = await axiosInstance.post(
       `/api/booking/create`,
-      bookingData,{
+      bookingData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -14,6 +14,56 @@ export const createBooking = async (bookingData,token) => {
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
+  }
+};
+
+//create cart
+export const createCart = async (Activity, token) => {
+  try {
+    const response = await axiosInstance.post(
+      `/api/cart/create`,
+      { activity: Activity }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    );
+
+    return response.data;
+  } catch (error) {
+
+    throw new Error(error.response.data.message);
+  }
+};
+
+//get all cart
+export const getAllCart = async (token) => {
+
+  try {
+    const response = await axiosInstance.get(`/api/cart/get/my/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data
+  } catch (error) {
+    throw error;
+  }
+
+}
+
+//delete cart
+export const deleteCart = async (id) => {
+  // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', id)
+
+  try {
+    const response = await axiosInstance.delete(`/api/cart/delete/${id}`);
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', response)
+    return response.data;
+
+  } catch (error) {
+    return error.message;
   }
 };
 
@@ -62,12 +112,15 @@ export const deleteBooking = async (id) => {
 
 // Cancel Booking
 export const cancelBooking = async (id, token) => {
+
   try {
     const response = await axiosInstance.put(`/api/booking/cancel/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
+
     return response.data;
   } catch (error) {
     return error.message;
@@ -127,6 +180,7 @@ export const getMyBookings = async (token) => {
 };
 
 export const getMyCartBookings = async (token) => {
+
   try {
     const response = await axiosInstance.get(`/api/booking/cart/`, {
       headers: {

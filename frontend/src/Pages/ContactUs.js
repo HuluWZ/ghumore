@@ -51,19 +51,19 @@ export default function ContactUs() {
       <br />
       <br />
       <div className="main-contact-us flex justify-center">
-        <div className="image-section">
+        <div className="image-section ">
           <img
-            className="hidden md:block rounded-3xs w-[430px] h-[540px] m-12 object-cover"
+            className="hidden md:block rounded-3xs w-[430px] h-[580px] mb-12  mr-12 object-cover"
             alt=""
             src="/unsplashtyandmpxwhc@2x.png"
           />
         </div>
 
-        <div className="form-section-extra">
-          <div className="font-bold font-extrabold">
-            <h1> Contact Us</h1>
+        <div className=" mt-[-50px] md:mt-0 flex flex-col ">
+          <div className="font-bold  md:font-extrabold">
+            <h1 className=" md:pr-96">Contact Us</h1>
           </div>
-          <div className="form-extra">
+          <div className="flex flex-col md:flex-row">
             <div className="contact-form">
               <form onSubmit={handleSubmit}>
                 <div className="form-field">
@@ -120,7 +120,7 @@ export default function ContactUs() {
 
               </form>
             </div>
-            <div className="address md:ml-24 md:mt-16 mb-5">
+            <div className="address text-start  md:ml-24 ml-12 md:mt-16 mb-5">
               <h2>Email</h2>
               <a href="mailto:ghumoreindia@gmail.com">ghumoreindia@gmail.com</a>
               <h2>Address</h2>
