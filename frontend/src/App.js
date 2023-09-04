@@ -10,7 +10,7 @@ import NotFound from "./Pages/notFound";
 import Spinner from "./Pages/Spinner";
 import SelectedItem from "./Pages/SelectedItem";
 import Profile from "./Pages/Profile";
-import Cart from "./Pages/Cart";
+import Cart from "./Pages/Cartt";
 import SecureCheckout from "./Pages/SecureCheckout";
 import SecurePay from "./Pages/SecurePay";
 import SecurePayConfirm from "./Pages/SecurePayConfirm";

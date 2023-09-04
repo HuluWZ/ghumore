@@ -123,19 +123,27 @@ export default function Profile() {
   const [historyBooking, setHistoryBooking] = useState(0);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-
+  const [itemsPerPage] = useState(6);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = upcomingBooking.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(upcomingBooking.length / itemsPerPage);
-  // console.log(upcomingBooking.length
+
+
 
   const handlePageChange = (pageNumber) => {
-    console.log("Current Page:", pageNumber);
-
     setCurrentPage(pageNumber);
   };
+
+  const resetPage = () => {
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    resetPage();
+  }, [upcomingBooking]);
+
   const getMyBooking = async () => {
     const token = localStorage.getItem("token"); // Replace with how you store the authentication token
     // const response = await getAllCart(token);
@@ -144,7 +152,7 @@ export default function Profile() {
       if (response.success) {
         setHistoryBooking(response["totalCart"]);
         setUpcomingBooking(response["cart"]);
-        console.log(upcomingBooking.length)
+        // console.log(upcomingBooking.length)
         // console.log('this is the one i am chekcking ', response.cart.category)
         // console.log("my booking history", historyBooking);
         // console.log("my booking upcoming", upcomingBooking);
@@ -155,6 +163,17 @@ export default function Profile() {
       message.error(error.message);
     }
   };
+  useEffect(() => {
+    // Simulating an API call to fetch upcoming bookings
+    // Replace this with your actual API call
+    setTimeout(() => {
+      // setCurrentBooking(upcomingBooking);
+    }, 1000);
+  }, []);
+
+
+
+
   const DeleteCart = async (id) => {
     try {
       dispatch(setLoader(true));
@@ -212,8 +231,11 @@ export default function Profile() {
           >
             <h2 className=" text-[35px]">{historyBooking} Items In Cart</h2>
             {/* pc web view  */}
+
+
             <div className="bookingss  md:pt-20px md:px-40px hidden    md:block">
-              {upcomingBooking.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((u) => {
+
+              {currentItems.map((u) => {
                 return (
                   <div className="upcoming-booking" key={u.activity._id}>
                     <div className="single-book">
@@ -289,12 +311,12 @@ export default function Profile() {
               })}
 
               {/* Pagination */}
-              <div className="pagination flex flex-row gap-12 text-xl text-orange-500 ml-32 mt-12">
+              <div className="pagination flex flex-row gap-12 text-orange-500 ml-32 mt-12">
                 {Array.from({ length: totalPages }, (_, i) => (
                   <button
                     key={i}
                     onClick={() => handlePageChange(i + 1)}
-                    className={currentPage === i + 1 ? "active" : ""}
+                    className={currentPage === i + 1 ? 'active' : ''}
                   >
                     {i + 1}
                   </button>
@@ -302,9 +324,12 @@ export default function Profile() {
               </div>
             </div>
 
+
+
             {/* mobile view  */}
+
             <div className="bookings  md:py-20px md:px-40px md:hidden">
-              {upcomingBooking.map((u) => {
+              {currentItems.map((u) => {
                 return (
                   <div className="upcoming-booking" key={u.activity._id}>
                     <div className="single-book">
@@ -362,7 +387,7 @@ export default function Profile() {
               })}
 
               {/* Pagination */}
-              <div className="pagination flex flex-row gap-3 text-orange-500 ml-32 mt-12">
+              <div className="pagination flex flex-row gap-12 text-xl text-orange-500 ml-32 mt-12">
                 {Array.from({ length: totalPages }, (_, i) => (
                   <button
                     key={i}
