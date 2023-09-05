@@ -158,8 +158,9 @@ export default function Profile() {
       message.error(error.message);
     }
   };
-  const cancelBookings = async (activity) => {
-    const id = activity._id;
+  const cancelBookings = async (id) => {
+    // const id = activity._id;
+    console.log('booking id', id)
     const token = localStorage.getItem("token")
     try {
       dispatch(setLoader(true))
@@ -395,11 +396,15 @@ export default function Profile() {
                       </div>
                       <div className="single-book-col">
                         <div className=" hover:cursor-pointer rounded-md bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
-                          <div className="">{`View & Manage`}</div>
+                          <div onClick={() => {
+                            navigate("/select", {
+                              state: { item: { ...u.activity } },
+                            });
+                          }} className="">{`View & Manage`}</div>
                         </div>
                         <div
                           onClick={() => {
-                            cancelBookings(u.activity);
+                            cancelBookings(u._id);
 
                           }}
                           className="rounded-md hover:cursor-pointer bg-red-600 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
@@ -498,7 +503,7 @@ export default function Profile() {
                         </div>
                         <div
                           onClick={() => {
-                            cancelBookings(u.activity);
+                            cancelBookings(u._id);
                           }}
                           className="rounded-md hover:cursor-pointer bg-red-600 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
                         >

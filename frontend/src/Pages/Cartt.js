@@ -40,7 +40,7 @@ export default function Cart() {
         toast.error('Canot cancel this booking now')
     }
     const handleCancelSuccess = () => {
-        toast.success('successful Canceled!')
+        toast.success('successfuly Canceled!')
     }
 
     const [activeForm, setActiveForm] = useState('profile-detail-form')
@@ -89,6 +89,7 @@ export default function Cart() {
 
 
     const DeleteCart = async (id) => {
+        console.log(id)
         try {
             dispatch(setLoader(true));
             const response = await deleteCart(id);
@@ -262,7 +263,7 @@ export default function Cart() {
                                                 </div>
                                                 <div
                                                     onClick={() => {
-                                                        DeleteCart(u.activity._id);
+                                                        DeleteCart(u._id);
                                                     }}
                                                     className="rounded-md bg-red-600 m-2 hover:cursor-pointer shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row md:py-[3px] px-12 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke"
                                                 >

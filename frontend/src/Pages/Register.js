@@ -162,7 +162,7 @@ export default function Register({ modalState }) {
               <Form.Item name="fullName" rules={[{ required: true, validator: validateInput },]}>
                 <div className=" flex flex-col gap-2">
                   <label>Full Name: </label>
-                  <Input type="text" name="fullName" className=" w-[300px] " placeholder="Full Name" />
+                  <Input type="text" required name="fullName" className=" w-[300px] " placeholder="Full Name" />
                 </div>
               </Form.Item>
               <Form.Item name="phone" className=" w-[200px]" rules={[{ required: true, validator: validatePhoneNumber }]}>

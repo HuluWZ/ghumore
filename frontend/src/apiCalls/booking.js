@@ -1,71 +1,73 @@
-import axiosInstance from "./axiosinstance";
+import axiosInstance from './axiosinstance'
 
 // Create Booking
 export const createBooking = async (bookingData, token) => {
   try {
     const response = await axiosInstance.post(
       `/api/booking/create`,
-      bookingData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-    );
-    return response.data;
+      bookingData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return response.data
   } catch (error) {
-    throw new Error(error.response.data.message);
+    throw new Error(error.response.data.message)
   }
-};
+}
 
 //create cart
 export const createCart = async (Activity, token) => {
   try {
     const response = await axiosInstance.post(
       `/api/cart/create`,
-      { activity: Activity }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-    );
-
-    return response.data;
-  } catch (error) {
-
-    throw new Error(error.response.data.message);
-  }
-};
-
-//get all cart
-export const getAllCart = async (token) => {
-
-  try {
-    const response = await axiosInstance.get(`/api/cart/get/my/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+      { activity: Activity },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
 
     return response.data
   } catch (error) {
-    throw error;
+    throw new Error(error.response.data.message)
   }
+}
 
+//get all cart
+export const getAllCart = async token => {
+  try {
+    const response = await axiosInstance.get(`/api/cart/get/my/`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return response.data
+  } catch (error) {
+    throw error
+  }
 }
 
 //delete cart
-export const deleteCart = async (id) => {
+export const deleteCart = async id => {
   // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', id)
 
   try {
-    const response = await axiosInstance.delete(`/api/cart/delete/${id}`);
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', response)
-    return response.data;
+    const response = await axiosInstance.delete(`/api/cart/delete/${id}`)
+    console.log(
 
+      response
+    )
+    console.log(response.data)
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // Update Booking
 export const updateBooking = async (id, bookingData) => {
@@ -73,79 +75,77 @@ export const updateBooking = async (id, bookingData) => {
     const response = await axiosInstance.put(
       `/api/booking/update/${id}`,
       bookingData
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // Get Booking by ID
-export const getBookingById = async (id) => {
+export const getBookingById = async id => {
   try {
-    const response = await axiosInstance.get(`/api/booking/get/${id}`);
-    return response.data;
+    const response = await axiosInstance.get(`/api/booking/get/${id}`)
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // Get All Bookings
 export const getAllBookings = async () => {
   try {
-    const response = await axiosInstance.get(`/api/booking/get`);
-    return response.data;
+    const response = await axiosInstance.get(`/api/booking/get`)
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // Delete Booking
-export const deleteBooking = async (id) => {
+export const deleteBooking = async id => {
   try {
-    const response = await axiosInstance.delete(`/api/booking/delete/${id}`);
-    return response.data;
+    const response = await axiosInstance.delete(`/api/booking/delete/${id}`)
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // Cancel Booking
 export const cancelBooking = async (id, token) => {
-
+  console.log('the booking id ', id)
   try {
     const response = await axiosInstance.put(`/api/booking/cancel/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-
-    return response.data;
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // Confirm Booking
-export const confirmBooking = async (id) => {
+export const confirmBooking = async id => {
   try {
-    const response = await axiosInstance.put(`/api/booking/confirm/${id}`);
-    return response.data;
+    const response = await axiosInstance.put(`/api/booking/confirm/${id}`)
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // Pay with Stripe for Booking
-export const payWithStripeBooking = async (id) => {
+export const payWithStripeBooking = async id => {
   try {
-    const response = await axiosInstance.put(`/api/booking/pay/${id}`);
-    return response.data;
+    const response = await axiosInstance.put(`/api/booking/pay/${id}`)
+    return response.data
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
 // const authenticateWithGoogle = async () => {
 //   try {
@@ -159,36 +159,35 @@ export const payWithStripeBooking = async (id) => {
 // Function to authenticate with Facebook
 const authenticateWithFacebook = async () => {
   try {
-    const response = await axiosInstance.get("/api/auth/facebook");
+    const response = await axiosInstance.get('/api/auth/facebook')
     // No specific response handling
   } catch (error) {
     // Handle error if needed
   }
-};
+}
 
-export const getMyBookings = async (token) => {
+export const getMyBookings = async token => {
   try {
     const response = await axiosInstance.get(`/api/booking/get/my/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
-export const getMyCartBookings = async (token) => {
-
+export const getMyCartBookings = async token => {
   try {
     const response = await axiosInstance.get(`/api/booking/cart/`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}

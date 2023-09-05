@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 export default function SecurePay() {
   const [selectOption, setSelectedOption] = useState("");
   const location = useLocation();
-  const { selectedActivity , data } =
-  location.state || {};
+  const { selectedActivity, data } =
+    location.state || {};
 
 
   const navigate = useNavigate()
@@ -25,12 +25,12 @@ export default function SecurePay() {
     event.preventDefault();
     // Perform any necessary logic with the selected option
     console.log("Selected option:", selectOption);
-    navigate("/securepayconfirm",{
+    navigate("/securepayconfirm", {
       state: {
         data: data
       }
     })
-    
+
   };
   return (
     <div className="SecureCheckoutPage">

@@ -204,6 +204,26 @@ export default function Header() {
     // Do something with the selected suggestion, such as initiating a search
   };
 
+  const inputRef1 = useRef(null);
+  const inputRef2 = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        (inputRef1.current && !inputRef1.current.contains(event.target)) ||
+        (inputRef2.current && !inputRef2.current.contains(event.target))
+      ) {
+        setShowDropdown(false);
+        setCategoryDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
 
   return (
@@ -234,6 +254,7 @@ export default function Header() {
             <div className="relative">
               <input
                 type="text"
+                // ref={inputRef1}
                 value={searchValue}
                 onChange={handleLocationChange}
                 className="px-4 py-2 border-0 rounded-md focus:outline-none  "
@@ -263,13 +284,14 @@ export default function Header() {
             <div className="relative">
               <input
                 type="text"
+                // ref={inputRef2}
                 value={categoryValue}
                 onChange={handleCategoryChange}
                 className=" px-4 py-2 border-0 rounded-md focus:outline-none "
                 placeholder="SkyDiving"
               />
               {categoryDropdown && (
-                <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
+                <ul className="absolute left-0 right-0  bg-white border border-gray-300 rounded-md shadow-lg">
                   {categorySuggestions.map((suggestion, index) => (
                     <li
                       key={index}

@@ -213,7 +213,7 @@ h2 {
 }
 .booked-data-cancel-info {
   display: flex;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
 }
 .booked-data-info-body {
   margin-left: 70px;

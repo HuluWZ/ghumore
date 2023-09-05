@@ -213,12 +213,11 @@ export default function SecureCheckout() {
           </div>
           <h2>Enter Promo (Coupon) Code</h2>
           <div className="last-detail-form">
-            <Form.Item name="promoCode" rules={[{ required: true },]}>
+            <Form.Item name="promoCode">
               <div className="form-item">
-                <label>Promo Code</label>
+                <label>Promo Code(optional)</label>
                 <Input
                   type="text"
-                  required
                   placeholder="Enter Coupon code if you have any"
                 />
               </div>

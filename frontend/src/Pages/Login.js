@@ -170,7 +170,7 @@ export default function Login({ modalState }) {
             </div>
           </Form>
           <div id="googleSigninDiv" className="googleSigninDiv mb-5"></div>
-          <div className=" ml-20">
+          <div className=" ml-[70px]">
 
             <GoogleOAuthProvider clientId={clientId}>
               <GoogleLogin
@@ -198,7 +198,7 @@ export default function Login({ modalState }) {
                 }}
               />
             </GoogleOAuthProvider>
-            <span>
+            <span className=" ml-[-120px] mt-56">
               Don't have an account?
               <Link to="/register">
                 <span className="hover:text-blue-500 cursor-pointer">
