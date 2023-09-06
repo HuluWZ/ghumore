@@ -61,12 +61,12 @@ export default function ContactUs() {
 
         <div className=" mt-[-50px] md:mt-0 flex flex-col ">
           <div className="font-bold  md:font-extrabold">
-            <h1 className=" md:pr-96">Contact Us</h1>
+            <h1 className=" md:pr-96 text-[40px]">Contact Us</h1>
           </div>
           <div className="flex flex-col md:flex-row">
             <div className="contact-form">
               <form onSubmit={handleSubmit}>
-                <div className="form-field">
+                <div className="form-field " >
                   <input
                     type="text"
                     className="custom-fields"

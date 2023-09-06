@@ -133,7 +133,7 @@ export default function SecureCheckout() {
     <div className="SecureCheckoutPage overflow-x-hidden">
       <Form onFinish={onFinish} className="form">
         <div className="secure-checkout-form">
-          <h1>Secure Checkout</h1>
+          <h1 className=" text-[35px]">Secure Checkout</h1>
           <h2>Contact Detail</h2>
           <div className="contact-detail-form">
             <div>

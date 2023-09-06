@@ -14,7 +14,7 @@ export default function AboutUs() {
       <br />
       <br />
       <br />
-      <h1 className=" text-[40px] md:text-[60px] md:my-7 "> About Our Company </h1>
+      <h1 className=" text-[35px] md:text-[60px] md:my-7 "> About Our Company </h1>
       <div className="Company  md:mb-5 md:ml-24 ml-5">
         <div className="company-image ">
           <LazyLoadImage className=" rounded w-[760px] h-[477px] object-cover" src="/image8@2x.png" lazy="lazy" />

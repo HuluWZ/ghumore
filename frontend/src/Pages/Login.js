@@ -48,17 +48,19 @@ export default function Login({ modalState }) {
       dispatch(setLoader(false));
       console.log(response, " Response");
       if (response.success) {
-        setLoginMessage("Loged in Successfully!");
-        setIsSucess("green");
-        message.success("Login Successfully");
-
         localStorage.setItem("token", response.token);
-        window.location.href = "/";
+        handleSuccess();
+
+        setTimeout(function () {
+          window.location.href = "/";
+        }, 6000); // Delay the redirect by 1 second (adjust the delay as needed)
+
       } else {
+        handleError()
         // throw new Error(response.message);
-        setLoginMessage("Invalid Credentials!");
-        setIsSucess("red");
-        message.error("Invalid Credentials!");
+        // setLoginMessage("Invalid Credentials!");
+        // setIsSucess("red");
+        // message.error("Invalid Credentials!");
       }
       // setLoginMessage('')
     } catch (error) {
@@ -97,7 +99,7 @@ export default function Login({ modalState }) {
 
 
   const validateEmail = (rule, value, callback) => {
-    console.log(" Value Email ", value);
+    // console.log(" Value Email ", value);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailRegex.test(value)) {
       callback(); // Validation successful
@@ -107,7 +109,7 @@ export default function Login({ modalState }) {
   };
 
   const validatePassword = (rule, value, callback) => {
-    console.log(" Value Password ", value);
+    // console.log(" Value Password ", value);
     if (value.length >= 8) {
       callback(); // Validation successful
     } else {
@@ -165,7 +167,7 @@ export default function Login({ modalState }) {
                 className="submit-btn bg-darkslateblue-100"
                 typeof="submit"
               >
-                Submit
+                Login
               </button>
             </div>
           </Form>

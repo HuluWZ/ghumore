@@ -345,6 +345,7 @@ export default function Profile() {
               <h3>Upcoming Booking</h3>
               {/* code trial with a pagination */}
               {currentItems.map((u) => {
+                console.log('details of profile', u.id)
                 return (
                   <div className="upcoming-booking" key={u.id}>
                     <div className="single-book">
@@ -372,7 +373,7 @@ export default function Profile() {
                         </span>
                         <span>{u.date}</span>
                       </div>
-                      <div className="single-book-col ml-2 mr-2">
+                      {/* <div className="single-book-col ml-2 mr-2">
                         <span className="font-semibold flex mr-4">
                           <img
                             className=" w-5 h-5 overflow-hidden shrink-0"
@@ -381,8 +382,8 @@ export default function Profile() {
                           />
                           Location
                         </span>
-                        <span>{u.activity.location.name}</span>
-                      </div>
+                        <span>{u.location.name}</span>
+                      </div> */}
                       <div className="single-book-col">
                         <span className="font-semibold flex">
                           <img
@@ -397,6 +398,7 @@ export default function Profile() {
                       <div className="single-book-col">
                         <div className=" hover:cursor-pointer rounded-md bg-darkslateblue-100 m-2 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                           <div onClick={() => {
+                            console.log('user details', { ...u.activity })
                             navigate("/select", {
                               state: { item: { ...u.activity } },
                             });
@@ -440,7 +442,7 @@ export default function Profile() {
                     <th className="text-sm font-medium">Journey Date</th>
                     <th className="text-sm font-medium">Booking Date</th>
                     <th className="text-sm font-medium">Booking Status</th>
-                    <div className="text-sm font-medium">View and Manage</div>
+                    {/* <div className="text-sm font-medium">View and Manage</div> */}
                   </tr>
 
                   {historyBooking.map((h) => {
@@ -453,9 +455,9 @@ export default function Profile() {
                         <td className="font-medium">{h.date}</td>
                         <td className="font-medium">{h.createdAt}</td>
                         <td className="font-medium">{h.status}</td>
-                        <div className=" rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
+                        {/* <div className=" rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                           View and Manage
-                        </div>
+                        </div> */}
                       </tr>
                     );
                   })}
@@ -499,7 +501,12 @@ export default function Profile() {
 
                       <div className="single-book-col">
                         <div className=" hover:cursor-pointer rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
-                          <div className="">{`View & Manage`}</div>
+                          <div onClick={() => {
+                            console.log('user details', { ...u.activity })
+                            navigate("/select", {
+                              state: { item: { ...u.activity } },
+                            });
+                          }} className="">{`View & Manage`}</div>
                         </div>
                         <div
                           onClick={() => {

@@ -27,7 +27,7 @@ export default function SimilarActivity({ item }) {
     }, []);
     console.log(result[1]);
     return (
-        <div className="md:ml-[1000px] lg:ml-60 xl:ml-[800px]">
+        <div className="md:ml-[1000px] mt-16 lg:ml-50 xl:ml-[600px]">
             <div className=" md:flex  w-[1800px] justify-start  md:flex-col  lg:items-center mt-10  md:px-48 ">
                 <h1 className=" md:text-[35px] md:px-12 text-[23px] pb-5 ml-[-27px]">Similar Tours & Experiences</h1>
                 <div className=" flex flex-col md:flex-row gap-16 md:m-7">

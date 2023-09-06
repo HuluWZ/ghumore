@@ -45,7 +45,7 @@ export const getAllCart = async token => {
         Authorization: `Bearer ${token}`
       }
     })
-
+    // console.log('activity has to be found in here', response.data)
     return response.data
   } catch (error) {
     throw error
@@ -58,11 +58,11 @@ export const deleteCart = async id => {
 
   try {
     const response = await axiosInstance.delete(`/api/cart/delete/${id}`)
-    console.log(
+    // console.log(
 
-      response
-    )
-    console.log(response.data)
+    //   response
+    // )
+    // console.log(response.data)
     return response.data
   } catch (error) {
     return error.message
@@ -114,7 +114,7 @@ export const deleteBooking = async id => {
 
 // Cancel Booking
 export const cancelBooking = async (id, token) => {
-  console.log('the booking id ', id)
+  // console.log('the booking id ', id)
   try {
     const response = await axiosInstance.put(`/api/booking/cancel/${id}`, {
       headers: {

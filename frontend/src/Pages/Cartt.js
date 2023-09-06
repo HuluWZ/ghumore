@@ -128,8 +128,9 @@ export default function Cart() {
             const response = await getAllCart(token)
             if (response.success) {
                 // setHistoryBooking(response["history"]);
+
                 setUpcomingBooking(response['cart'])
-                // console.log("my booking history", historyBooking);
+                console.log("my booking history", response['cart']);
                 // console.log("my booking upcoming", upcomingBooking);
             } else {
                 throw new Error(response.error)
@@ -201,6 +202,7 @@ export default function Cart() {
                             {/* Add your code for the My Booking view form here (cloned from the profile detail form) */}
                             {/* code trial with a pagination */}
                             {currentItems.map(u => {
+                                console.log('datas in u', u)
                                 return (
                                     <div className='upcoming-booking' key={u.id}>
                                         <div className='single-book'>
@@ -214,7 +216,7 @@ export default function Cart() {
                                                     Product
                                                 </span>
                                                 <span className='font-semibold inline-block font-medium text-orange-800'>
-                                                    {u.activity.name}
+                                                    {/* {u.activity.name} */}
                                                 </span>
                                             </div>
                                             <div className='single-book-col'>
@@ -237,7 +239,7 @@ export default function Cart() {
                                                     />
                                                     Location
                                                 </span>
-                                                <span>{u.activity.location.name}</span>
+                                                {/* <span>{u.activity.location.name}</span> */}
                                             </div>
                                             <div className='single-book-col'>
                                                 <span className='font-semibold flex'>
@@ -306,7 +308,7 @@ export default function Cart() {
                                                     Product
                                                 </span>
                                                 <span className='font-semibold inline-block font-medium text-orange-800'>
-                                                    {u.activity.name}
+                                                    {/* {u.activity.name} */}
                                                 </span>
                                             </div>
                                             <div className='single-book-col'>
