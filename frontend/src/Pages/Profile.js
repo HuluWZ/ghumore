@@ -437,14 +437,14 @@ export default function Profile() {
               <div className="completed-booking">
                 <table>
                   <tr className="tr">
-                    <th className="text-sm font-medium">Booking Ref Number</th>
+                    <th className="text-sm font-medium">Product</th>
                     <th className="text-sm font-medium">Trip Details</th>
                     <th className="text-sm font-medium">Journey Date</th>
                     <th className="text-sm font-medium">Booking Date</th>
                     <th className="text-sm font-medium">Booking Status</th>
                     {/* <div className="text-sm font-medium">View and Manage</div> */}
                   </tr>
-
+ 
                   {historyBooking.map((h) => {
                     return (
                       <tr className="tr">
@@ -541,7 +541,7 @@ export default function Profile() {
                 <h2 className=" px-4"> Completed Booking</h2>
                 <table>
                   <tr className="tr">
-                    <th className="text-sm font-medium">Booking Ref Number</th>
+                    <th className="text-sm font-medium">Product</th>
                     {/* <th className="text-sm font-medium">Trip Details</th> */}
                     <th className="text-sm font-medium">Journey Date</th>
                     {/* <th className="text-sm font-medium">Booking Date</th> */}

@@ -216,7 +216,7 @@ export default function Cart() {
                                                     Product
                                                 </span>
                                                 <span className='font-semibold inline-block font-medium text-orange-800'>
-                                                    {/* {u.activity.name} */}
+                                                    {u.activity.name}
                                                 </span>
                                             </div>
                                             <div className='single-book-col'>
@@ -226,9 +226,9 @@ export default function Cart() {
                                                         alt=''
                                                         src='/date4.svg'
                                                     />
-                                                    Date
+                                                    Duration  
                                                 </span>
-                                                <span>{u.date}</span>
+                                                <span>{u.activity.duration}</span>
                                             </div>
                                             <div className='single-book-col ml-2 mr-2'>
                                                 <span className='font-semibold flex mr-4'>
@@ -239,7 +239,7 @@ export default function Cart() {
                                                     />
                                                     Location
                                                 </span>
-                                                {/* <span>{u.activity.location.name}</span> */}
+                                                <span>{u.activity.location.name}</span>
                                             </div>
                                             <div className='single-book-col'>
                                                 <span className='font-semibold flex'>
@@ -308,7 +308,7 @@ export default function Cart() {
                                                     Product
                                                 </span>
                                                 <span className='font-semibold inline-block font-medium text-orange-800'>
-                                                    {/* {u.activity.name} */}
+                                                    {u.activity.name}
                                                 </span>
                                             </div>
                                             <div className='single-book-col'>
@@ -318,9 +318,9 @@ export default function Cart() {
                                                         alt=''
                                                         src='/date4.svg'
                                                     />
-                                                    Date
+                                                    Duration
                                                 </span>
-                                                <span>{u.date}</span>
+                                                <span>{u.activity.duration}</span>
                                             </div>
 
                                             <div className="single-book-col">

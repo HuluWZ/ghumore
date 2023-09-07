@@ -6,6 +6,7 @@ import { setLoader } from "../redux/loaderSlice";
 import { Form, message, Input, Button } from "antd";
 import { createBooking } from "../apiCalls/booking";
 import { useForm } from 'antd/lib/form/Form';
+import DrawerAppBar from "../Components/Navbar/DrawerAppBar";
 
 var token = localStorage.getItem("token")
 
@@ -130,7 +131,9 @@ export default function SecureCheckout() {
   };
 
   return (
-    <div className="SecureCheckoutPage overflow-x-hidden">
+    <>
+    <DrawerAppBar />
+    <div className="SecureCheckoutPage overflow-x-hidden mb-10">
       <Form onFinish={onFinish} className="form">
         <div className="secure-checkout-form">
           <h1 className=" text-[35px]">Secure Checkout</h1>
@@ -140,13 +143,13 @@ export default function SecureCheckout() {
               <Form.Item name="firstname" rules={[{ required: true, validator: validateInput },]}>
                 <div className="form-item">
                   <label>First Name</label>
-                  <Input type='text' name="firstname" required placeholder="John" />
+                  <Input type='text' name="firstname" required placeholder="John"  className=" w-[250px]"/>
                 </div>
               </Form.Item>
               <Form.Item name="lastname" rules={[{ required: true, validator: validateInput },]}>
                 <div className="form-item">
                   <label>Last Name</label>
-                  <Input type="text" required placeholder="Kevin" />
+                  <Input type="text" required placeholder="Kevin" className=" w-[250px]"/>
                 </div>
               </Form.Item>
             </div>
@@ -156,7 +159,7 @@ export default function SecureCheckout() {
               >
                 <div className="form-item">
                   <label>Email</label>
-                  <Input type="email" placeholder="johnkevin@gmail.com" />
+                  <Input type="email" placeholder="johnkevin@gmail.com" className=" w-[270px]"/>
                 </div>
               </Form.Item>
               <Form.Item name="mobile"
@@ -164,7 +167,7 @@ export default function SecureCheckout() {
               >
                 <div className="form-item">
                   <label>Mobile</label>
-                  <Input type="text" required placeholder="9291927548" />
+                  <Input type="text" required placeholder="9291927548" className=" w-[270px]"/>
                 </div>
               </Form.Item>
             </div>
@@ -182,7 +185,7 @@ export default function SecureCheckout() {
                     >
                       <div className="form-item">
                         <label>First Name</label>
-                        <Input type="text" required placeholder="John" />
+                        <Input type="text" required placeholder="John" className=" w-[250px]"/>
                       </div>
                     </Form.Item>
                   </div>
@@ -194,7 +197,7 @@ export default function SecureCheckout() {
                     >
                       <div className="form-item">
                         <label>Last Name</label>
-                        <Input type="text" required placeholder="Kevin" />
+                        <Input type="text" required placeholder="Kevin" className=" w-[250px]"/>
                       </div>
                     </Form.Item>
                   </div>
@@ -207,7 +210,7 @@ export default function SecureCheckout() {
             <Form.Item name="pickupLocation" rules={[{ required: true },]}>
               <div className="form-item">
                 <label>Pickup Location</label>
-                <Input type="text" required placeholder="Enter your pickup location" />
+                <Input type="text" required placeholder="Enter your pickup location" className=" w-[250px]"/>
               </div>
             </Form.Item>
           </div>
@@ -218,7 +221,7 @@ export default function SecureCheckout() {
                 <label>Promo Code(optional)</label>
                 <Input
                   type="text"
-                  placeholder="Enter Coupon code if you have any"
+                  placeholder="Enter Coupon code if you have any" className=" w-[250px]"
                 />
               </div>
             </Form.Item>
@@ -291,5 +294,6 @@ export default function SecureCheckout() {
         © 2023 GhumoRe, All rights reserved.
       </div>
     </div>
+    </>
   );
 }
