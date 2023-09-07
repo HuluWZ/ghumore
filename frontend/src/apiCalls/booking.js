@@ -12,6 +12,7 @@ export const createBooking = async (bookingData, token) => {
         }
       }
     )
+    console.log('book created response', response.data)
     return response.data
   } catch (error) {
     throw new Error(error.response.data.message)
@@ -111,6 +112,18 @@ export const deleteBooking = async id => {
     return error.message
   }
 }
+
+export const cancelTheBooking = async (id) => {
+  // console.log('the booking id ', id)
+  try {
+    const response = await axiosInstance.put(`/api/booking/cancel/${id}`)
+    console.log(response, 'this is cancel booking')
+    return response.data
+  } catch (error) {
+    return error.message
+  }
+}
+
 
 // Cancel Booking
 export const cancelBooking = async (id, token) => {

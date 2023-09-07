@@ -1,5 +1,5 @@
 .SecureCheckoutPage {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   display: flex;
   flex-wrap: wrap;
 }
@@ -161,7 +161,8 @@ h2 {
   margin: 10px;
 }
 .next-btn{
-  margin: 40px auto;
+  /* margin: 40px auto; */
+  margin-left: 70px;
   width: 50%;
 }
 .review-order-cost {

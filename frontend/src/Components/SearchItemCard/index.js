@@ -30,14 +30,14 @@ export default function SearchItemCard({
         <h2>{name}</h2>
 
         <span className="flex flex-row">
-        {[0, 1, 2, 3, 4].map(() => (
-                  <img
-                    className="relative w-[15.55px] h-[15.64px]"
-                    alt=""
-                    src="/magicstar20.svg"
-                  />
-                ))}
-                {rating}
+          {[0, 1, 2, 3, 4].map(() => (
+            <img
+              className="relative w-[15.55px] h-[15.64px]"
+              alt=""
+              src="/magicstar20.svg"
+            />
+          ))}
+          {rating}
         </span>
         <div className="flex flex-row">
           <img
@@ -69,7 +69,7 @@ export default function SearchItemCard({
             state: { item: { ...item } },
           });
         }}
-        className="book-now">
+        className="book-now hover:cursor-pointer">
         BOOK NOW
       </span>
     </div>

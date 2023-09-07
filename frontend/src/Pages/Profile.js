@@ -435,6 +435,7 @@ export default function Profile() {
 
 
               <div className="completed-booking">
+                <h2 className=" px-4"> Completed Booking</h2>
                 <table>
                   <tr className="tr">
                     <th className="text-sm font-medium">Product</th>
@@ -444,7 +445,7 @@ export default function Profile() {
                     <th className="text-sm font-medium">Booking Status</th>
                     {/* <div className="text-sm font-medium">View and Manage</div> */}
                   </tr>
- 
+
                   {historyBooking.map((h) => {
                     return (
                       <tr className="tr">

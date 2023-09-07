@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./securecheckout.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { confirmBooking } from "../apiCalls/booking";
 
 export default function SecurePay() {
   const [selectOption, setSelectedOption] = useState("");
@@ -10,7 +11,8 @@ export default function SecurePay() {
 
 
   const navigate = useNavigate()
-  console.log(data, 'data')
+  console.log(data._id, 'Booking Id')
+  const bookId = data._id;
   const ColoredLine = ({ color }) => (
     <hr
       className="line-break"
@@ -21,15 +23,33 @@ export default function SecurePay() {
       }}
     />
   );
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Perform any necessary logic with the selected option
-    console.log("Selected option:", selectOption);
-    navigate("/securepayconfirm", {
-      state: {
-        data: data
+    try {
+
+
+      const response = await confirmBooking(bookId);
+      console.log(response);
+
+      if (response.success) {
+        navigate("/securepayconfirm", {
+          state: {
+            data: data
+          }
+        })
+      } else {
+        throw new Error(response.message);
       }
-    })
+    } catch (error) {
+
+      console.log(error.message, "error");
+    }
+    // navigate("/securepayconfirm", {
+    //   state: {
+    //     data: data
+    //   }
+    // })
 
   };
   return (

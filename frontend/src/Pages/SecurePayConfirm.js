@@ -5,6 +5,7 @@ import DrawerAppBar from "../Components/Navbar/DrawerAppBar";
 import Footer from "../Components/Footer";
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { cancelTheBooking } from "../apiCalls/booking";
 
 
 export default function SecurePayConfirm() {
@@ -13,6 +14,8 @@ export default function SecurePayConfirm() {
   const navigate = useNavigate()
   const { data } = location.state || {}
 
+  console.log(data._id)
+  const bookId = data._id;
   const handleCancelError = () => {
     toast.error('Canot cancel this booking now')
   }
@@ -30,9 +33,24 @@ export default function SecurePayConfirm() {
       }}
     />
   );
-  const cancelBooking = () => {
-    handleCancelSuccess()
-    navigate('/')
+  const cancelBooking = async () => {
+    try {
+
+
+      const response = await cancelTheBooking(bookId);
+      console.log(response);
+
+      if (response.success) {
+        handleCancelSuccess()
+        console.log('success');
+        navigate("/")
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+
+      console.log(error.message, "error");
+    }
   }
   return (
     <div className=" w-screen">
