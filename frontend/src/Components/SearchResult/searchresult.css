@@ -122,7 +122,7 @@ img{
 }
 
 .checkbox-label {
-  position: relative;
+  /* position: relative; */
   padding-left: 25px;
   cursor: pointer;
 }
@@ -156,7 +156,7 @@ img{
   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.3);
   border-radius: 1rem;
   padding: 30px;
-  position: relative; 
+  /* position: relative;  */
   display: flex;
   min-height: 30vh;
   width: 70vw;
@@ -199,7 +199,7 @@ img{
 }
 .book-now{
   background-color: blue;
-  position: absolute;
+  /* position: absolute; */
   bottom: 10px;
   right: 10px;
   color: white;
@@ -268,7 +268,7 @@ h2{
   background-color: orangered;
 }
 .recomendation-card{
-  position: relative;
+  /* position: relative; */
     text-align: left;
     width: 300px;
     padding: 5px;

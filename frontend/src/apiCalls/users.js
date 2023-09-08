@@ -93,7 +93,7 @@ export const changePassword = async (oldPassword, newPassword) => {
         },
       }
     );
-
+    // console.log(response)
     return response.data; // Assuming your API returns data with a success message
   } catch (error) {
     // Handle error here

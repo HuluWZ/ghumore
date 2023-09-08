@@ -22,8 +22,13 @@ export default function SearchItemCard({
   const navigate = useNavigate();
   console.log(images[0]);
   return (
-    <div className="search-item">
-      <div className="item-image">
+    // .item - image{
+    //     border - radius: 1rem;
+    //     width: 300px;
+    //     height: 250px;
+    //   }
+    <div className="search-item flex-row">
+      <div className="md:item-image md:w-[300px]">
         <img src={images[0]} alt="img" className="img-search-item" />
       </div>
       <div className="item-detail">
@@ -58,20 +63,21 @@ export default function SearchItemCard({
         <div>
           <h2>₹{price}</h2>
         </div>
+        <span
+          onClick={() => {
+            console.log(item, "book now error why");
+            navigate("/select", {
+              state: { item: { ...item } },
+            });
+          }}
+          className="hover:cursor-pointer bg-blue-700 px-[45px] py-[10px] w-48 md:ml-64 rounded-md">
+          BOOK NOW
+        </span>
       </div>
       <span className="item-duration">
         {duration} {durationType}
       </span>
-      <span
-        onClick={() => {
-          console.log(item, "book now error why");
-          navigate("/select", {
-            state: { item: { ...item } },
-          });
-        }}
-        className="book-now hover:cursor-pointer">
-        BOOK NOW
-      </span>
+
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom'
 
 export default function SelectedItem() {
   let locate = useLocation();
-  console.log(locate.state.item, 'selected')
+  console.log(locate.state.item, 'selected item cehck for search')
   return (
     <div className='SelectedItem overflow-x-hidden max-w-screen'>
       {/* <NavbarSearch/>

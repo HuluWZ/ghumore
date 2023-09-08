@@ -86,16 +86,14 @@ const SearchResult = () => {
   // Experience selection
   const handleExperienceSelection = (experience) => {
     navigate(`/search?category=${experience}&location=&activity=`);
-    // window.location.href = newUrl;
     window.location.reload();
     setSelectedExperience(experience === selectedExperience ? null : experience);
   };
 
   // Location selection
-  
+
   const handleLocationSelection = (location) => {
-     navigate(`/search?category=&location=${location}&activity=`) ;
-    // window.location.href = newUrl;
+    navigate(`/search?category=&location=${location}&activity=`);
     window.location.reload();
   };
 
@@ -138,6 +136,7 @@ const SearchResult = () => {
   };
 
   // Filter the results
+
   const filteredResults = result.filter((item) => {
     const categoryMatch =
       !selectedExperience || item.category === selectedExperience;
@@ -155,7 +154,7 @@ const SearchResult = () => {
     return categoryMatch && locationMatch && durationMatch && priceMatch;
   });
 
-  console.log(filteredResults,'filtered result checker in detail ...............')
+  console.log(filteredResults, 'filtered result checker in detail ...............')
 
 
   useEffect(() => {
@@ -169,6 +168,7 @@ const SearchResult = () => {
           categoryParam
         );
         if (response.success) {
+          console.log(response)
           setResult(response.searchResult);
         } else {
           throw new Error(response.message);
@@ -270,7 +270,7 @@ const SearchResult = () => {
         </div>
 
         <div className="main">
-          
+
           <div className="search-list">
             {filteredResults.length > 0 ? (
               filteredResults.map((item) => (
@@ -278,6 +278,7 @@ const SearchResult = () => {
                   key={item._id}
                   name={item.name}
                   description={item.description}
+
                   price={item.price}
                   location={item.location.name}
                   rating={item?.averageRating?.toFixed(1) || 0}

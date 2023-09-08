@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LoginUser, SocailAuth } from "../apiCalls/users";
 import { setLoader } from "../redux/loaderSlice";
@@ -53,6 +53,7 @@ export default function Login({ modalState }) {
 
         setTimeout(function () {
           window.location.href = "/";
+          // redirect('/')
         }, 6000); // Delay the redirect by 1 second (adjust the delay as needed)
 
       } else {

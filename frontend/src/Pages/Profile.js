@@ -5,7 +5,7 @@ import Footer from "../Components/Footer";
 import "./profile.css";
 import { Form, message, Input, Button } from "antd";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { logout } from "../redux/userSlice";
 import { cancelBooking, getMyBookings } from "../apiCalls/booking";
+import Password from "antd/es/input/Password";
 
 const rules = [{}];
 
@@ -44,20 +45,43 @@ export default function Profile() {
     toast.success('successful Canceled!');
   }
 
+  // HANDLE PASSWORD NOT MUCH ERROR 
+  const handlePASSWORDNOTMUCHError = () => {
+    toast.error('comfirmation password not much');
+  }
+  // handle old password not correct 
+  const handleoldpasswordError = () => {
+    toast.error('old password not correct');
+  }
+
+  // handle Password changed succces
+  const handlepasswordSuccess = () => {
+    toast.success('password changed successfully');
+  }
+
+  // handle success and failure of profile update 
+  const handleUpdateError = () => {
+    toast.error('Profile Update not completed please fill all required fields');
+  }
+  const handleUpdateSuccess = () => {
+    toast.success('Profile successfully updated');
+  }
+
   const [activeForm, setActiveForm] = useState("profile-detail-form");
 
   const handleChangeForm = (formId) => {
     console.log(" FORMD ID = ", formId);
     setActiveForm(formId);
     console.log(" FORM DATA ", activeForm);
-    
+
   };
 
   const handlePasswordSubmit = async (values) => {
     // take data to submit
     console.log(values);
     if (values.newPassword !== values.confirmPassword) {
-      message.error("New password and confirm password do not match");
+      handlePASSWORDNOTMUCHError()
+      // message.error("New password and confirm password do not match");
       return;
     }
     try {
@@ -66,16 +90,26 @@ export default function Profile() {
         values.oldPassword,
         values.newPassword
       );
-      console.log(response, "response passowrd change");
       dispatch(setLoader(false));
       if (response.success) {
-        message.success(response.message);
+        handlepasswordSuccess();
+        setTimeout(function () {
+          window.location.reload();
+          // redirect('/')
+        }, 6000);
+        // message.success(response.message);
       } else {
+
         throw new Error(response.error);
       }
     } catch (error) {
-      message.error(error.message);
-      console.log(error.message, "error");
+
+      // message.error(error.message);
+
+      handleoldpasswordError()
+      dispatch(setLoader(false)); // Stop the loading state
+
+      // redirect('/profile')
     }
   };
 
@@ -94,8 +128,9 @@ export default function Profile() {
       console.log(response, values, " Update Response");
       dispatch(setLoader(false));
       if (response.success) {
-        message.success(response.message);
-        navigate("/");
+        handleUpdateSuccess()
+        // message.success(response.message);
+        // navigate("/");
       } else {
         throw new Error(response.message);
       }

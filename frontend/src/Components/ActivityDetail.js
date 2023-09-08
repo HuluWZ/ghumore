@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ActivityDetail = ({ response }) => {
+    console.log(response.overview);
     const divStyle = {
         padding: '1px',
         marginTop: '35px'

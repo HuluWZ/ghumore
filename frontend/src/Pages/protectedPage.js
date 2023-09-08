@@ -28,7 +28,7 @@ function ProtectedPage({ children }) {
     } catch (error) {
       message.error(error.message);
       console.log(error.message);
-        navigate("/");
+      navigate("/");
     }
   };
 
@@ -39,49 +39,16 @@ function ProtectedPage({ children }) {
   }, []);
   return (
     <>
-      {/*header*/}
-      {/* <div className="flex justify-between item-center bg-primary p-5">
-        <h1
-          className="text-2xl text-white cursor-pointer"
-          onClick={() => navigate("/")}>
-          Dishiki District
-        </h1>
-        <div className="bg-white py-2 px-5 rounded flex gap-1 items-center">
-          <i className="ri-shield-user-line"></i>
 
-          {user && user.name ? (
-            <span
-              className="underline cursor-pointer uppercase"
-              onClick={() => {
-                if (user.role === "user") {
-                  navigate("/profile");
-                } else {
-                  navigate("/admin");
-                }
-              }}>
-              {user.name}
-            </span>
-          ) : (
-            <button
-              className="login-button"
-              onClick={() => {
-                navigate("/login");
-              }}>
-              Login
-            </button>
-          )}
-        </div>
-      </div> */}
-      {/* <Navbar/> */}
-      <div  className="yellow-bar">
+      <div className="yellow-bar">
         Book tours, attractions & things to do with GHUMORE
       </div>
-      <DrawerAppBar/>
+      <DrawerAppBar />
       {/*body*/}
       <div>
         <div> {children} </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
