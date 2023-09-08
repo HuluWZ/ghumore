@@ -3,11 +3,27 @@ import "./footer.css";
 import { useNavigate } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import TermsAndCondition from "../TermsAndCondition";
+import { useEffect } from "react";
 
 
 
 export default function Footer() {
+  useEffect(() => {
+    const handleLinkClick = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
+    const links = document.querySelectorAll('.footer-link');
+    links.forEach((link) => {
+      link.addEventListener('click', handleLinkClick);
+    });
+
+    return () => {
+      links.forEach((link) => {
+        link.removeEventListener('click', handleLinkClick);
+      });
+    };
+  }, []);
 
   const navigate = useNavigate();
   return (
@@ -28,19 +44,19 @@ export default function Footer() {
           <ul>
             <li>
               {" "}
-              <Link to="/aboutus">Company</Link>
+              <Link to="/aboutus" className=" footer-link">Company</Link>
             </li>
             <li>
-              <Link to="/contactus">Contact Us</Link>
+              <Link to="/contactus" className=" footer-link">Contact Us</Link>
             </li>
 
-            <li><Link to="/termsandconditions">Terms and Conditions</Link> </li>
+            <li><Link to="/termsandconditions" className=" footer-link">Terms and Conditions</Link> </li>
           </ul>
         </div>
           <div className="footer-lists">
             <h2>Activities</h2>
             <ul>
-              <li
+              <li className=" footer-link"
                 onClick={() => {
                   navigate(
                     `/search?category=&location=&activity=outdoor activities`
@@ -51,7 +67,7 @@ export default function Footer() {
                   Outdoor Activities
                 </Link>
               </li>
-              <li
+              <li className=" footer-link"
                 onClick={() => {
                   navigate(`/search?category=trekking&location=&activity=`);
                 }}
@@ -60,21 +76,21 @@ export default function Footer() {
                   Trekking
                 </Link>
               </li>
-              <li
+              <li className=" footer-link"
                 onClick={() => {
                   navigate(`/search?category=skydiving&location=&activity=`);
                 }}
               >
-                <Link to="/search?category=skydiving&location=&activity=">
+                <Link to="/search?category=skydiving&location=&activity=" className=" footer-link"> 
                   Skydiving
                 </Link>
               </li>
-              <li
+              <li className=" footer-link"
                 onClick={() => {
                   navigate(`/search?category=tree ziplining&location=&activity=`);
                 }}
               >
-                <Link to="/search?category=tree ziplining&location=&activity=">
+                <Link to="/search?category=tree ziplining&location=&activity=" className=" footer-link">
                   Tree Ziplining
                 </Link>
               </li>
@@ -83,15 +99,15 @@ export default function Footer() {
           <div className="footer-lists">
             <h2>Quick Link</h2>
             <ul>
-              <li
+              <li className=" footer-link"
                 onClick={() => {
                   navigate(`/destinations`);
                 }}
               >
-                <Link to="/destinations">Destinations</Link>
+                <Link to="/destinations" className=" footer-link">Destinations</Link>
               </li>
 
-              <li><Link to="/privacypolicy">Privacy</Link> </li>
+              <li><Link to="/privacypolicy" className=" footer-link">Privacy</Link> </li>
 
 
             </ul>
@@ -101,25 +117,7 @@ export default function Footer() {
 
 
 
-          <div className="footer-lists">
-            <h2>Company</h2>
-            <ul>
-              <li
-                onClick={() => {
-                  navigate(`/login`);
-                }}
-              >
-                <Link to="/login">Login</Link>
-              </li>
-              <li
-                onClick={() => {
-                  navigate(`/register`);
-                }}
-              >
-                <Link to="/register">Register</Link>
-              </li>
-            </ul>
-          </div>
+          
 
         </div>
 

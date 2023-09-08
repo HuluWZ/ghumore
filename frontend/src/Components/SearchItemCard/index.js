@@ -64,7 +64,7 @@ export default function SearchItemCard({
       </span>
       <span
         onClick={() => {
-          console.log(item, "book");
+          console.log(item, "book now error why");
           navigate("/select", {
             state: { item: { ...item } },
           });

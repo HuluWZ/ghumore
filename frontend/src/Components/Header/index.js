@@ -251,7 +251,7 @@ export default function Header() {
               <img className="" alt="" src="/location.svg" />
               Location
             </div>
-            <div className="relative">
+            <div className="">
               <input
                 type="text"
                 // ref={inputRef1}
@@ -281,7 +281,7 @@ export default function Header() {
               <img className="" alt="" src="/location.svg" />
               Category
             </div>
-            <div className="relative">
+            <div className="">
               <input
                 type="text"
                 // ref={inputRef2}
@@ -304,28 +304,7 @@ export default function Header() {
                 </ul>
               )}
             </div>
-            {/* <input
-              type="text"
-              placeholder="SkyDiving"
-              value={categoryValue}
-              onChange={handleCategorySearchChange}
-              onClick={() => setIsCategoryOpen(true)}
-            />
-
-            {isCategoryOpen && (
-
-              <div className="dropdown ml-24 sm:ml-36 msm:ml-[180px] md:ml-[530px] mds:ml-[585px] xsm:ml-[155px] xm:ml-[910px] xll:ml-[850px] xml:ml-[930px] xxl:ml-[1145px] lg:ml-[600px] mdd:ml-[630px] xl:ml-[800px] mt-20 md:mt-20">
-                <ul className="dropdown-list px-16 ">
-                  {filteredCategories.slice(0, 10).map((item) => (
-                    <li key={item} onClick={() => handleCategorySelect(item)}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              // </div>
-            )} */}
+         
           </div>
 
 

@@ -57,7 +57,7 @@ function DrawerAppBar(props) {
 
     if (link === "Testimonials") {
       setIsModalOpen(false);
-      await navigate("/");
+      // await navigate("/");
       const testimonialSection = document.getElementById("testimonial");
       testimonialSection.scrollIntoView({ behavior: "smooth" });
     }

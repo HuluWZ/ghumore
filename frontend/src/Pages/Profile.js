@@ -50,6 +50,7 @@ export default function Profile() {
     console.log(" FORMD ID = ", formId);
     setActiveForm(formId);
     console.log(" FORM DATA ", activeForm);
+    
   };
 
   const handlePasswordSubmit = async (values) => {
@@ -203,7 +204,7 @@ export default function Profile() {
 
   return (
     // <div className="  md:w-[1540px]  h-[100rem] flex flex-col items-center overflow-x-hidden">
-    <div className="w-screen md:w-[1540px] min-h-[70rem] md:h-[90rem] flex flex-col items-center overflow-x-hidden">
+    <div className="w-screen md:w-[1540px] min-h-[110rem] md:h-[125rem] flex flex-col items-center mb-100px overflow-x-hidden">
       <div className=" Poster  h-[400px] bg-[url(/public/image90@2x.png)] bg-cover bg-no-repeat bg-[top]  w-[1300px] font-lato">
         <div className="font-semibold [text-shadow:0px_2px_3px_rgba(0,_0,_0,_0.25)]">
           My Profile
@@ -434,28 +435,28 @@ export default function Profile() {
 
 
 
-              <div className="completed-booking">
+              <div className="completed-booking mb-[20px]">
                 <h2 className=" px-4"> Completed Booking</h2>
-                <table>
+                <table >
                   <tr className="tr">
-                    <th className="text-sm font-medium">Product</th>
-                    <th className="text-sm font-medium">Trip Details</th>
-                    <th className="text-sm font-medium">Journey Date</th>
-                    <th className="text-sm font-medium">Booking Date</th>
-                    <th className="text-sm font-medium">Booking Status</th>
+                    <th className=" text-[17px]">Product</th>
+                    <th className=" text-[17px]">Trip Details</th>
+                    <th className=" text-[17px]">Journey Date</th>
+                    <th className=" text-[17px]">Booking Date</th>
+                    <th className=" text-[17px]">Booking Status</th>
                     {/* <div className="text-sm font-medium">View and Manage</div> */}
                   </tr>
 
                   {historyBooking.map((h) => {
                     return (
                       <tr className="tr">
-                        <td className="font-medium text-orange-800">
+                        <td className=" text-[15px] text-orange-800 font-bold">
                           {h.option.name}
                         </td>
-                        <td className="font-medium">{h.option.description}</td>
-                        <td className="font-medium">{h.date}</td>
-                        <td className="font-medium">{h.createdAt}</td>
-                        <td className="font-medium">{h.status}</td>
+                        <td className=" text-[15px]">{h.option.description}</td>
+                        <td className=" text-[15px]">{h.date}</td>
+                        <td className=" text-[15px]">{h.createdAt}</td>
+                        <td className=" text-[15px]">{h.status}</td>
                         {/* <div className=" rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
                           View and Manage
                         </div> */}

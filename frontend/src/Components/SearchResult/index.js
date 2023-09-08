@@ -8,11 +8,13 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { fetchAllLocations } from "../../apiCalls/location";
 import { fetchAllCategories } from "../../apiCalls/categories";
+import { useNavigate } from "react-router-dom";
+
 
 const SearchResult = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-
+  const navigate = useNavigate();
   const locationParam = queryParams.get("location");
   const activityParam = queryParams.get("activity");
   const categoryParam = queryParams.get("category");
@@ -28,7 +30,7 @@ const SearchResult = () => {
   const maxLocationsToShow = 3;
 
   const addLocationToDestinationList = async () => {
-    console.log("here")
+    // console.log("here")
     try {
       const response = await fetchAllLocations();
       if (response.success) {
@@ -37,7 +39,7 @@ const SearchResult = () => {
           element.push(response.location[index].name);
         }
         setLocations(element);
-        console.log(element, "location");
+        // console.log(element, "location");
       } else {
         throw new Error(response.message);
       }
@@ -54,7 +56,7 @@ const SearchResult = () => {
         for (let index = 0; index < response.category.length; index++) {
           element.push(response.category[index].name);
         }
-        console.log(element, "exprerience");
+        // console.log(element, "exprerience");
         setExperiences(element);
       } else {
         throw new Error(response.message);
@@ -83,14 +85,18 @@ const SearchResult = () => {
 
   // Experience selection
   const handleExperienceSelection = (experience) => {
-    setSelectedExperience(
-      experience === selectedExperience ? null : experience
-    );
+    navigate(`/search?category=${experience}&location=&activity=`);
+    // window.location.href = newUrl;
+    window.location.reload();
+    setSelectedExperience(experience === selectedExperience ? null : experience);
   };
 
   // Location selection
+  
   const handleLocationSelection = (location) => {
-    setSelectedLocation(location === selectedLocation ? null : location);
+     navigate(`/search?category=&location=${location}&activity=`) ;
+    // window.location.href = newUrl;
+    window.location.reload();
   };
 
   const [selectedDurations, setSelectedDurations] = useState([]);
@@ -148,6 +154,9 @@ const SearchResult = () => {
 
     return categoryMatch && locationMatch && durationMatch && priceMatch;
   });
+
+  console.log(filteredResults,'filtered result checker in detail ...............')
+
 
   useEffect(() => {
     addLocationToDestinationList();
@@ -261,14 +270,7 @@ const SearchResult = () => {
         </div>
 
         <div className="main">
-          <div className="search-features">
-            <span>{filteredResults.length} Results</span>
-            <select className="select-option">
-              <option value="option1">Featured</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
-          </div>
+          
           <div className="search-list">
             {filteredResults.length > 0 ? (
               filteredResults.map((item) => (
