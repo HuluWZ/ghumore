@@ -19,6 +19,7 @@ import LocationMap from "../LocationMap";
 import { createCart } from "../../apiCalls/booking";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReviewComponent from "../ReviewComponent";
 
 export default function SelectedItemBody({ item }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -125,7 +126,7 @@ export default function SelectedItemBody({ item }) {
         {/* the images section */}
         <div>
           <div>
-            <h1 className=" ml-7 md:ml-32 text-[30px] w-[500px] mb-4 text-start">
+            <h1 className=" ml-7 md:ml-32 text-[16px] md:text-[30px] w-[300px] md:w-[600px] mb-4 text-start">
               {item.name}
             </h1>
           </div>
@@ -158,8 +159,10 @@ export default function SelectedItemBody({ item }) {
                   alt=""
                 />
               </div>
+              
             </div>
             <div></div>
+            
           </div>
         </div>
         <div className="bg-gray-200 p-4 mt-4 md:hidden">
@@ -241,7 +244,7 @@ export default function SelectedItemBody({ item }) {
                         }
                       >
                         <div className="form-header flex flex-row">
-                          <h2>{option.name}</h2>
+                          {/* <h2>{option.name}</h2> */}
                           <input
                             className="ml-16 md:ml-6"
                             type="checkbox"
@@ -331,12 +334,16 @@ export default function SelectedItemBody({ item }) {
 
         {/* the bottom overview section */}
         <div className="">
+       
+       
           <div className=" md:w-[700px] lg:w-[890px] lg:ml-[-70px] w-96  md:mt-20  lg:mt-0 md:flex md:flex-col md:items-center text-left px-16 gap-5">
             <div className=" md:px-16">
               <div>
                 <ActivityDetail response={item} />
               </div>
             </div>
+            <ReviewComponent token={token} activityId={item._id} user={user} /> 
+
             <SimilarActivity item={item} />
             <LocationMap item={item} />
           </div>
@@ -422,7 +429,7 @@ export default function SelectedItemBody({ item }) {
                       }
                     >
                       <div className="form-header flex flex-row">
-                        <h2>{option.name}</h2>
+                        {/* <h2>{option.name}</h2> */}
                         <input
                           className="ml-16 md:ml-6"
                           type="checkbox"

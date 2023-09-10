@@ -188,7 +188,7 @@ const SearchResult = () => {
         <div className="filter">
           <div className="  experience-filter">
             <h2>All things to do</h2>
-            {visibleExperiences.map((experience) => (
+            {visibleExperiences.sort((a, b) => a.localeCompare(b)).map((experience) => (
               <div
                 key={experience}
                 className={`experience-item ${experience === selectedExperience ? "selected" : ""
@@ -207,7 +207,7 @@ const SearchResult = () => {
           </div>
           <div className="  location-filter">
             <h2>All locations</h2>
-            {visibleLocations.map((location) => (
+            {visibleLocations.sort((a, b) => a.localeCompare(b)).map((location) => (
               <div
                 key={location}
                 className={`location-item ${location === selectedLocation ? "selected" : ""

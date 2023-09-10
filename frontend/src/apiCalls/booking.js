@@ -160,14 +160,6 @@ export const payWithStripeBooking = async id => {
   }
 }
 
-// const authenticateWithGoogle = async () => {
-//   try {
-//     const response = await axiosInstance.get('/api/auth/google');
-//     // No specific response handling
-//   } catch (error) {
-//     // Handle error if needed
-//   }
-// };
 
 // Function to authenticate with Facebook
 const authenticateWithFacebook = async () => {
@@ -204,3 +196,37 @@ export const getMyCartBookings = async token => {
     throw error
   }
 }
+// create a review for an activity
+export const createReview = async (activityId,review,rating,token) => {
+  try {
+    const response = await axiosInstance.post(
+      `/api/feedback/create`,
+      { activity: activityId,
+        message: review,
+        rating:rating
+        
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+     console.log(response.data.feedback)
+    return response.data
+  } catch (error) {
+    throw new Error(error.response.data.message)
+  }
+}
+
+// Get All Review
+export const getAllReview = async (activityId) => {
+  console.log(activityId)
+  try {
+    const response = await axiosInstance.get(`/api/feedback/average/${activityId}`);
+    console.log('response of all reviews', response.data.activity.reviews);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};

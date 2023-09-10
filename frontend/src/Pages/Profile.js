@@ -583,7 +583,6 @@ export default function Profile() {
                     <th className="text-sm font-medium">Journey Date</th>
                     {/* <th className="text-sm font-medium">Booking Date</th> */}
                     <th className="text-sm font-medium">Booking Status</th>
-                    <div className="text-sm font-medium">View and Manage</div>
                   </tr>
 
                   {historyBooking.map((h) => {
@@ -596,9 +595,7 @@ export default function Profile() {
                         <td className="font-medium">{h.date}</td>
                         {/* <td className="font-medium">{h.createdAt}</td> */}
                         <td className="font-medium">{h.status}</td>
-                        <div className=" rounded-md bg-darkslateblue-100 shadow-[0px_2px_6px_rgba(0,_0,_0,_0.14)] overflow-hidden flex flex-row py-[3px] px-3.5 items-center justify-center text-center text-sm text-white border-[1px] border-solid border-button-stroke">
-                          View and Manage
-                        </div>
+                        
                       </tr>
                     );
                   })}
