@@ -257,11 +257,11 @@ export default function Header() {
                 // ref={inputRef1}
                 value={searchValue}
                 onChange={handleLocationChange}
-                className="px-4 py-2 border-0 rounded-md focus:outline-none  "
+                className=" px-4  py-2 border-0 rounded-md focus:outline-none  "
                 placeholder="Delhi,Inidia"
               />
               {showDropdown && (
-                <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
+                <ul className="absolute w-[21%] mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
                   {suggestions.map((suggestion, index) => (
                     <li
                       key={index}
@@ -291,7 +291,7 @@ export default function Header() {
                 placeholder="SkyDiving"
               />
               {categoryDropdown && (
-                <ul className="absolute left-0 right-0  bg-white border border-gray-300 rounded-md shadow-lg">
+                <ul className="absolute w-[21%]  bg-white border border-gray-300 rounded-md shadow-lg">
                   {categorySuggestions.map((suggestion, index) => (
                     <li
                       key={index}
