@@ -17,7 +17,6 @@ const { uploadAnyImages,uploadImage,uploadImages } = require("../middleware/file
 
 const router = express.Router();
 
-// Activity Router
 router.post("/one", uploadImage, uploadOneImage);
 router.post("/upload", uploadImages,uploadMultipleImages);
 router.post("/create",uploadImages,createActivity);
